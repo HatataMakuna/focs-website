@@ -2,7 +2,7 @@
 # Amazon Linux 2023
 
 #!/bin/bash
-dnf install git python-pip -y
+dnf install git -y
 git clone https://github.com/HatataMakuna/focs-website.git
 cd focs-website
 dnf install python-pip -y

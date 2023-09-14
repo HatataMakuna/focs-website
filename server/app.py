@@ -1,17 +1,16 @@
 import boto3
-import config
 from flask import Flask, render_template, request
 from flask_cors import CORS
 from db_connection import DbConnection
 
-app = Flask(__name__, static_url_path="/")
+app = Flask(__name__, template_folder="../templates")
 db_conn = DbConnection.get_instance()
 CORS(app)
 
 
 @app.errorhandler(404)
 def catch_all(error):
-    return app.send_static_file("404notfound.html")
+    return render_template("404notfound.html")
 
 
 @app.route("/about", methods=['POST'])
