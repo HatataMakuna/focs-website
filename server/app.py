@@ -1,29 +1,17 @@
-from flask import Flask, render_template, request
-from pymysql import connections
-import os
 import boto3
-from config import *
+import config
+from flask import Flask, render_template, request
+from flask_cors import CORS
+from db_connection import DbConnection
 
-app = Flask(__name__)
-
-bucket = custombucket
-region = customregion
-
-db_conn = connections.Connection(
-    host=customhost,
-    port=3306,
-    user=customuser,
-    password=custompass,
-    db=customdb
-
-)
-output = {}
-table = 'employee'
+app = Flask(__name__, static_url_path="/")
+db_conn = DbConnection.get_instance()
+CORS(app)
 
 
-@app.route("/", methods=['GET', 'POST'])
-def home():
-    return render_template('AddEmp.html')
+@app.errorhandler(404)
+def catch_all(error):
+    return app.send_static_file("404notfound.html")
 
 
 @app.route("/about", methods=['POST'])
