@@ -8,12 +8,23 @@ db_conn = DbConnection.get_instance()
 CORS(app)
 
 
+@app.route("/", methods=["GET"])
+def index():
+    return render_template('index.html')
+
+@app.route("/programmes", methods=["GET"])
+def list_programmes():
+    return render_template('ProgrammeList.html')
+
+@app.route("/staffs", methods=["GET"])
+def list_staffs():
+    return render_template('StaffList.html')
+
 @app.errorhandler(404)
 def catch_all(error):
     return render_template("404notfound.html")
 
-
-@app.route("/about", methods=['POST'])
+@app.route("/about", methods=['GET'])
 def about():
     return render_template('www.tarc.edu.my')
 
