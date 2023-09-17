@@ -1,7 +1,7 @@
 import boto3
 import config
 from db_connection_pool import DbConnectionPool
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder="../static", template_folder="../templates")
@@ -36,6 +36,19 @@ def index():
 @app.route("/programmes", methods=["GET"])
 def list_programmes():
     return render_template("ProgrammeList.html")
+
+
+# TODO: [N1] The website should be able to show the page regarding the information
+# of an intended computing programme as a search result
+#
+# If only ONE programme is returned as search result, redirect the user to the programme page
+@app.route("/redirect-program", methods=["GET"])
+def redirect_programme():
+    program_name = request.args.get('program_name')
+    # Implement your logic to determine the program URL based on the name
+    # Example: program_url = get_program_url(program_name)
+    program_url = f'/path/to/program/{program_name}'
+    return redirect(program_url)
 
 
 @app.route("/staffs", methods=["GET"])
