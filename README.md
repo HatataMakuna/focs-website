@@ -2,7 +2,7 @@
 
 This is the improved FOCS website, for BACS3003 Software Evolution and Maintenance assignment purpose
 
-# Run locally
+## Run locally
 
 1. In Visual Studio Code, click "Terminal" button at the top, then select "New Terminal" to launch a terminal in Visual Studio Code.
 2. In the terminal, run `init_venv` to select `venv` folder as the Python library installation folder.
