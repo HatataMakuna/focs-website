@@ -1,16 +1,19 @@
 import config
-from pymysql import Connection
+from pymysqlpool import ConnectionPool
 
-class DbConnection:
+
+class DbConnectionPool:
     _instance = None
 
     def __init__(self):
-        raise RuntimeError("Call instance() instead")
+        raise RuntimeError("Call get_instance() instead")
 
     @classmethod
     def get_instance(cls):
         if not cls._instance:
-            cls._instance = Connection(
+            cls._instance = ConnectionPool(
+                size=2,
+                pre_create_num=2,
                 host=config.customhost,
                 port=3306,
                 user=config.customuser,
