@@ -9,6 +9,25 @@ db_conn_pool = DbConnectionPool.get_instance()
 CORS(app)
 
 
+# TODO: [N8] The website should be able to track the IP (Internet Protocol) address of the visitor device.
+@app.before_request
+def on_req():
+    # Get the visitor public IPv4 address
+    # TODO: Stream printed logs from EC2 to CloudWatch
+    print(request.remote_addr)
+
+    # TODO: Unblock the client address after 60 minutes
+    # If the client address is being blocked the second time, the client address will be unblocked after 2 hours
+    # If the client address is being blocked the third time, the client address will be unblocked after 4 hours
+    # The time taken to unblock the client will increase exponentialy and capped at 24 hours
+
+    # TODO: Block the client address if the client enters our system 2500 times within 1 second
+
+    # TODO: Is this client address exists in our block list DB table ?
+    # If exist, reject the request
+    # Else proceed
+
+
 @app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")
