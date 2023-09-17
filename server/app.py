@@ -4,7 +4,7 @@ from db_connection_pool import DbConnectionPool
 from flask import Flask, render_template, request
 from flask_cors import CORS
 
-app = Flask(__name__, template_folder="../templates")
+app = Flask(__name__, static_folder="../static", template_folder="../templates")
 db_conn_pool = DbConnectionPool.get_instance()
 CORS(app)
 

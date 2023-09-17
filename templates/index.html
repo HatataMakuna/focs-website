@@ -1,48 +1,3 @@
-<!-- <html>
-    <head>
-        <title>FOCS Website</title>
-    </head>
-    <body>
-        <h1>Why So Serious</h1>
-    </body>
-</html> -->
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<link>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>
-    Tunku Abdul Rahman University of Management &amp; Technology - Faculty of Computing and Information Technology
-  </title>
-
-  <link rel="icon" type="image/png" href="/assets/favicon.png" />
-  <link rel="stylesheet" media="screen" href="https://cpwebassets.codepen.io/assets/fullpage/fullpage-7d0085e88e3f06095d712efc55f79fc6aedaeed08967649de30e3ea674797898.css" />
-
-  <style>
-    html { font-size: 15px; }
-    html, body { margin: 0; padding: 0; min-height: 100%; }
-    body { height:100%; display: flex; flex-direction: column; }
-    .referer-warning {
-      background: black;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-      padding: 0.75em;
-      color: white;
-      text-align: center;
-      font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, system-ui, Sans-Serif;
-      line-height: 1.2;
-      font-size: 1rem;
-      position: relative;
-      z-index: 2;
-    }
-    .referer-warning span { font-family: initial; }
-    .referer-warning h1 { font-size: 1.2rem; margin: 0; }
-    .referer-warning a { color: #56bcf9; }
-  </style>
-</head> -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,8 +7,7 @@
       Tunku Abdul Rahman University of Management &amp; Technology - Faculty of Computing and Information Technology
     </title>
 
-    <link rel="icon" type="image/png" href="/assets/favicon.png" />
-    <link rel="canonical" href="https://codepen.io/bradtraversy/pen/ZEGGNRb" />
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
 
     <style>
@@ -158,12 +112,6 @@
       .showcase {
         width: 100%;
         height: 400px;
-        background: url('https://i.ibb.co/zGSDGCL/slide1.png') no-repeat center center/cover;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        justify-content: flex-end;
         padding-bottom: 50px;
         margin-bottom: 20px;
       }
@@ -384,11 +332,111 @@
           margin-bottom: 20px;
         }
       }
-    </style>
 
-    <script>
-      window.console = window.console || function (t) {}
-    </script>
+      /* Slideshow container */
+      .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+      }
+
+      /* Make the images invisible by default */
+      .Containers {
+        display: none;
+      }
+
+      /* forward & Back buttons */
+      .Back,
+      .forward {
+        cursor: pointer;
+        position: absolute;
+        top: 48%;
+        width: auto;
+        margin-top: -23px;
+        padding: 17px;
+        color: grey;
+        font-weight: bold;
+        font-size: 19px;
+        transition: 0.4s ease;
+        border-radius: 0 5px 5px 0;
+        user-select: none;
+      }
+
+      /* Place the "forward button" to the right */
+      .forward {
+        right: 0;
+        border-radius: 4px 0 0 4px;
+      }
+
+      /*when the user hovers,add a black background with some little opacity */
+      .Back:hover,
+      .forward:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+
+      /* Caption Info */
+      .Info {
+        color: #e3e3e3;
+        font-size: 16px;
+        padding: 10px 14px;
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Worknumbering (1/3 etc) */
+      .MessageInfo {
+        color: #f2f2f3;
+        font-size: 14px;
+        padding: 10px 14px;
+        position: absolute;
+        top: 0;
+      }
+
+      /* The circles or bullets and indicators */
+      .dots {
+        cursor: pointer;
+        height: 16px;
+        width: 16px;
+        margin: 0 3px;
+        background-color: #acc;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.5s ease;
+      }
+
+      .enable,
+      .dots:hover {
+        background-color: #717161;
+      }
+
+      /* Faint animation */
+      .fade {
+        -webkit-animation-name: fade;
+        -webkit-animation-duration: 1.4s;
+        animation-name: fade;
+        animation-duration: 1.4s;
+      }
+
+      @-webkit-keyframes fade {
+        from {
+          opacity: 0.5;
+        }
+        to {
+          opacity: 2;
+        }
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 0.5;
+        }
+        to {
+          opacity: 2;
+        }
+      }
+    </style>
   </head>
 
   <body translate="no">
@@ -399,15 +447,32 @@
     <div class="container">
       <!-- Nav -->
       <nav class="main-nav">
-        <img src="https://i.ibb.co/wwLhz98/logo.png" alt="Microsoft" class="logo" />
+        <img class="logo" src="/static/logo.png" alt="Tunku Abdul Rahman University of Management and Technology" />
 
         <ul class="main-menu">
-          <li><a href="#">Office</a></li>
-          <li><a href="#">Windows</a></li>
-          <li><a href="#">Surface</a></li>
-          <li><a href="#">Xbox</a></li>
-          <li><a href="#">Deals</a></li>
-          <li><a href="#">Support</a></li>
+          <li>
+            <a href="#">Home</a>
+          </li>
+
+          <li>
+            <a href="#">About Us</a>
+          </li>
+
+          <li>
+            <a href="#">Facilities</a>
+          </li>
+
+          <li>
+            <a href="#">Research</a>
+          </li>
+
+          <li>
+            <a href="#">External Advisors</a>
+          </li>
+
+          <li>
+            <a href="#">Our Team</a>
+          </li>
         </ul>
 
         <ul class="right-menu">
@@ -416,19 +481,136 @@
               <i class="fas fa-search"></i>
             </a>
           </li>
-          <li>
-            <a href="#">
-              <i class="fas fa-shopping-cart"></i>
-            </a>
-          </li>
         </ul>
       </nav>
 
       <!-- Showcase -->
       <header class="showcase">
-        <h2>Surface Deals</h2>
-        <p>Select Surfaces are on sale now - save while supplies last</p>
-        <a href="#" class="btn"> Shop Now <i class="fas fa-chevron-right"></i> </a>
+        <!-- Slideshow container -->
+        <div class="slideshow-container fade">
+          <!-- Full images with numbers and message Info -->
+          <div class="Containers">
+            <div class="MessageInfo">1 / 7</div>
+
+            <div
+              style="
+                width: 100%;
+                height: 320px;
+                background-image: url('/static/focs_0.png');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+              "
+            ></div>
+          </div>
+
+          <div class="Containers">
+            <div class="MessageInfo">2 / 7</div>
+
+            <div
+              style="
+                width: 100%;
+                height: 320px;
+                background-image: url('/static/focs_1.jpg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+              "
+            ></div>
+          </div>
+
+          <div class="Containers">
+            <div class="MessageInfo">3 / 7</div>
+
+            <div
+              style="
+                width: 100%;
+                height: 320px;
+                background-image: url('/static/focs_2.jpg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+              "
+            ></div>
+          </div>
+
+          <div class="Containers">
+            <div class="MessageInfo">4 / 7</div>
+
+            <div
+              style="
+                width: 100%;
+                height: 320px;
+                background-image: url('/static/focs_3.jpg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+              "
+            ></div>
+          </div>
+
+          <div class="Containers">
+            <div class="MessageInfo">5 / 7</div>
+
+            <div
+              style="
+                width: 100%;
+                height: 320px;
+                background-image: url('/static/focs_4.jpg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+              "
+            ></div>
+          </div>
+
+          <div class="Containers">
+            <div class="MessageInfo">6 / 7</div>
+
+            <div
+              style="
+                width: 100%;
+                height: 320px;
+                background-image: url('/static/focs_5.jpg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+              "
+            ></div>
+          </div>
+
+          <div class="Containers">
+            <div class="MessageInfo">7 / 7</div>
+
+            <div
+              style="
+                width: 100%;
+                height: 320px;
+                background-image: url('/static/focs_6.png');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+              "
+            ></div>
+          </div>
+
+          <!-- Back and forward buttons -->
+          <a class="Back" onclick="plusSlides(-1)">&#10094;</a>
+          <a class="forward" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+
+        <br />
+
+        <!-- The circles/dots -->
+        <div style="text-align: center">
+          <span class="dots" onclick="currentSlide(1)"></span>
+          <span class="dots" onclick="currentSlide(2)"></span>
+          <span class="dots" onclick="currentSlide(3)"></span>
+          <span class="dots" onclick="currentSlide(4)"></span>
+          <span class="dots" onclick="currentSlide(5)"></span>
+          <span class="dots" onclick="currentSlide(6)"></span>
+          <span class="dots" onclick="currentSlide(7)"></span>
+        </div>
       </header>
 
       <!-- Home cards 1 -->
@@ -599,11 +781,45 @@
       </div>
     </footer>
 
-    <script id="rendered-js">
+    <script>
       document
         .querySelector('.menu-btn')
         .addEventListener('click', () => document.querySelector('.main-menu').classList.toggle('show'))
-      //# sourceURL=pen.js
+
+      var slidePosition = 1
+      SlideShow(slidePosition)
+
+      // forward/Back controls
+      function plusSlides(n) {
+        SlideShow((slidePosition += n))
+      }
+
+      //  images controls
+      function currentSlide(n) {
+        SlideShow((slidePosition = n))
+      }
+
+      function SlideShow(n) {
+        var i
+        var slides = document.getElementsByClassName('Containers')
+        var circles = document.getElementsByClassName('dots')
+        if (n > slides.length) {
+          slidePosition = 1
+        }
+        if (n < 1) {
+          slidePosition = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = 'none'
+        }
+        for (i = 0; i < circles.length; i++) {
+          circles[i].className = circles[i].className.replace(' enable', '')
+        }
+        slides[slidePosition - 1].style.display = 'block'
+        circles[slidePosition - 1].className += ' enable'
+      }
+
+      setInterval(() => plusSlides(1), 5000)
     </script>
   </body>
 </html>
