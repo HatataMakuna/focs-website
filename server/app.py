@@ -1,42 +1,99 @@
 import sys
+import time
 
 import boto3
 import config
+import consts
 from db_connection_pool import DbConnectionPool
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder="../static", template_folder="../templates")
 db_conn_pool = DbConnectionPool.get_instance()
+sns = boto3.resource("sns", consts.AWS_REGION)
+sys_abuse_topic = sns.Topic(consts.SYS_ABUSE_TOPIC_ARN)
 CORS(app)
 
 
 def log(func):
     def inner(*args, **kwargs):
         # Stream printed logs from EC2 to CloudWatch
-        with open("/log.txt", "w") as sys.stdout:
+        with open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w") as sys.stdout:
             func(*args, **kwargs)
 
     return inner
 
 
-# TODO: [N8] The website should be able to track the IP (Internet Protocol) address of the visitor device.
+# [N8] The website should be able to track the IP (Internet Protocol) address of the visitor device.
 @log
 @app.before_request
 def on_req():
+    # Get current time
+    now = int(time.time())
+
     # Get the visitor public IPv4 address
     print(f"Client public IPv4 address: {request.remote_addr}")
 
-    # TODO: Block the client address if the client enters our system 2500 times within 1 second
+    # Reopen the timed out database connection to avoid PyMySQL interface error
+    db_conn = db_conn_pool.get_connection(pre_ping=True)
+    cursor = db_conn.cursor()
 
-    # TODO: Is this client address exists in our block list DB table ?
-    # If exist, reject the request
-    # Else proceed
+    try:
+        # Find out when the client first enters our system
+        cursor.execute(
+            "SELECT enter_count, first_enter_at, unblock_at, block_count FROM ip_addr WHERE `value` = %s",
+            (request.remote_addr,),
+        )
+        db_conn.commit()
+        db_row = cursor.fetchone()
 
-    # TODO: Unblock the client address after 60 minutes
-    # If the client address is being blocked the second time, the client address will be unblocked after 2 hours
-    # If the client address is being blocked the third time, the client address will be unblocked after 4 hours
-    # The time taken to unblock the client will increase exponentialy and capped at 24 hours
+        if db_row:
+            enter_count = db_row[0]
+            first_enter_at = db_row[1]
+            unblock_at = db_row[2]
+            block_count = db_row[3]
+
+            # Is this client still being blocked ?
+            if now < unblock_at:
+                # Reject the request
+                return {"message": "Forbidden"}, 403
+
+            # The client has entered our system for 1 second ?
+            if now != first_enter_at:
+                # Reset the client's enter count in the database
+                cursor.execute(
+                    "UPDATE ip_addr SET enter_count = 1, first_enter_at = %s WHERE `value` = %s",
+                    (now, request.remote_addr),
+                )
+
+            else:
+                # The client enters our system
+                cursor.execute(
+                    "UPDATE ip_addr SET enter_count = enter_count + 1 WHERE `value` = %s", (request.remote_addr,)
+                )
+
+                # If the client enters our system 100 times within 1 second, block the client
+                if enter_count == 99:
+                    cursor.execute(
+                        "UPDATE ip_addr SET unblock_at = %s, block_count = block_count + 1 WHERE `value` = %s",
+                        (now + min(3600 * (1 << block_count), 86400), request.remote_addr),
+                    )
+
+                    # Send an email to the developer account when this event occurs
+                    sys_abuse_topic.publish(
+                        Message=f"User from {request.remote_addr} is trying to send too many requests to your server.",
+                        Subject="Suspicious User Encountered",
+                    )
+
+        else:
+            # The client enters our system
+            cursor.execute("INSERT INTO ip_addr VALUES (%s, DEFAULT, %s, DEFAULT, DEFAULT)", (request.remote_addr, now))
+
+        db_conn.commit()
+
+    finally:
+        cursor.close()
+        db_conn.close()
 
 
 @log
