@@ -21,6 +21,7 @@ def log(func):
         with open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w") as sys.stdout:
             func(*args, **kwargs)
 
+    inner.__name__ = func.__name__
     return inner
 
 
