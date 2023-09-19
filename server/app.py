@@ -14,28 +14,16 @@ sns = boto3.resource("sns", consts.AWS_REGION)
 sys_abuse_topic = sns.Topic(consts.SYS_ABUSE_TOPIC_ARN)
 CORS(app)
 
-
-def log(func):
-    def inner(*args, **kwargs):
-        # Stream printed logs from EC2 to CloudWatch
-        with open(
-            "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "a"
-        ) as sys.stdout, sys.stdout as sys.stderr:
-            return func(*args, **kwargs)
-
-    inner.__name__ = func.__name__
-    return inner
+# Stream printed logs from EC2 to CloudWatch
+sys.stdout = open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w")
+sys.stderr = sys.stdout
 
 
 # [N8] The website should be able to track the IP (Internet Protocol) address of the visitor device.
 @app.before_request
-@log
 def on_req():
     # Get current time
     now = int(time.time())
-
-    # Get the visitor public IPv4 address
-    print(f"Client public IPv4 address: {request.remote_addr}")
 
     # Reopen the timed out database connection to avoid PyMySQL interface error
     db_conn = db_conn_pool.get_connection(pre_ping=True)
@@ -100,13 +88,11 @@ def on_req():
 
 
 @app.route("/", methods=["GET"])
-@log
 def index():
     return render_template("index.html")
 
 
 @app.route("/programmes", methods=["GET"])
-@log
 def list_programmes():
     return render_template("ProgrammeList.html")
 
@@ -116,7 +102,6 @@ def list_programmes():
 #
 # If only ONE programme is returned as search result, redirect the user to the programme page
 @app.route("/redirect-program", methods=["GET"])
-@log
 def redirect_programme():
     program_name = request.args.get("program_name")
     # Implement your logic to determine the program URL based on the name
@@ -127,7 +112,6 @@ def redirect_programme():
 
 # TODO: [N9]
 @app.route("/get-staff-list", methods=["GET"])
-@log
 def get_staff_list():
     db_conn = db_conn_pool.get_connection(pre_ping=True)
     cursor = db_conn.cursor()
@@ -159,25 +143,21 @@ def get_staff_list():
 
 
 @app.route("/staffs", methods=["GET"])
-@log
 def list_staffs():
     return render_template("StaffList.html")
 
 
 @app.errorhandler(404)
-@log
 def catch_all(error):
     return render_template("404notfound.html")
 
 
 @app.route("/about", methods=["GET"])
-@log
 def about():
     return render_template("www.tarc.edu.my")
 
 
 @app.route("/addemp", methods=["POST"])
-@log
 def AddEmp():
     emp_id = request.form["emp_id"]
     first_name = request.form["first_name"]
@@ -215,9 +195,9 @@ def AddEmp():
             else:
                 s3_location = "-" + s3_location
 
-            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-                s3_location, config.custombucket, emp_image_file_name_in_s3
-            )
+            # object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+            #     s3_location, config.custombucket, emp_image_file_name_in_s3
+            # )
 
         except Exception as e:
             return str(e)
