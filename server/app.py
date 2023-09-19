@@ -5,7 +5,7 @@ import boto3
 import config
 import consts
 from db_connection_pool import DbConnectionPool
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder="../static", template_folder="../templates")
@@ -108,6 +108,52 @@ def list_programmes():
     return render_template("ProgrammeList.html")
 
 
+# TODO: [N1] The website should be able to show the page regarding the information
+# of an intended computing programme as a search result
+#
+# If only ONE programme is returned as search result, redirect the user to the programme page
+@app.route("/redirect-program", methods=["GET"])
+def redirect_programme():
+    program_name = request.args.get('program_name')
+    # Implement your logic to determine the program URL based on the name
+    # Example: program_url = get_program_url(program_name)
+    program_url = f'/path/to/program/{program_name}'
+    return redirect(program_url)
+
+
+# TODO: [N9]
+@log
+@app.route("/get-staff-list", methods=['GET'])
+def get_staff_list():
+    db_conn = db_conn_pool.get_connection(pre_ping=True)
+    cursor = db_conn.cursor()
+    try:
+        cursor.execute("SELECT * FROM staff")
+        staff_data = cursor.fetchall()
+
+        # Convert the result to a list of dictionaires
+        staff_list = []
+        for staff in staff_data:
+            staff_info = {
+                "staff_name": staff[1],
+                "avatar": staff[2],
+                "designation": staff[3],
+                "department": staff[4],
+                "position": staff[5],
+                "email": staff[6],
+            }
+            staff_list.append(staff_info)
+
+        return jsonify({"staff_list": staff_list})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+    finally:
+        cursor.close()
+        db_conn.close()
+
+
 @log
 @app.route("/staffs", methods=["GET"])
 def list_staffs():
@@ -157,17 +203,18 @@ def AddEmp():
         try:
             print("Data inserted in MySQL RDS... uploading image to S3...")
             s3.Bucket(config.custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
-            bucket_location = boto3.client("s3").get_bucket_location(Bucket=config.custombucket)
-            s3_location = bucket_location["LocationConstraint"]
+            bucket_location = boto3.client('s3').get_bucket_location(Bucket=config.custombucket)
+            s3_location = (bucket_location['LocationConstraint'])
 
             if s3_location is None:
                 s3_location = ""
             else:
                 s3_location = "-" + s3_location
 
-            # object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-            #     s3_location, config.custombucket, emp_image_file_name_in_s3
-            # )
+            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                config.custombucket,
+                emp_image_file_name_in_s3)
 
         except Exception as e:
             return str(e)
