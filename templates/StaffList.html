@@ -65,7 +65,41 @@
       <header></header>
 
       <!-- TODO: Staff List (retrieve from database, use paging) -->
-      <section></section>
+      <section>
+        <div id="staff-list"></div>
+      </section>
     </div>
   </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  // Function to retrieve and display staff list
+  function fetchStaffList() {
+      $.ajax({
+          url: '/get-staff-list',  // The server-side route to fetch staff data
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+              // Assuming data is in the format: { 'staff_list': [...] }
+              const staffList = data.staff_list;
+
+              // Display staff data on the webpage
+              const staffListDiv = $('#staff-list');
+              staffListDiv.empty();
+              staffList.forEach(function (staff) {
+                // image cannot display properly
+                  const staffInfo = `
+                    <p>Name: ${staff.staff_name}</p><br/>
+                    Avatar: <div style="background-image: url('/static/${staff.avatar}');"></div><br/>
+                    <p>Designation: ${staff.designation}, Department: ${staff.department}</p>
+                  `;
+                  staffListDiv.append(staffInfo);
+              });
+          }
+      });
+  }
+
+  // Call the fetchStaffList function to retrieve and display staff data
+  fetchStaffList();
+</script>
