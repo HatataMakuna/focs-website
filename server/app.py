@@ -18,7 +18,9 @@ CORS(app)
 def log(func):
     def inner(*args, **kwargs):
         # Stream printed logs from EC2 to CloudWatch
-        with open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "a") as sys.stdout:
+        with open(
+            "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "a"
+        ) as sys.stdout, sys.stdout as sys.stderr:
             return func(*args, **kwargs)
 
     inner.__name__ = func.__name__
