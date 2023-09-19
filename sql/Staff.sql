@@ -1,5 +1,14 @@
 -- Insert to general staff table
-INSERT INTO `staff` (`staff_id`, `staff_name`, `avatar`, `designation`, `department`, `position`, `email`) VALUES (1, 'Dr. Lim Wei Jie', 'staff_1.png', 'Dean', 'Faculty of Computing And Information Technology', 'Senior Lecturer', 'limwj@tarc.edu.my');
+INSERT INTO `staff` (`staff_id`, `staff_name`, `avatar`, `designation`, `department`, `position`, `email`) VALUES (1, 'Dr. Lim Wei Jie', 'staff_m.png', 'Dean', 'Faculty of Computing And Information Technology', 'Senior Lecturer', 'limwj@tarc.edu.my');
+INSERT INTO `staff` (`staff_id`, `staff_name`, `avatar`, `designation`, `department`, `position`, `email`) VALUES (2, 'Prof. Nurul Aida', 'staff_f.png', 'Deputy Dean', 'Faculty of Computing And Information Technology', 'Principal Lecturer', 'nurula@tarc.edu.my');
+INSERT INTO `staff` (`staff_id`, `staff_name`, `avatar`, `designation`, `department`, `position`, `email`) VALUES (3, 'Mr. Mohd Shaharuddin', 'staff_m.png', 'Associate Dean', 'Department of Software Engineering And Technology', 'Senior Lecturer', 'mohds@tarc.edu.my');
+INSERT INTO `staff` (`staff_id`, `staff_name`, `avatar`, `designation`, `department`, `position`, `email`) VALUES (4, 'Dr. Siti Amanah', 'staff_f.png', 'Programme Leader', 'Department of Software Engineering And Technology', 'Lecturer', 'sitia@tarc.edu.my');
+INSERT INTO `staff` (`staff_id`, `staff_name`, `avatar`, `designation`, `department`, `position`, `email`) VALUES (5, 'Mr. Cheng Cai Jie', 'staff_m.png', 'Programme Leader', 'Department of Software Engineering And Technology', 'Senior Lecturer', 'chengcj@tarc.edu.my');
+INSERT INTO `staff` (`staff_id`, `staff_name`, `avatar`, `designation`, `department`, `position`, `email`) VALUES (6, 'Prof. Tan Kang Hong', 'staff_m.png', NULL, 'Department of Software Engineering And Technology', 'Assistant Professor', 'tankh@tarc.edu.my');
+INSERT INTO `staff` (`staff_id`, `staff_name`, `avatar`, `designation`, `department`, `position`, `email`) VALUES (7, 'Dr. Muhammad Azlan', 'staff_m.png', NULL, 'Department of Software Engineering And Technology', 'Lecturer', 'muhammada@tarc.edu.my');
+INSERT INTO `staff` (`staff_id`, `staff_name`, `avatar`, `designation`, `department`, `position`, `email`) VALUES (8, 'Ms. Norliza Ismail', 'staff_f.png', 'Associate Dean', 'Department of Mathematical And Data Science', 'Principal Lecturer', 'norlizai@tarc.edu.my');
+INSERT INTO `staff` (`staff_id`, `staff_name`, `avatar`, `designation`, `department`, `position`, `email`) VALUES (9, 'Prof. Ahmad Firdaus', 'staff_m.png', 'Programme Leader', 'Department of Mathematical And Data Science', 'Senior Lecturer', 'ahmada@tarc.edu.my');
+INSERT INTO `staff` (`staff_id`, `staff_name`, `avatar`, `designation`, `department`, `position`, `email`) VALUES (10, 'Dr. Tan Mei Ling', 'staff_f.png', 'Course Leader', 'Department of Mathematical And Data Science', 'Assistant Professor', 'tanml@tarc.edu.my');
 
 -- Insert to detailed staff table
 INSERT INTO `staff_details` (`staff_id`, `publications`, `specialization`, `area_of_interest`) VALUES (1, NULL, 'Management Information Systems', '*Information Security<br>*Networking');
