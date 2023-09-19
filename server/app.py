@@ -5,7 +5,7 @@ import boto3
 import config
 import consts
 from db_connection_pool import DbConnectionPool
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, jsonify, redirect, render_template, request
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder="../static", template_folder="../templates")
@@ -25,8 +25,8 @@ def log(func):
 
 
 # [N8] The website should be able to track the IP (Internet Protocol) address of the visitor device.
-@log
 @app.before_request
+@log
 def on_req():
     # Get current time
     now = int(time.time())
@@ -96,14 +96,14 @@ def on_req():
         db_conn.close()
 
 
-@log
 @app.route("/", methods=["GET"])
+@log
 def index():
     return render_template("index.html")
 
 
-@log
 @app.route("/programmes", methods=["GET"])
+@log
 def list_programmes():
     return render_template("ProgrammeList.html")
 
@@ -113,17 +113,18 @@ def list_programmes():
 #
 # If only ONE programme is returned as search result, redirect the user to the programme page
 @app.route("/redirect-program", methods=["GET"])
+@log
 def redirect_programme():
-    program_name = request.args.get('program_name')
+    program_name = request.args.get("program_name")
     # Implement your logic to determine the program URL based on the name
     # Example: program_url = get_program_url(program_name)
-    program_url = f'/path/to/program/{program_name}'
+    program_url = f"/path/to/program/{program_name}"
     return redirect(program_url)
 
 
 # TODO: [N9]
+@app.route("/get-staff-list", methods=["GET"])
 @log
-@app.route("/get-staff-list", methods=['GET'])
 def get_staff_list():
     db_conn = db_conn_pool.get_connection(pre_ping=True)
     cursor = db_conn.cursor()
@@ -154,26 +155,26 @@ def get_staff_list():
         db_conn.close()
 
 
-@log
 @app.route("/staffs", methods=["GET"])
+@log
 def list_staffs():
     return render_template("StaffList.html")
 
 
-@log
 @app.errorhandler(404)
+@log
 def catch_all(error):
     return render_template("404notfound.html")
 
 
-@log
 @app.route("/about", methods=["GET"])
+@log
 def about():
     return render_template("www.tarc.edu.my")
 
 
-@log
 @app.route("/addemp", methods=["POST"])
+@log
 def AddEmp():
     emp_id = request.form["emp_id"]
     first_name = request.form["first_name"]
@@ -203,8 +204,8 @@ def AddEmp():
         try:
             print("Data inserted in MySQL RDS... uploading image to S3...")
             s3.Bucket(config.custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
-            bucket_location = boto3.client('s3').get_bucket_location(Bucket=config.custombucket)
-            s3_location = (bucket_location['LocationConstraint'])
+            bucket_location = boto3.client("s3").get_bucket_location(Bucket=config.custombucket)
+            s3_location = bucket_location["LocationConstraint"]
 
             if s3_location is None:
                 s3_location = ""
@@ -212,9 +213,8 @@ def AddEmp():
                 s3_location = "-" + s3_location
 
             object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-                s3_location,
-                config.custombucket,
-                emp_image_file_name_in_s3)
+                s3_location, config.custombucket, emp_image_file_name_in_s3
+            )
 
         except Exception as e:
             return str(e)
