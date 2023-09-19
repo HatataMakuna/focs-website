@@ -19,7 +19,7 @@ def log(func):
     def inner(*args, **kwargs):
         # Stream printed logs from EC2 to CloudWatch
         with open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w") as sys.stdout:
-            func(*args, **kwargs)
+            return func(*args, **kwargs)
 
     inner.__name__ = func.__name__
     return inner
