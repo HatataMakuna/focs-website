@@ -14,7 +14,7 @@ CORS(app)
 def log(func):
     def inner(*args, **kwargs):
         # Stream printed logs from EC2 to CloudWatch
-        with open("/log.txt", "w") as sys.stdout:
+        with open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w") as sys.stdout:
             func(*args, **kwargs)
 
     return inner
@@ -28,6 +28,8 @@ def on_req():
     print(f"Client public IPv4 address: {request.remote_addr}")
 
     # TODO: Block the client address if the client enters our system 2500 times within 1 second
+    # TODO: Trigger a CloudWatch alarm when this event occurs
+    # TODO: Send an email to developer account when this event occurs
 
     # TODO: Is this client address exists in our block list DB table ?
     # If exist, reject the request
