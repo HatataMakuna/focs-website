@@ -1,0 +1,95 @@
+/* GENERAL STYLES */
+.center {
+  text-align: center !important;
+}
+
+.card, .card-2, .card-4 {
+  background-color: #D9D9D9;
+  min-height: 300px;
+}
+
+.card, .card-2 {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.panel {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 0.01em 16px;
+}
+
+.card-4 {
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+}
+
+/* HEADER */
+.animate-top {
+  position: relative;
+  animation: animatetop 1.0s;
+}
+
+.animate-fading {
+  animation: fading 1.0s;
+}
+
+@keyframes animatetop {
+  0% {
+    top: -300px;
+    opacity: 0;
+  }
+
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes fading {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* SEARCH BAR */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the search input field */
+.search-bar input[type="text"] {
+  flex: 1;
+  border: none;
+  padding: 8px;
+  font-size: 16px;
+  background: transparent;
+}
+
+/* Style the search button */
+.search-bar button[type="submit"] {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Style the search icon inside the button */
+.search-bar button[type="submit"] i {
+  font-size: 20px;
+}
+
+/* Add some hover effect to the search button */
+.search-bar button[type="submit"]:hover {
+  background-color: #0056b3;
+}
