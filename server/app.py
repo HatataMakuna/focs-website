@@ -15,8 +15,8 @@ sys_abuse_topic = sns.Topic(consts.SYS_ABUSE_TOPIC_ARN)
 CORS(app)
 
 # Stream printed logs from EC2 to CloudWatch
-sys.stdout = open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w")
-sys.stderr = sys.stdout
+# sys.stdout = open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w")
+# sys.stderr = sys.stdout
 
 
 # [N8] The website should be able to track the IP (Internet Protocol) address of the visitor device.
@@ -111,6 +111,7 @@ def redirect_programme():
 
 
 # TODO: [N9]
+# Get the list of staffs : DONE
 @app.route("/get-staff-list", methods=["GET"])
 def get_staff_list():
     db_conn = db_conn_pool.get_connection(pre_ping=True)
@@ -123,6 +124,7 @@ def get_staff_list():
         staff_list = []
         for staff in staff_data:
             staff_info = {
+                "staff_id": staff[0],
                 "staff_name": staff[1],
                 "avatar": staff[2],
                 "designation": staff[3],
@@ -142,9 +144,17 @@ def get_staff_list():
         db_conn.close()
 
 
+# route to Staff list
 @app.route("/staffs", methods=["GET"])
 def list_staffs():
     return render_template("StaffList.html")
+
+
+# get the staff details
+@app.route("/staffs/<int:id>")
+def staff(id):
+    academician = next((a for a in academicians if a["id"] == id), None)
+    return render_template("academician_details.html", academician=academician)
 
 
 @app.errorhandler(404)

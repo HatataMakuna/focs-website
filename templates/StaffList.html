@@ -5,18 +5,22 @@
         * should contain: Name of Staff, Designation, Department, Publications (if any), Contact Information, Research area
 -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Page title -->
     <title>Staff List | FOCS</title>
 
     <!-- Link CSS and favicon -->
     <link rel="icon" type="image/png" href="/static/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/slStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}">
   </head>
 
-  <body translate="no">
+  <body>
     <div class="menu-btn">
       <i class="fas fa-bars fa-2x"></i>
     </div>
@@ -61,13 +65,22 @@
         </ul>
       </nav>
 
-      <!-- TODO: Search feature -->
-      <header></header>
+        <header class="animate-top">
+          <h1 style="text-align:center; font-size:3em;">Staff List</h3>
+        </header>
 
-      <!-- TODO: Staff List (retrieve from database, use paging) -->
-      <section>
-        <div id="staff-list"></div>
-      </section>
+        <!-- TODO: Search feature -->
+        <section>
+          <div class="search-bar">
+            <input type="text" placeholder="Search staff...">
+            <button type="submit">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </section>
+
+        <!-- TODO: Staff List (use paging if possible) -->
+        <section><div id="staff-list"></div></section>
     </div>
   </body>
 </html>
@@ -90,9 +103,22 @@
               staffList.forEach(function (staff) {
                 // image cannot display properly
                   const staffInfo = `
-                    <p>Name: ${staff.staff_name}</p><br/>
-                    Avatar: <div style="background-image: url('/static/${staff.avatar}');"></div><br/>
-                    <p>Designation: ${staff.designation}, Department: ${staff.department}</p>
+                  <div class="card-4 panel animate-fading">
+                    <table>
+                      <tr>
+                        <td class="card-section-1">
+                          <div class="staff-avatar center">
+                            <img src="/static/${staff.avatar}" style="width:100%;"/>
+                          </div>
+                        </td>
+                        <td class="card-section-2">
+                          <b class="staff-name">${staff.staff_name}</b><br/>
+                          Designation: ${staff.designation}<br/>Department: ${staff.department}<br/>
+                          Position: ${staff.position}<br/>Email: ${staff.email}
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
                   `;
                   staffListDiv.append(staffInfo);
               });
