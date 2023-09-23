@@ -114,10 +114,24 @@ def redirect_programme():
 # Get the list of staffs : DONE
 @app.route("/get-staff-list", methods=["GET"])
 def get_staff_list():
+    # Get the page number, items per page, and search query from the request parameters
+    page_number = int(request.args.get("page", 1))  # default is 1st page
+    items_per_page = int(request.args.get("itemsPerPage", 20))  # default is 20 staffs per page
+    search_query = request.args.get("search", '')
+
+    # Calculate the offset based on the page number and items per page
+    offset = (page_number - 1) * items_per_page
+
     db_conn = db_conn_pool.get_connection(pre_ping=True)
     cursor = db_conn.cursor()
     try:
-        cursor.execute("SELECT * FROM staff")
+        cursor.execute("""
+            SELECT * FROM staff WHERE UPPER(staff_name) LIKE UPPER(%s) OR UPPER(designation) LIKE UPPER(%s)
+            OR UPPER(position) LIKE UPPER(%s) OR UPPER(department) LIKE UPPER(%s) LIMIT %s OFFSET %s
+        """, (
+            f"%{search_query}%", f"%{search_query}%", f"%{search_query}%", f"%{search_query}%",
+            items_per_page, offset
+        ))
         staff_data = cursor.fetchall()
 
         # Convert the result to a list of dictionaires
@@ -134,7 +148,10 @@ def get_staff_list():
             }
             staff_list.append(staff_info)
 
-        return jsonify({"staff_list": staff_list})
+        # Get the total count of staff members
+        cursor.execute("SELECT COUNT(*) FROM staff")
+        total_count = cursor.fetchone()[0]
+        return jsonify({"staff_list": staff_list, "total_count": total_count})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -151,10 +168,40 @@ def list_staffs():
 
 
 # get the staff details
-@app.route("/staffs/<int:id>")
-def staff(id):
-    academician = next((a for a in academicians if a["id"] == id), None)
-    return render_template("academician_details.html", academician=academician)
+@app.route("/staffs/<id>")
+def staff(id: int):
+    db_conn = db_conn_pool.get_connection(pre_ping=True)
+    cursor = db_conn.cursor()
+    print(id)
+    try:
+        cursor.execute(
+            "SELECT s.staff_id, s.staff_name, s.avatar, s.designation, s.department, s.position," +
+            " s.email, d.publications, d.specialization, d.area_of_interest FROM staff s, staff_details d" +
+            " WHERE s.staff_id = d.staff_id AND s.staff_id = %s",
+            (id,)
+        )
+        staff_data = cursor.fetchone()
+        if staff_data:
+            data_to_pass = {
+                "staff_id": staff_data[0],
+                "staff_name": staff_data[1],
+                "avatar": "/static/" + staff_data[2],
+                "designation": staff_data[3],
+                "department": staff_data[4],
+                "position": staff_data[5],
+                "email": staff_data[6],
+                "publications": staff_data[7],
+                "specialization": staff_data[8],
+                "area_of_interest": staff_data[9],
+            }
+            return render_template("StaffDetails.html", staffprofile=data_to_pass), 200
+        else:
+            return jsonify({"message": "Staff not found"}), 404
+    except Exception as e:
+        return jsonify({"message": "Error while retrieving staff details" + str(e)}), 500
+    finally:
+        cursor.close()
+        db_conn.close()
 
 
 @app.errorhandler(404)
