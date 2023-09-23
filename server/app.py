@@ -1,3 +1,4 @@
+import random
 import sys
 import time
 
@@ -110,6 +111,11 @@ def redirect_programme():
     return redirect(program_url)
 
 
+@app.route("/programmes")
+def programmes():
+    return render_template("ProgrammeList.html")
+
+
 # TODO: [N9]
 # Get the list of staffs : DONE
 @app.route("/get-staff-list", methods=["GET"])
@@ -172,7 +178,6 @@ def list_staffs():
 def staff(id: int):
     db_conn = db_conn_pool.get_connection(pre_ping=True)
     cursor = db_conn.cursor()
-    print(id)
     try:
         cursor.execute(
             "SELECT s.staff_id, s.staff_name, s.avatar, s.designation, s.department, s.position," +
@@ -182,7 +187,7 @@ def staff(id: int):
         )
         staff_data = cursor.fetchone()
         if staff_data:
-            data_to_pass = {
+            current_staff_profile = {
                 "staff_id": staff_data[0],
                 "staff_name": staff_data[1],
                 "avatar": "/static/" + staff_data[2],
@@ -194,11 +199,42 @@ def staff(id: int):
                 "specialization": staff_data[8],
                 "area_of_interest": staff_data[9],
             }
-            return render_template("StaffDetails.html", staffprofile=data_to_pass), 200
         else:
             return jsonify({"message": "Staff not found"}), 404
+
+        # Get all staff data
+        cursor.execute("SELECT * FROM staff")
+        staff_profile_data = cursor.fetchall()
+
+        staff_profiles = []
+        for staff in staff_profile_data:
+            staff_info = {
+                "staff_id": staff_data[0],
+                "staff_name": staff_data[1],
+                "avatar": "/static/" + staff_data[2],
+                "designation": staff_data[3],
+                "department": staff_data[4],
+                "position": staff_data[5],
+                "email": staff_data[6],
+            }
+            staff_profiles.append(staff_info)
+
+        # Implement a content-based filtering recommendation logic
+        similar_staff_profiles = []
+        for staff in staff_profiles:
+            # Check if the staff is in a similar department or designation
+            if (staff["department"] == current_staff_profile["department"]):
+                similar_staff_profiles.append(staff)
+
+        # Randomly select up to three similar staff profiles
+        recommended_profiles = random.sample(
+            staff_profiles, min(3, len(staff_profiles))
+        )
+        print(recommended_profiles)
+        return render_template(
+            "StaffDetails.html", staffprofile=current_staff_profile, recommended=recommended_profiles), 200
     except Exception as e:
-        return jsonify({"message": "Error while retrieving staff details" + str(e)}), 500
+        return jsonify({"message": "Error while retrieving staff details: " + str(e)}), 500
     finally:
         cursor.close()
         db_conn.close()

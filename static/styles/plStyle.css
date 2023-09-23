@@ -5,7 +5,7 @@
 
 .card, .card-2, .card-4 {
   background-color: #D9D9D9;
-  min-height: 300px;
+  /* min-height: 300px; */
 }
 
 .card, .card-2 {
@@ -15,7 +15,7 @@
 .panel {
   margin-top: 16px;
   margin-bottom: 16px;
-  padding: 0.01em 16px;
+  /* padding: 0.01em 16px; */
 }
 
 .card-4 {
@@ -92,4 +92,25 @@
 /* Add some hover effect to the search button */
 .search-bar button[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+/* PROGRAMME LIST */
+h1 {
+  text-align: center;
+  font-size: 3em;
+}
+
+.blue {
+  color: #fff !important;
+  background-color: #2196F3!important;
+}
+
+.bullets {
+  list-style-type: square;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.program-type {
+  padding-left: 10px;
 }
