@@ -1,0 +1,14 @@
+pip install pytesseract pillow
+pip show pillow   //check library
+pip show pytesseract
+
+pip uninstall pillow pytesseract   // if still cannot start the ai
+
+pip install pdf2image
+
+pip install pytesseract pillow pdf2image
+
+
+pip install tabula-py
+
+pip install Flask PyMuPDF
