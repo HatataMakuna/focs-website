@@ -1,0 +1,85 @@
+<!--
+    TODO: [N1]
+    - Programme list: Provide search feature
+    - Show the information of each programme
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Programme List | FOCS</title>
+        <link rel="icon" type="image/png" href="/static/favicon.png" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/plStyle.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}">
+    </head>
+
+    <body translate="no">
+        <div class="menu-btn">
+          <i class="fas fa-bars fa-2x"></i>
+        </div>
+
+        <div class="container">
+          <!-- Navigation bar -->
+          <nav class="main-nav">
+            <img class="logo" src="/static/logo.png" alt="Tunku Abdul Rahman University of Management and Technology" />
+
+            <ul class="main-menu">
+              <li>
+                <a href="#">Home</a>
+              </li>
+
+              <li>
+                <a href="#">About Us</a>
+              </li>
+
+              <li>
+                <a href="#">Facilities</a>
+              </li>
+
+              <li>
+                <a href="#">Research</a>
+              </li>
+
+              <li>
+                <a href="#">External Advisors</a>
+              </li>
+
+              <li>
+                <a href="#">Our Team</a>
+              </li>
+            </ul>
+
+            <ul class="right-menu">
+              <li>
+                <a href="#">
+                  <i class="fas fa-search"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <header class="animate-top">
+            <h1>Programme List</h3>
+          </header>
+
+          <!-- TODO: Search feature -->
+          <section>
+            <div class="search-bar">
+              <input type="text" id="search-input" placeholder="Search programmes...">
+              <button type="submit" id="search-button">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </section>
+
+          <!-- Search results -->
+          <section>
+            <div id="card-2 panel"></div>
+          </section>
+        </div>
+    </body>
+</html>
+
+<script>
+</script>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Bachelor of Computer Science (Honours) in Interactive Software Technology | FOCS</title>
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/plStyle.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}">
+</head>
+<body translate="no">
+  <div class="menu-btn">
+    <i class="fas fa-bars fa-2x"></i>
+  </div>
+  <div class="container">
+    <!-- Navigation bar -->
+    <nav class="main-nav">
+      <img class="logo" src="/static/logo.png" alt="Tunku Abdul Rahman University of Management and Technology" />
+
+      <ul class="main-menu">
+        <li>
+          <a href="#">Home</a>
+        </li>
+
+        <li>
+          <a href="#">About Us</a>
+        </li>
+
+        <li>
+          <a href="#">Facilities</a>
+        </li>
+
+        <li>
+          <a href="#">Research</a>
+        </li>
+
+        <li>
+          <a href="#">External Advisors</a>
+        </li>
+
+        <li>
+          <a href="#">Our Team</a>
+        </li>
+      </ul>
+
+      <ul class="right-menu">
+        <li>
+          <a href="#">
+            <i class="fas fa-search"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <header class="animate-top">
+      <h1>Bachelor of Computer Science (Honours) in Interactive Software Technology</h3>
+    </header>
+
+    <ol class="breadcrumb">
+      <li><a href="/programmes">Programmes</a></li>
+      <li>Bachelor of Computer Science (Honours) in Interactive Software Technology</li>
+    </ol>
+
+    <section>
+      <!-- Images -->
+      <div class="content section">
+        <img src="/static/pImages/RST_1.jpg" style="width:50%">
+        <img src="/static/pImages/RST_2.jpg" style="width:50%">
+      </div>
+
+      <div class="card panel">
+        <!-- Tab Menu -->
+        <div class="bar border-bottom light-grey" style="margin-bottom: 10px;">
+          <a class="bar-item button tablink dark-grey" onclick="openTab(event, 'ProgrammeOverview')">Programme Overview</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'MinimumEntryRequirements')">Minimum Entry Requirements</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'ProgrammeOutline')">Programme Outline</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'CareerProspects')">Career Prospects</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'FeesFinancialAids')">Fees & Financial Aids</a>
+        </div>
+
+        <!-- Start of tab contents -->
+        <div id="ProgrammeOverview" class="container animate-opacity detail" style="display: block;">
+          <i class="fa fa-book"></i><strong> Programme Overview</strong>
+          <p align="justify">This programme aims to teach students the technical knowledge and skills in computer science with a further focus on the design and development of interactive software such as mobile applications, video games, simulations, virtual reality, electronic magazines, educational and training materials. These interactive applications can then be utilized by the entertainment industry, businesses as well as in education.</p>
+
+          <p align="justify">The students from this programme will study Computer Game Studies, Mathematics for Games Technology, Computer Game Programming, Software Engineering, Mobile Application Development, Artificial Intelligence, Graphics Programming and Human Computer Interaction.</p>
+
+          <p align="justify">Electives courses like Advanced Computer Game Programming, Digital Illustration, Computer Game Design, Virtual Reality, 3D Animation and 3D Game Development will be offered to students undergoing this programme.</p>
+
+          <i class="fa fa-calendar-check-o"></i><strong> Intake</strong>
+          <ul class="bullets">
+            <li>Year 1 Intake: June</li>
+            <li>Year 2 Intake: June</li>
+          </ul>
+
+          <i class="fa fa-clock-o"></i><strong> Duration</strong>
+          <p>3 years</p>
+
+          <i class="fa fa-building"></i><strong> Campus</strong>
+          <ul class="bullets">
+            <li>KL Main Campus</li>
+          </ul>
+
+          <i class="fa fa-arrow-circle-up"></i><strong> Academic Progression:</strong>
+          <div class="image-container">
+            <img src="/static/pImages/academic_progression.jpg" alt="Academic Progression"/>
+          </div>
+        </div>
+
+        <div id="MinimumEntryRequirements" class="container animate-opacity detail" style="display: none;">
+          <i class="fa fa-list"></i><strong> Minimum Entry Requirements</strong>
+          <div class="image-container">
+            <a href="/static/pImages/degree_requirements.png" target="_blank">
+              <img src="/static/pImages/degree_requirements.png" caption="false">
+            </a>
+          </div>
+        </div>
+
+        <div id="ProgrammeOutline" class="container animate-opacity detail" style="display: none;">
+          <i class="fa fa-book"></i><strong> Programme Outline</strong>
+          <ul class="bullets" style="margin: 10px;">
+            <li>Problem Solving and Programming</li>
+            <li>Computer Game Studies</li>
+            <li>Database Management</li>
+            <li>Computer Organisation and Architecture</li>
+            <li>Object-Oriented Programming</li>
+            <li>Research Methods</li>
+            <li>Object-Oriented Analysis and Design</li>
+            <li>Data Structures and Algorithms</li>
+            <li>Operating Systems</li>
+            <li>Software Engineering</li>
+            <li>Graphics Programming</li>
+            <li>Computer Game Programming</li>
+            <li>Social and Professional Issues</li>
+            <li>Contemporary Malaysian Issues</li>
+            <li>Artificial Intelligence</li>
+            <li>IT Fundamentals</li>
+            <li>Web Design and Development</li>
+            <li>Distributed Systems and Parallel Computing</li>
+            <li>Fundamentals of Computer Networks</li>
+            <li>Mobile Application Development</li>
+            <li>Human Computer Interaction</li>
+            <li>Discrete Mathematics</li>
+            <li>Probability and Statistics</li>
+            <li>Mathematics for Games Technology</li>
+            <li>Project I</li>
+            <li>Project II</li>
+            <li>Industrial Training (6 months)</li>
+          </ul>
+          <strong>Elective 1 (Choose 1):</strong>
+          <ul class="bullets" style="margin: 10px;">
+            <li>3D Game Development</li>
+            <li>3D Animation</li>
+          </ul>
+          <strong>Elective 2, Elective 3 (Choose any 2):</strong>
+          <ul class="bullets" style="margin: 10px;">
+            <li>Virtual Reality</li>
+            <li>Computer Game Design</li>
+            <li>Advanced Computer Game Programming</li>
+            <li>Computer Games Technology</li>
+            <li>Blockchain Application Development</li>
+            <li>Digital Illustration</li>
+          </ul>
+          <strong>Elective 4 (Choose 1):</strong>
+          <ul class="bullets" style="margin: 10px;">
+            <li>Introduction to Short Story</li>
+            <li>Music Appreciation</li>
+          </ul>
+          <strong>Language, Mata Pelajaran Pengajian Umum (MPU) and Co-curricular Courses:</strong>
+          <ul class="bullets" style="margin: 10px;">
+            <li>English for Tertiary Studies</li>
+            <li>Falsafah dan Isu Semasa</li>
+            <li>Academic English</li>
+            <li>Penghayatan Etika dan Peradaban</li>
+            <li>English for Career Preparation</li>
+            <li>Entrepreneurship</li>
+            <li>Bahasa Kebangsaan A</li>
+            <li>Contemporary Malaysian Issues</li>
+            <li>Co-curricular</li>
+          </ul>
+        </div>
+
+        <div id="CareerProspects" class="container animate-opacity detail" style="display: none;">
+          <i class="fa fa-briefcase"></i><strong> Career Prospects</strong>
+          <ul class="bullets" style="margin:10px;">
+            <li>Games Designers</li>
+            <li>Games Programmers</li>
+            <li>Games Software Engineers</li>
+            <li>Games Producers</li>
+            <li>Games Testers</li>
+            <li>Technical Lead</li>
+            <li>Web Designers</li>
+            <li>Multimedia Developers</li>
+            <li>Software Developers</li>
+            <li>Mobile Application Developers</li>
+            <li>Systems Analysts</li>
+          </ul>
+        </div>
+
+        <div id="FeesFinancialAids" class="container animate-opacity detail" style="display: none;">
+          <strong>Fees & Financial Aids</strong>
+          <ul class="bullets">
+            <li>Estimated Total Fees: RM 35,100 (Malaysian Student), RM61,200 (International Student)</li>
+            <li>The estimated total fees may vary by 10%</li>
+            <li>For more information on Fees, <a href="https://www.tarc.edu.my/bursary/content.jsp?cat_id=5AA0377F-4E7F-494A-8EB4-CEF5CE4DD7AE" target="_blank"><b>click here</b></a>.</li>
+          </ul>
+
+          <p><b>Merit Scholarship</b></p>
+          <p>To find out more, <a class="hovering" href="https://www.tarc.edu.my/admissions/contentsub.jsp?cat_id=58F1E9DB-53BF-4657-8DD6-80056FEAF89F&fmenuid=" target="_blank"><b>click here</b></a>.</p>
+
+          <p><b>Other Scholarship</b></p>
+          <p>To find out more, <a class="hovering" href="https://www.tarc.edu.my/dsa/financial-aid/scholarships-grants/" target="_blank"><b>click here</b></a>.</p>
+
+          <p><b>Financial Aid</b></p>
+          <ul class="bullets">
+            <li>For PTPTN, <a href="https://www.tarc.edu.my/dsa/financial-aid/ptptn/" target="_blank"><b>click here</b></a></li>
+            <li>For Study Loan, <a href="https://www.tarc.edu.my/dsa/financial-aid/study-loans/" target="_blank"><b>click here</b></a></li>
+            <li>For more information on Financial Aid, <a href="https://www.tarc.edu.my/dsa/financial-aid/financial-aid/" target="_blank"><b>click here</b></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="width: 100%; padding: 50px 0; text-align: center; background-image: url('https://www.tarc.edu.my/files/focs/background/C8D273C9-6BB6-4977-953F-44EEBFDEB2C5.jpg'); background-size: cover;">
+        <h3 style="color: white;"></h3>
+        <a class="btn" style="margin: 5px;" href="https://www.tarc.edu.my/admissions/a/intake-in-progress/" bis_skin_checked="1">Enroll Now</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  function openTab(evt, name) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("detail");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" dark-grey", "");
+    }
+    document.getElementById(name).style.display = "block";
+    evt.currentTarget.className += " dark-grey";
+  }
+
+  var slideIndex = 1;
+  showDivs(slideIndex);
+
+  function plusDivs(n) {
+    showDivs(slideIndex += n);
+  }
+
+  function showDivs(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    x[slideIndex-1].style.display = "block";
+  }
+</script>
+
