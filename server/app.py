@@ -119,7 +119,7 @@ def get_staff_list():
     # Get the page number, items per page, and search query from the request parameters
     page_number = int(request.args.get("page", 1))  # default is 1st page
     items_per_page = int(request.args.get("itemsPerPage", 20))  # default is 20 staffs per page
-    search_query = request.args.get("search", '')
+    search_query = request.args.get("search", "")
 
     # Calculate the offset based on the page number and items per page
     offset = (page_number - 1) * items_per_page
@@ -127,13 +127,20 @@ def get_staff_list():
     db_conn = db_conn_pool.get_connection(pre_ping=True)
     cursor = db_conn.cursor()
     try:
-        cursor.execute("""
+        cursor.execute(
+            """
             SELECT * FROM staff WHERE UPPER(staff_name) LIKE UPPER(%s) OR UPPER(designation) LIKE UPPER(%s)
             OR UPPER(position) LIKE UPPER(%s) OR UPPER(department) LIKE UPPER(%s) LIMIT %s OFFSET %s
-        """, (
-            f"%{search_query}%", f"%{search_query}%", f"%{search_query}%", f"%{search_query}%",
-            items_per_page, offset
-        ))
+        """,
+            (
+                f"%{search_query}%",
+                f"%{search_query}%",
+                f"%{search_query}%",
+                f"%{search_query}%",
+                items_per_page,
+                offset,
+            ),
+        )
         staff_data = cursor.fetchall()
 
         # Convert the result to a list of dictionaires
@@ -169,13 +176,13 @@ def list_staffs():
     return render_template("StaffList.html")
 
 
-@log
+# @log
 @app.route("/qna", methods=["GET"])
 def list_qna():
     return render_template("Qna.html")
 
 
-@log
+# @log
 # get the staff details
 @app.route("/staffs/<id>")
 def staff(id: int):
@@ -184,10 +191,10 @@ def staff(id: int):
     print(id)
     try:
         cursor.execute(
-            "SELECT s.staff_id, s.staff_name, s.avatar, s.designation, s.department, s.position," +
-            " s.email, d.publications, d.specialization, d.area_of_interest FROM staff s, staff_details d" +
-            " WHERE s.staff_id = d.staff_id AND s.staff_id = %s",
-            (id,)
+            "SELECT s.staff_id, s.staff_name, s.avatar, s.designation, s.department, s.position,"
+            + " s.email, d.publications, d.specialization, d.area_of_interest FROM staff s, staff_details d"
+            + " WHERE s.staff_id = d.staff_id AND s.staff_id = %s",
+            (id,),
         )
         staff_data = cursor.fetchone()
         if staff_data:
