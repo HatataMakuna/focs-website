@@ -4,3 +4,164 @@
     - Show the information of each programme
     - Return the result, if possible: if return one result, redirect to that page
 -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Programme List | FOCS</title>
+        <link rel="icon" type="image/png" href="/static/favicon.png" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/plStyle.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}">
+    </head>
+
+    <body translate="no">
+        <div class="menu-btn">
+          <i class="fas fa-bars fa-2x"></i>
+        </div>
+
+        <div class="container">
+          <!-- Navigation bar -->
+          <nav class="main-nav">
+            <img class="logo" src="/static/logo.png" alt="Tunku Abdul Rahman University of Management and Technology" />
+
+            <ul class="main-menu">
+              <li>
+                <a href="#">Home</a>
+              </li>
+
+              <li>
+                <a href="#">About Us</a>
+              </li>
+
+              <li>
+                <a href="#">Facilities</a>
+              </li>
+
+              <li>
+                <a href="#">Research</a>
+              </li>
+
+              <li>
+                <a href="#">External Advisors</a>
+              </li>
+
+              <li>
+                <a href="#">Our Team</a>
+              </li>
+            </ul>
+
+            <ul class="right-menu">
+              <li>
+                <a href="#">
+                  <i class="fas fa-search"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <header class="navigate-top">
+            <h1 style="text-align:center; font-size:3em;">Programme List</h3>
+          </header>
+
+          <!-- TODO: Search feature -->
+          <section>
+            <div class="search-bar">
+              <input type="text" placeholder="Search staff...">
+              <button type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </section>
+
+          <!-- TODO: Programme List (use paging if possible) -->
+        <section><div id="programme-list"></div></section>
+        </div>
+    </body>
+</html>
+
+<script>
+const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+
+// Simulated list of available programs
+// TODO: Retrieve the list of programmes from database
+/* function fetchProgrammeList() {
+      $.ajax({
+          url: '/get-programme-list',  // The server-side route to fetch staff data
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+              // Assuming data is in the format: { 'staff_list': [...] }
+              const staffList = data.staff_list;
+
+              // Display staff data on the webpage
+              const staffListDiv = $('#staff-list');
+              staffListDiv.empty();
+              staffList.forEach(function (staff) {
+                // image cannot display properly
+                  const staffInfo = `
+                  <div class="card-4 panel animate-fading">
+                    <table>
+                      <tr>
+                        <td class="card-section-1">
+                          <div class="staff-avatar center">
+                            <img src="/static/${staff.avatar}" style="width:100%;"/>
+                          </div>
+                        </td>
+                        <td class="card-section-2">
+                          <b class="staff-name">${staff.staff_name}</b><br/>
+                          Designation: ${staff.designation}<br/>Department: ${staff.department}<br/>
+                          Position: ${staff.position}<br/>Email: ${staff.email}
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  `;
+                  staffListDiv.append(staffInfo);
+              });
+          }
+      });
+  } */
+
+const programs = [
+    'Program A',
+    'Program B',
+    'Program C',
+    // Add more program names
+];
+
+searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    const matchingPrograms = programs.filter(program => program.toLowerCase().includes(query));
+
+    // Display autocomplete suggestions
+    displayResults(matchingPrograms);
+});
+
+function displayResults(results) {
+    searchResults.innerHTML = '';
+
+    if (results.length === 1) {
+        // Automatically redirect if there's only one result
+        redirectToProgramPage(results[0]);
+    } else {
+        // Display autocomplete suggestions
+        results.forEach(result => {
+            const resultItem = document.createElement('div');
+            resultItem.classList.add('result-item');
+            resultItem.textContent = result;
+            searchResults.appendChild(resultItem);
+
+            resultItem.addEventListener('click', () => {
+                redirectToProgramPage(result);
+            });
+        });
+    }
+}
+
+function redirectToProgramPage(programName) {
+    // You can implement the redirection logic here
+    // Example: window.location.href = '/path/to/program/' + programName;
+}
+</script>

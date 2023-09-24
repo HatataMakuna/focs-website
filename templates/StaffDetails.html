@@ -1,0 +1,119 @@
+<!--
+  TODO:
+  - Get the specific staff details from the database
+  - When clicking on the staff name from the staff list page, get the staff's ID
+  - Display all the columns in this page
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta chartset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Page title -->
+  <title>Staff Details | FOCS</title>
+
+  <!-- Link CSS and favicon -->
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/sdStyle.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}">
+</head>
+
+<body>
+  <div class="menu-btn">
+    <i class="fas fa-bars fa-2x"></i>
+  </div>
+
+  <div class="container">
+    <!-- Navigation bar -->
+    <nav class="main-nav">
+      <img class="logo" src="/static/logo.png" alt="Tunku Abdul Rahman University of Management and Technology" />
+
+      <ul class="main-menu">
+        <li>
+          <a href="#">Home</a>
+        </li>
+
+        <li>
+          <a href="#">About Us</a>
+        </li>
+
+        <li>
+          <a href="#">Facilities</a>
+        </li>
+
+        <li>
+          <a href="#">Research</a>
+        </li>
+
+        <li>
+          <a href="#">External Advisors</a>
+        </li>
+
+        <li>
+          <a href="#">Our Team</a>
+        </li>
+      </ul>
+
+      <ul class="right-menu">
+        <li>
+          <a href="#">
+            <i class="fas fa-search"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <header class="animate-top">
+      <h1>Staff Profile</h1>
+    </header>
+
+    <!-- TODO: Staff Profile -->
+    <section>
+      <div class="card-4 panel">
+        <table style="width:100%;">
+          <tr>
+            <td class="card-section">
+              <div class="center">
+                <img src="{{ staffprofile.avatar }}" alt="{{ staffprofile.staff_name }}" width="300">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="card-section center">
+              <h2>{{ staffprofile.staff_name }}</h2>
+            </td>
+          </tr>
+          <tr>
+            <td class="card-section">
+              <p><strong>Designation:</strong> {{ staffprofile.designation }}</p>
+              <p><strong>Department:</strong> {{ staffprofile.department }}</p>
+              <p><strong>Position:</strong> {{ staffprofile.position }}</p>
+              <p><strong>Email:</strong> {{ staffprofile.email }}</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="card-section">
+              <h3>Publications</h3>
+              <p>{{ staffprofile.publications }}</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="card-section">
+              <h3>Specialization</h3>
+              <p>{{ staffprofile.specialization }}</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="card-section">
+              <h3>Area of Interest</h3>
+              <p>{{ staffprofile.area_of_interest }}</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
