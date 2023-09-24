@@ -114,6 +114,29 @@
         </table>
       </div>
     </section>
+
+    <!-- You may like-->
+    <section>
+      <div class="card-4 panel">
+        <h2>Similar Staffs</h2>
+        <table style="width:100%;">
+          <tr>
+            <td class="card-section">
+              <img class="s-staff-avatar" src="{{ recommended[0].avatar }}" width="200"><br/>
+              <a href="href=/staffs/{{ recommended[0].staff_id }}">{{ recommended[0].staff_name }}</a>
+            </td>
+            <td class="card-section">
+              <img class="s-staff-avatar" src="{{ recommended[1].avatar }}" width="200"><br/>
+              <a href="href=/staffs/{{ recommended[1].staff_id }}">{{ recommended[1].staff_name }}</a>
+            </td>
+            <td class="card-section">
+              <img class="s-staff-avatar" src="{{ recommended[2].avatar }}" width="200"><br/>
+              <a href="href=/staffs/{{ recommended[2].staff_id }}">{{ recommended[2].staff_name }}</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </section>
   </div>
 </body>
 </html>

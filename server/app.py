@@ -1,12 +1,10 @@
-import sys
 import time
 import uuid
 
 import boto3
-import config
 import consts
 from db_connection_pool import DbConnectionPool
-from flask import Flask, jsonify, redirect, render_template, request
+from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder="../static", template_folder="../templates")
@@ -94,22 +92,101 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/programmes", methods=["GET"])
-def list_programmes():
+# TODO: [N1] The website should be able to show the page regarding the information
+# of an intended computing programme as a search result
+@app.route("/programmes")
+def programmes():
     return render_template("ProgrammeList.html")
 
 
-# TODO: [N1] The website should be able to show the page regarding the information
-# of an intended computing programme as a search result
-#
-# If only ONE programme is returned as search result, redirect the user to the programme page
-@app.route("/redirect-program", methods=["GET"])
-def redirect_programme():
-    program_name = request.args.get("program_name")
-    # Implement your logic to determine the program URL based on the name
-    # Example: program_url = get_program_url(program_name)
-    program_url = f"/path/to/program/{program_name}"
-    return redirect(program_url)
+@app.route("/programmes/pcs")
+def programme_pcs():
+    return render_template("programmes/PCS.html")
+
+
+@app.route("/programmes/pit")
+def programme_pit():
+    return render_template("programmes/PIT.html")
+
+
+@app.route("/programmes/pms")
+def programme_pms():
+    return render_template("programmes/PMS.html")
+
+
+@app.route("/programmes/mcs")
+def programme_mcs():
+    return render_template("programmes/MCS.html")
+
+
+@app.route("/programmes/mit")
+def programme_mit():
+    return render_template("programmes/MIT.html")
+
+
+@app.route("/programmes/mms")
+def programme_mms():
+    return render_template("programmes/MMS.html")
+
+
+@app.route("/programmes/rds")
+def programme_rds():
+    return render_template("programmes/RDS.html")
+
+
+@app.route("/programmes/rei")
+def programme_rei():
+    return render_template("programmes/REI.html")
+
+
+@app.route("/programmes/ris")
+def programme_ris():
+    return render_template("programmes/RIS.html")
+
+
+@app.route("/programmes/rit")
+def programme_rit():
+    return render_template("programmes/RIT.html")
+
+
+@app.route("/programmes/rmm")
+def programme_rmm():
+    return render_template("programmes/RMM.html")
+
+
+@app.route("/programmes/rsd")
+def programme_rsd():
+    return render_template("programmes/RSD.html")
+
+
+@app.route("/programmes/rst")
+def programme_rst():
+    return render_template("programmes/RST.html")
+
+
+@app.route("/programmes/rsw")
+def programme_rsw():
+    return render_template("programmes/RSW.html")
+
+
+@app.route("/programmes/dcs")
+def programme_dcs():
+    return render_template("programmes/DCS.html")
+
+
+@app.route("/programmes/dft")
+def programme_dft():
+    return render_template("programmes/DFT.html")
+
+
+@app.route("/programmes/dis")
+def programme_dis():
+    return render_template("programmes/DIS.html")
+
+
+@app.route("/programmes/dse")
+def programme_dse():
+    return render_template("programmes/DSE.html")
 
 
 # TODO: [N9]
@@ -120,6 +197,7 @@ def get_staff_list():
     page_number = int(request.args.get("page", 1))  # default is 1st page
     items_per_page = int(request.args.get("itemsPerPage", 20))  # default is 20 staffs per page
     search_query = request.args.get("search", "")
+    search_query = request.args.get("search", "")
 
     # Calculate the offset based on the page number and items per page
     offset = (page_number - 1) * items_per_page
@@ -129,8 +207,20 @@ def get_staff_list():
     try:
         cursor.execute(
             """
+        cursor.execute(
+            """
             SELECT * FROM staff WHERE UPPER(staff_name) LIKE UPPER(%s) OR UPPER(designation) LIKE UPPER(%s)
             OR UPPER(position) LIKE UPPER(%s) OR UPPER(department) LIKE UPPER(%s) LIMIT %s OFFSET %s
+        """,
+            (
+                f"%{search_query}%",
+                f"%{search_query}%",
+                f"%{search_query}%",
+                f"%{search_query}%",
+                items_per_page,
+                offset,
+            ),
+        )
         """,
             (
                 f"%{search_query}%",
@@ -188,7 +278,6 @@ def list_qna():
 def staff(id: int):
     db_conn = db_conn_pool.get_connection(pre_ping=True)
     cursor = db_conn.cursor()
-    print(id)
     try:
         cursor.execute(
             "SELECT s.staff_id, s.staff_name, s.avatar, s.designation, s.department, s.position,"
@@ -198,7 +287,7 @@ def staff(id: int):
         )
         staff_data = cursor.fetchone()
         if staff_data:
-            data_to_pass = {
+            current_staff_profile = {
                 "staff_id": staff_data[0],
                 "staff_name": staff_data[1],
                 "avatar": "/static/" + staff_data[2],
@@ -210,11 +299,11 @@ def staff(id: int):
                 "specialization": staff_data[8],
                 "area_of_interest": staff_data[9],
             }
-            return render_template("StaffDetails.html", staffprofile=data_to_pass), 200
         else:
             return jsonify({"message": "Staff not found"}), 404
+        return render_template("StaffDetails.html", staffprofile=current_staff_profile), 200
     except Exception as e:
-        return jsonify({"message": "Error while retrieving staff details" + str(e)}), 500
+        return jsonify({"message": "Error while retrieving staff details: " + str(e)}), 500
     finally:
         cursor.close()
         db_conn.close()
@@ -231,6 +320,10 @@ def compare_programmes():
 def get_faq_answer():
     # Input
     q = request.args.get("q", ".")
+
+    # Ensure query is not empty
+    if q == "":
+        q = "."
 
     # Get current time
     now = int(time.time())
@@ -294,56 +387,29 @@ def about():
     return render_template("www.tarc.edu.my")
 
 
-@app.route("/addemp", methods=["POST"])
-def AddEmp():
-    emp_id = request.form["emp_id"]
-    first_name = request.form["first_name"]
-    last_name = request.form["last_name"]
-    pri_skill = request.form["pri_skill"]
-    location = request.form["location"]
-    emp_image_file = request.files["emp_image_file"]
+@app.route("/softwareEngineer", methods=["GET"])
+def softwareEngineer():
+    return render_template("TanKangHong/homepage.html")
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
 
-    # Reopen the timed out database connection to avoid PyMySQL interface error
-    db_conn = db_conn_pool.get_connection(pre_ping=True)
+@app.route("/softwareEngineer/display1", methods=["GET"])
+def display1():
+    return render_template("TanKangHong/applyPage.html")
 
-    cursor = db_conn.cursor()
 
-    if emp_image_file.filename == "":
-        return "Please select a file"
+@app.route("/softwareEngineer/display2", methods=["GET"])
+def display2():
+    return render_template("TanKangHong/apply2.html")
 
-    try:
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
-        db_conn.commit()
-        emp_name = "" + first_name + " " + last_name
-        # Uplaod image file in S3 #
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-        s3 = boto3.resource("s3")
 
-        try:
-            print("Data inserted in MySQL RDS... uploading image to S3...")
-            s3.Bucket(config.custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
-            bucket_location = boto3.client("s3").get_bucket_location(Bucket=config.custombucket)
-            s3_location = bucket_location["LocationConstraint"]
+@app.route("/softwareEngineer/display3", methods=["GET"])
+def display3():
+    return render_template("TanKangHong/apply3.html")
 
-            if s3_location is None:
-                s3_location = ""
-            else:
-                s3_location = "-" + s3_location
 
-            # object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-            #     s3_location, config.custombucket, emp_image_file_name_in_s3
-            # )
-
-        except Exception as e:
-            return str(e)
-
-    finally:
-        cursor.close()
-
-    print("all modification done...")
-    return render_template("AddEmpOutput.html", name=emp_name)
+@app.route("/softwareEngineer/display4", methods=["GET"])
+def display4():
+    return render_template("TanKangHong/apply4.html")
 
 
 if __name__ == "__main__":

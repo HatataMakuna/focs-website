@@ -16,436 +16,12 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}">
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
 
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #fff;
-        color: #000;
-        font-size: 15px;
-        line-height: 1.5;
-      }
+    <!-- TODO: Copy this to other pages -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
 
-      a {
-        color: #262626;
-        text-decoration: none;
-      }
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}" />
 
-      ul {
-        list-style: none;
-      }
-
-      .container {
-        width: 90%;
-        max-width: 1100px;
-        margin: auto;
-      }
-
-      /* Nav */
-      .main-nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 60px;
-        padding: 20px 0;
-        font-size: 13px;
-      }
-
-      .main-nav .logo {
-        width: 110px;
-      }
-
-      .main-nav ul {
-        display: flex;
-      }
-
-      .main-nav ul li {
-        padding: 0 10px;
-      }
-
-      .main-nav ul li a {
-        padding-bottom: 2px;
-      }
-
-      .main-nav ul li a:hover {
-        border-bottom: 2px solid #262626;
-      }
-
-      .main-nav ul.main-menu {
-        flex: 1;
-        margin-left: 20px;
-      }
-
-      .menu-btn {
-        cursor: pointer;
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        z-index: 2;
-        display: none;
-      }
-
-      .btn {
-        cursor: pointer;
-        display: inline-block;
-        border: 0;
-        font-weight: bold;
-        padding: 10px 20px;
-        background: #262626;
-        color: #fff;
-        font-size: 15px;
-      }
-
-      .btn:hover {
-        opacity: 0.9;
-      }
-
-      .dark {
-        color: #fff;
-      }
-
-      .dark .btn {
-        background: #f4f4f4;
-        color: #333;
-      }
-
-      /* Showcase */
-      .showcase {
-        width: 100%;
-        height: 400px;
-        padding-bottom: 50px;
-        margin-bottom: 20px;
-      }
-
-      .showcase h2,
-      .showcase p {
-        margin-bottom: 10px;
-      }
-
-      .showcase .btn {
-        margin-top: 20px;
-      }
-
-      /* Home cards */
-      .home-cards {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-gap: 20px;
-        margin-bottom: 40px;
-      }
-
-      .home-cards img {
-        width: 100%;
-        margin-bottom: 20px;
-      }
-
-      .home-cards h3 {
-        margin-bottom: 5px;
-      }
-
-      .home-cards a {
-        display: inline-block;
-        padding-top: 10px;
-        color: #0067b8;
-        text-transform: uppercase;
-        font-weight: bold;
-      }
-
-      .home-cards a:hover i {
-        margin-left: 10px;
-      }
-
-      /* Xbox */
-      .xbox {
-        width: 100%;
-        height: 350px;
-        background: url('/static/awardEvent.jpg') no-repeat center center/cover;
-        background-size: 100% 425px;
-        background-position: center top;
-        margin-bottom: 20px;
-      }
-
-      .xbox .content {
-        width: 40%;
-        padding: 120px 0 0 70px;
-      }
-
-      .xbox p,
-      .carbon p {
-        margin: 10px 0 20px;
-      }
-
-      /* Carbon */
-      .carbon {
-        width: 100%;
-        height: 350px;
-        background: url('https://i.ibb.co/72cgtsz/carbon.jpg') no-repeat center center/cover;
-      }
-
-      .carbon .content {
-        width: 55%;
-        padding: 100px 0 0 30px;
-      }
-
-      /* Follow */
-      .follow {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        margin: 5px 0 30px;
-      }
-
-      .follow * {
-        margin-right: 10px;
-      }
-
-      /* Links */
-      .links {
-        background: #f2f2f2;
-        color: #616161;
-        font-size: 12px;
-        padding: 35px 0;
-      }
-
-      .links-inner {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 0 50px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 10px;
-        align-items: flex-start;
-        justify-content: center;
-      }
-
-      .links li {
-        line-height: 2.8;
-      }
-
-      /* Footer */
-      .footer {
-        background: #f2f2f2;
-        color: #616161;
-        font-size: 12px;
-        padding: 10px 0;
-      }
-
-      .footer-inner {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 0 20px 0 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .footer div {
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-      }
-
-      .footer div i {
-        margin-right: 10px;
-      }
-
-      .footer ul {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      .footer li {
-        margin-left: 300px;
-        margin-bottom: 20px;
-      }
-
-      @media (max-width: 700px) {
-        .menu-btn {
-          display: block;
-        }
-
-        .menu-btn:hover {
-          opacity: 0.5;
-        }
-
-        .main-nav ul.right-menu {
-          margin-right: 50px;
-        }
-
-        .main-nav ul.main-menu {
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 0;
-          background: #f2f2f2;
-          width: 50%;
-          height: 100%;
-          border-right: #ccc 1px solid;
-          opacity: 0.9;
-          padding: 30px;
-          transform: translateX(-500px);
-          transition: transform 0.5s ease-in-out;
-        }
-
-        .main-nav ul.main-menu li {
-          padding: 10px;
-          border-bottom: #ccc solid 1px;
-          font-size: 14px;
-        }
-
-        .main-nav ul.main-menu li:last-child {
-          border-bottom: 0;
-        }
-
-        .main-nav ul.main-menu.show {
-          transform: translateX(-20px);
-        }
-
-        .home-cards {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .xbox .content p {
-          display: none;
-        }
-
-        .xbox .content h2 {
-          margin-bottom: 20px;
-        }
-
-        .carbon .content {
-          width: 85%;
-        }
-
-        .links .links-inner {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      @media (max-width: 500px) {
-        .home-cards {
-          grid-template-columns: 1fr;
-        }
-
-        .links .links-inner {
-          grid-template-columns: 1fr;
-        }
-
-        .links .links-inner ul {
-          margin-bottom: 20px;
-        }
-      }
-
-      /* Slideshow container */
-      .slideshow-container {
-        max-width: 1000px;
-        position: relative;
-        margin: auto;
-      }
-
-      /* Make the images invisible by default */
-      .Containers {
-        display: none;
-      }
-
-      /* forward & Back buttons */
-      .Back,
-      .forward {
-        cursor: pointer;
-        position: absolute;
-        top: 48%;
-        width: auto;
-        margin-top: -23px;
-        padding: 17px;
-        color: grey;
-        font-weight: bold;
-        font-size: 19px;
-        transition: 0.4s ease;
-        border-radius: 0 5px 5px 0;
-        user-select: none;
-      }
-
-      /* Place the "forward button" to the right */
-      .forward {
-        right: 0;
-        border-radius: 4px 0 0 4px;
-      }
-
-      /*when the user hovers,add a black background with some little opacity */
-      .Back:hover,
-      .forward:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-      }
-
-      /* Caption Info */
-      .Info {
-        color: #e3e3e3;
-        font-size: 16px;
-        padding: 10px 14px;
-        position: absolute;
-        bottom: 10px;
-        width: 100%;
-        text-align: center;
-      }
-
-      /* Worknumbering (1/3 etc) */
-      .MessageInfo {
-        color: #f2f2f3;
-        font-size: 14px;
-        padding: 10px 14px;
-        position: absolute;
-        top: 0;
-      }
-
-      /* The circles or bullets and indicators */
-      .dots {
-        cursor: pointer;
-        height: 16px;
-        width: 16px;
-        margin: 0 3px;
-        background-color: #acc;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.5s ease;
-      }
-
-      .enable,
-      .dots:hover {
-        background-color: #717161;
-      }
-
-      /* Faint animation */
-      .fade {
-        -webkit-animation-name: fade;
-        -webkit-animation-duration: 1.4s;
-        animation-name: fade;
-        animation-duration: 1.4s;
-      }
-
-      @-webkit-keyframes fade {
-        from {
-          opacity: 0.5;
-        }
-        to {
-          opacity: 2;
-        }
-      }
-
-      @keyframes fade {
-        from {
-          opacity: 0.5;
-        }
-        to {
-          opacity: 2;
-        }
-      }
-    </style>
   </head>
 
   <body translate="no">
@@ -496,7 +72,8 @@
       <!-- Showcase -->
       <header class="mb-4">
         <div id="carouselExampleIndicators" class="carousel slide bg-dark">
-          <div class="carousel-indicators">
+          <!-- TODO: Copy z-0 to other pages -->
+          <div class="carousel-indicators z-0">
             <button
               type="button"
               data-bs-target="#carouselExampleIndicators"
@@ -641,8 +218,9 @@
               <div class="position-absolute"></div>
             </div>
           </div>
+          <!-- TODO: Copy z-0 to other pages -->
           <button
-            class="carousel-control-prev"
+            class="carousel-control-prev z-0"
             type="button"
             data-bs-target="#carouselExampleIndicators"
             data-bs-slide="prev"
@@ -650,8 +228,9 @@
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
+          <!-- TODO: Copy z-0 to other pages -->
           <button
-            class="carousel-control-next"
+            class="carousel-control-next z-0"
             type="button"
             data-bs-target="#carouselExampleIndicators"
             data-bs-slide="next"
@@ -788,6 +367,81 @@
       </div>
     </footer>
 
+    <!-- TODO: Copy this to other pages -->
+    <div id="hello-msg-container" class="position-fixed" style="bottom: 16px; right: 16px">
+      <div id="hello-msg" style="transition: opacity 0.1s; opacity: 0">
+        <!-- Hello message -->
+        <div class="position-absolute end-0 bg-dark rounded text-white z-1 shadow" style="width: 256px; bottom: 80px">
+          <i class="bi bi-robot fs-2 mx-2 align-middle"></i>
+          <span>Hello, how can I help you ?</span>
+
+          <i
+            class="position-absolute bi bi-x text-danger fs-5 end-0 top-0 fw-bold"
+            onclick="hideHelloMessage()"
+            style="cursor: pointer"
+          >
+          </i>
+        </div>
+
+        <!-- Arrow -->
+        <div
+          class="position-absolute bg-dark z-0"
+          style="width: 16px; height: 16px; bottom: 72px; right: 24px; transform: rotate(45deg)"
+        ></div>
+      </div>
+
+      <!-- Chat room -->
+      <div id="chat-room" style="transition: opacity 0.5s; opacity: 0">
+        <div
+          class="position-absolute end-0 bg-dark rounded text-white z-1 shadow"
+          style="width: 512px; height: 512px; bottom: 80px"
+        >
+          <!-- Chat messages -->
+          <ol id="chat-msgs" class="px-1 mb-0 overflow-auto" style="list-style-type: none; height: 442px">
+            <li class="overflow-auto">
+              <i class="bi bi-robot fs-2 mx-2 float-start"></i>
+              <span class="float-start" style="margin-top: 12px">Hello, how can I help you ?</span>
+            </li>
+          </ol>
+
+          <form id="q-form">
+            <!-- Text box to send text to chatbot -->
+            <input
+              id="q"
+              class="form-control position-absolute"
+              name="q"
+              placeholder="I want to ask something..."
+              style="left: 16px; bottom: 16px; width: 408px"
+            />
+
+            <!-- Send button -->
+            <button
+              class="position-absolute btn btn-info rounded bg-info text-dark pt-2"
+              style="bottom: 16px; right: 16px; height: 38px"
+              type="submit"
+            >
+              <i class="bi bi-send fs-6"></i>
+            </button>
+          </form>
+        </div>
+
+        <div
+          class="position-absolute bg-dark z-0"
+          style="width: 16px; height: 16px; bottom: 72px; right: 24px; transform: rotate(45deg)"
+        ></div>
+      </div>
+
+      <!-- Chat button -->
+      <button
+        type="button"
+        class="position-absolute btn btn-dark rounded-circle ps-3 bottom-0 end-0 shadow"
+        style="width: 64px"
+        onclick="toggleChatRoom()"
+      >
+        <i class="fs-2 bi bi-chat-dots"></i>
+      </button>
+    </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -798,6 +452,69 @@
       document
         .querySelector('.menu-btn')
         .addEventListener('click', () => document.querySelector('.main-menu').classList.toggle('show'))
+
+      // TODO: Copy this to other pages from here
+      // Blinking to catch the user attention that there is a help chatbot
+      const helloMsgOpacities = [1, 0, 1]
+      let index = 0
+      setTimeout(() => {
+        const timer = setInterval(() => {
+          document.getElementById('hello-msg').style.opacity = helloMsgOpacities[index]
+          ++index
+          if (index == helloMsgOpacities.length) clearInterval(timer)
+        }, 100)
+      }, 1000)
+
+      function hideHelloMessage() {
+        document.getElementById('hello-msg').style.opacity = 0
+      }
+
+      function toggleChatRoom() {
+        hideHelloMessage()
+
+        const chatRoom = document.getElementById('chat-room')
+        chatRoom.style.opacity = 1 - chatRoom.style.opacity
+      }
+
+      document.getElementById('q-form').addEventListener('submit', async event => {
+        // Dont refresh the page
+        event.preventDefault()
+
+        // Input
+        const q = document.getElementById('q').value
+
+        // Display user query
+        const userMsg = document.createElement('li')
+        userMsg.className = 'overflow-auto'
+        userMsg.innerHTML = `
+          <i class="bi bi-person-circle fs-2 mx-2 float-end"></i>
+          <span class="float-end" style="margin-top: 12px">${q}</span>
+        `
+        document.getElementById('chat-msgs').appendChild(userMsg)
+
+        // Clear user input
+        document.getElementById('q').value = ''
+
+        // Tell something to the chatbot
+        const resp = await fetch('/faq_ans?' + new URLSearchParams({ q }))
+
+        // Display chatbot response
+        const botMsg = document.createElement('li')
+        botMsg.className = 'overflow-auto'
+        botMsg.innerHTML = `
+          <i class="bi bi-robot fs-2 mx-2 float-start"></i>
+          <span class="float-start" style="margin-top: 12px">${(await resp.json()).result}</span>
+        `
+        document.getElementById('chat-msgs').appendChild(botMsg)
+      })
+
+      document.body.addEventListener('click', event => {
+        // Clicking outside the chat room will close the chat room
+        if (!document.getElementById('hello-msg-container').contains(event.target)) {
+          document.getElementById('chat-room').style.opacity = 0
+        }
+      })
+      // TODO: Until here
     </script>
   </body>
 </html>
