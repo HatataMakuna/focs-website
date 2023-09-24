@@ -171,6 +171,10 @@ def get_faq_answer():
     # Input
     q = request.args.get("q", ".")
 
+    # Ensure query is not empty
+    if q == "":
+        q = "."
+
     # Get current time
     now = int(time.time())
 
