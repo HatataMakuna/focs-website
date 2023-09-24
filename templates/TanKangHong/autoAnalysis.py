@@ -1,25 +1,61 @@
-import pytesseract
-from pdf2image import convert_from_path
+import fitz  # PyMuPDF
 
-# Convert the PDF to images
-pdf_path = 'C:\\Users\\User\\Downloads\\SEM\\focs-website\\result1.pdf'
-images = convert_from_path(pdf_path, first_page=0, last_page=1)
+# Define grading criteria and approval/denial rules
+grading_criteria = {
+    "A": {"min_score": 90, "max_score": 100},
+    "B": {"min_score": 80, "max_score": 89},
+    "C": {"min_score": 70, "max_score": 79},
+    "D": {"min_score": 60, "max_score": 69},
+    "F": {"min_score": 0, "max_score": 59},
+}
 
-# Check if any pages were converted
-if images:
-    pdf_image = images[0]  # Assuming you want to work with the first page
-    text = pytesseract.image_to_string(pdf_image)
+approval_rules = {
+    "A": "Approved",
+    "B": "Approved",
+    "C": "Approved",
+    "D": "Denied",
+    "F": "Denied",
+}
 
-    # Define grade detection criteria
-    grade_keywords = ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F']
+# Function to check grade and approval status
+def check_grade_and_approval(score):
+    for grade, criteria in grading_criteria.items():
+        if criteria["min_score"] <= score <= criteria["max_score"]:
+            return grade, approval_rules[grade]
+    return "N/A", "N/A"
 
-    # Detect grades using regular expressions
-    detected_grades = [grade for grade in grade_keywords if grade in text]
+# Function to process a PDF file and check student results
+def process_pdf(pdf_file_path):
+    extracted_text = ""
+    doc = fitz.open(pdf_file_path)
 
-    # Print the detected grades
-    if detected_grades:
-        print('Detected Grades:', ', '.join(detected_grades))
-    else:
-        print('No grades detected.')
-else:
-    print("No pages found in the PDF.")
+    # Iterate through pages and extract text
+    for page_num in range(doc.page_count):
+        page = doc[page_num]
+        extracted_text += page.get_text()
+
+    doc.close()
+
+    # Process and analyze the extracted text (replace this with your parsing logic)
+    # In this simplified example, we assume that each line contains a student name and score.
+    lines = extracted_text.split('\n')
+    student_results = []
+    for line in lines:
+        parts = line.split(',')
+        if len(parts) == 2:
+            name = parts[0].strip()
+            score = int(parts[1].strip())
+            grade, approval_status = check_grade_and_approval(score)
+            student_results.append({"name": name, "score": score, "grade": grade, "status": approval_status})
+
+    return student_results
+
+# Sample PDF file path (replace with user-uploaded file path)
+pdf_file_path = "focs-website/templates/TanKangHong/result.pdf"
+
+# Process the PDF file and get student results
+results = process_pdf(pdf_file_path)
+
+# Display the results (you can customize this part to your needs)
+for result in results:
+    print(f"Name: {result['name']}, Score: {result['score']}, Grade: {result['grade']}, Status: {result['status']}")
