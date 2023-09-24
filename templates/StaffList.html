@@ -4,3 +4,170 @@
     - retrieve from database to have a page for each staff
         * should contain: Name of Staff, Designation, Department, Publications (if any), Contact Information, Research area
 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title -->
+    <title>Staff List | FOCS</title>
+
+    <!-- Link CSS and favicon -->
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/slStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}">
+  </head>
+
+  <body>
+    <div class="menu-btn">
+      <i class="fas fa-bars fa-2x"></i>
+    </div>
+
+    <div class="container">
+      <!-- Navigation bar -->
+      <nav class="main-nav">
+        <img class="logo" src="/static/logo.png" alt="Tunku Abdul Rahman University of Management and Technology" />
+
+        <ul class="main-menu">
+          <li>
+            <a href="#">Home</a>
+          </li>
+
+          <li>
+            <a href="#">About Us</a>
+          </li>
+
+          <li>
+            <a href="#">Facilities</a>
+          </li>
+
+          <li>
+            <a href="#">Research</a>
+          </li>
+
+          <li>
+            <a href="#">External Advisors</a>
+          </li>
+
+          <li>
+            <a href="#">Our Team</a>
+          </li>
+        </ul>
+
+        <ul class="right-menu">
+          <li>
+            <a href="#">
+              <i class="fas fa-search"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+        <header class="animate-top">
+          <h1 style="text-align:center; font-size:3em;">Staff List</h1>
+        </header>
+
+        <!-- TODO: Search feature -->
+        <section>
+          <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search staffs...">
+            <button type="submit" id="search-button">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </section>
+
+        <!-- TODO: Staff List (use paging if possible) -->
+        <section>
+          <div id="staff-list"></div>
+          <div id="pagination"></div>
+        </section>
+    </div>
+  </body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  // Define the number of staff members per page
+  const itemsPerPage = 20;
+
+  // Function to retrieve and display staff list
+  function fetchStaffList(pageNumber, searchQuery) {
+      const url = `/get-staff-list?page=${pageNumber}&itemsPerPage=${itemsPerPage}&search=${searchQuery}`;
+      $.ajax({
+          url: url,  // The server-side route to fetch staff data
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+              const staffList = data.staff_list;
+              const totalCount = data.total_count;
+
+              // Calculate the total number of pages needed
+              const totalPages = Math.ceil(totalCount / itemsPerPage);
+
+              // Display staff data on the webpage
+              const staffListDiv = $('#staff-list');
+              staffListDiv.empty();
+              staffList.forEach(function (staff) {
+                  const staffInfo = `
+                  <div class="card-4 panel animate-fading">
+                    <table>
+                      <tr>
+                        <td class="card-section-1">
+                          <div class="staff-avatar center">
+                            <img src="/static/${staff.avatar}" style="width:100%;"/>
+                          </div>
+                        </td>
+                        <td class="card-section-2">
+                          <a class="staff-name" href="/staffs/${staff.staff_id}">${staff.staff_name}</a><br/>
+                          Designation: ${staff.designation}<br/>Department: ${staff.department}<br/>
+                          Position: ${staff.position}<br/>Email: ${staff.email}
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  `;
+                  staffListDiv.append(staffInfo);
+              });
+
+              // Generate pagination links
+              const paginationDiv = $('#pagination');
+              paginationDiv.empty();
+
+              for (let i = 1; i <= totalPages; i++) {
+                const pageLink = `<a href="#" class="page-link" data-page="${i}">${i}</a>`;
+                paginationDiv.append(pageLink);
+              }
+          }
+      });
+  }
+
+  function handleSearch() {
+    const searchQuery = $('#search-input').val();
+    fetchStaffList(1, searchQuery); // Start from the first page when searching
+  }
+
+  // Add an event listener for the "keydown" event on the search input
+  $('#search-input').on('keydown', function (e) {
+    if (e.keyCode === 13) {
+      // If "Enter" key is pressed, trigger the search button click event
+      $('#search-button').click();
+    }
+  });
+
+  // Handle search button onclick
+  $('#search-button').on('click', handleSearch);
+
+  // Handle pagination link details
+  $('#pagination').on('click', '.page-link', function (e) {
+    e.preventDefault();
+    const pageNumber = $(this).data('page');
+    fetchStaffList(pageNumber);
+  });
+
+  // Call the fetchStaffList function to retrieve and display staff data
+  // Initial fetch for the first page
+  fetchStaffList(1, '');
+</script>
