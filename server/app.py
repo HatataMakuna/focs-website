@@ -169,6 +169,13 @@ def list_staffs():
     return render_template("StaffList.html")
 
 
+@log
+@app.route("/qna", methods=["GET"])
+def list_qna():
+    return render_template("Qna.html")
+
+
+@log
 # get the staff details
 @app.route("/staffs/<id>")
 def staff(id: int):
