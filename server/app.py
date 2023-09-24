@@ -1,12 +1,10 @@
-import random
 import sys
 import time
 
 import boto3
-import config
 import consts
 from db_connection_pool import DbConnectionPool
-from flask import Flask, jsonify, redirect, render_template, request
+from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder="../static", template_folder="../templates")
@@ -93,27 +91,101 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/programmes", methods=["GET"])
-def list_programmes():
-    return render_template("ProgrammeList.html")
-
-
 # TODO: [N1] The website should be able to show the page regarding the information
 # of an intended computing programme as a search result
-#
-# If only ONE programme is returned as search result, redirect the user to the programme page
-@app.route("/redirect-program", methods=["GET"])
-def redirect_programme():
-    program_name = request.args.get("program_name")
-    # Implement your logic to determine the program URL based on the name
-    # Example: program_url = get_program_url(program_name)
-    program_url = f"/path/to/program/{program_name}"
-    return redirect(program_url)
-
-
 @app.route("/programmes")
 def programmes():
     return render_template("ProgrammeList.html")
+
+
+@app.route("/programmes/pcs")
+def programme_pcs():
+    return render_template("programmes/PCS.html")
+
+
+@app.route("/programmes/pit")
+def programme_pit():
+    return render_template("programmes/PIT.html")
+
+
+@app.route("/programmes/pms")
+def programme_pms():
+    return render_template("programmes/PMS.html")
+
+
+@app.route("/programmes/mcs")
+def programme_mcs():
+    return render_template("programmes/MCS.html")
+
+
+@app.route("/programmes/mit")
+def programme_mit():
+    return render_template("programmes/MIT.html")
+
+
+@app.route("/programmes/mms")
+def programme_mms():
+    return render_template("programmes/MMS.html")
+
+
+@app.route("/programmes/rds")
+def programme_rds():
+    return render_template("programmes/RDS.html")
+
+
+@app.route("/programmes/rei")
+def programme_rei():
+    return render_template("programmes/REI.html")
+
+
+@app.route("/programmes/ris")
+def programme_ris():
+    return render_template("programmes/RIS.html")
+
+
+@app.route("/programmes/rit")
+def programme_rit():
+    return render_template("programmes/RIT.html")
+
+
+@app.route("/programmes/rmm")
+def programme_rmm():
+    return render_template("programmes/RMM.html")
+
+
+@app.route("/programmes/rsd")
+def programme_rsd():
+    return render_template("programmes/RSD.html")
+
+
+@app.route("/programmes/rst")
+def programme_rst():
+    return render_template("programmes/RST.html")
+
+
+@app.route("/programmes/rsw")
+def programme_rsw():
+    return render_template("programmes/RSW.html")
+
+
+@app.route("/programmes/dcs")
+def programme_dcs():
+    return render_template("programmes/DCS.html")
+
+
+@app.route("/programmes/dft")
+def programme_dft():
+    return render_template("programmes/DFT.html")
+
+
+@app.route("/programmes/dis")
+def programme_dis():
+    return render_template("programmes/DIS.html")
+
+
+@app.route("/programmes/dse")
+def programme_dse():
+    return render_template("programmes/DSE.html")
 
 
 # TODO: [N9]
@@ -201,38 +273,7 @@ def staff(id: int):
             }
         else:
             return jsonify({"message": "Staff not found"}), 404
-
-        # Get all staff data
-        cursor.execute("SELECT * FROM staff")
-        staff_profile_data = cursor.fetchall()
-
-        staff_profiles = []
-        for staff in staff_profile_data:
-            staff_info = {
-                "staff_id": staff_data[0],
-                "staff_name": staff_data[1],
-                "avatar": "/static/" + staff_data[2],
-                "designation": staff_data[3],
-                "department": staff_data[4],
-                "position": staff_data[5],
-                "email": staff_data[6],
-            }
-            staff_profiles.append(staff_info)
-
-        # Implement a content-based filtering recommendation logic
-        similar_staff_profiles = []
-        for staff in staff_profiles:
-            # Check if the staff is in a similar department or designation
-            if (staff["department"] == current_staff_profile["department"]):
-                similar_staff_profiles.append(staff)
-
-        # Randomly select up to three similar staff profiles
-        recommended_profiles = random.sample(
-            staff_profiles, min(3, len(staff_profiles))
-        )
-        print(recommended_profiles)
-        return render_template(
-            "StaffDetails.html", staffprofile=current_staff_profile, recommended=recommended_profiles), 200
+        return render_template("StaffDetails.html", staffprofile=current_staff_profile), 200
     except Exception as e:
         return jsonify({"message": "Error while retrieving staff details: " + str(e)}), 500
     finally:
@@ -248,58 +289,6 @@ def catch_all(error):
 @app.route("/about", methods=["GET"])
 def about():
     return render_template("www.tarc.edu.my")
-
-
-@app.route("/addemp", methods=["POST"])
-def AddEmp():
-    emp_id = request.form["emp_id"]
-    first_name = request.form["first_name"]
-    last_name = request.form["last_name"]
-    pri_skill = request.form["pri_skill"]
-    location = request.form["location"]
-    emp_image_file = request.files["emp_image_file"]
-
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
-
-    # Reopen the timed out database connection to avoid PyMySQL interface error
-    db_conn = db_conn_pool.get_connection(pre_ping=True)
-
-    cursor = db_conn.cursor()
-
-    if emp_image_file.filename == "":
-        return "Please select a file"
-
-    try:
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
-        db_conn.commit()
-        emp_name = "" + first_name + " " + last_name
-        # Uplaod image file in S3 #
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-        s3 = boto3.resource("s3")
-
-        try:
-            print("Data inserted in MySQL RDS... uploading image to S3...")
-            s3.Bucket(config.custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
-            bucket_location = boto3.client("s3").get_bucket_location(Bucket=config.custombucket)
-            s3_location = bucket_location["LocationConstraint"]
-
-            if s3_location is None:
-                s3_location = ""
-            else:
-                s3_location = "-" + s3_location
-
-            # object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-            #     s3_location, config.custombucket, emp_image_file_name_in_s3
-            # )
-
-        except Exception as e:
-            return str(e)
-
-    finally:
-        cursor.close()
-
-    print("all modification done...")
-    return render_template("AddEmpOutput.html", name=emp_name)
 
 
 if __name__ == "__main__":

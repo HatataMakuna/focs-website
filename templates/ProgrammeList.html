@@ -2,7 +2,6 @@
     TODO: [N1]
     - Programme list: Provide search feature
     - Show the information of each programme
-    - Return the result, if possible: if return one result, redirect to that page
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -27,11 +26,11 @@
 
             <ul class="main-menu">
               <li>
-                <a href="#">Home</a>
+                <a href="/">Home</a>
               </li>
 
               <li>
-                <a href="#">About Us</a>
+                <a href="/about">About Us</a>
               </li>
 
               <li>
@@ -47,7 +46,7 @@
               </li>
 
               <li>
-                <a href="#">Our Team</a>
+                <a href="/staffs">Our Team</a>
               </li>
             </ul>
 
@@ -64,25 +63,15 @@
             <h1>Programme List</h3>
           </header>
 
-          <!-- TODO: Search feature -->
-          <section>
-            <div class="search-bar">
-              <input type="text" placeholder="Search programmes...">
-              <button type="submit">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
-          </section>
-
-          <!-- TODO: Programme List -->
+          <!-- Programme List -->
         <section>
           <div class="card-2 panel">
             <h2 class="blue program-type">Doctor of Philosophy</h2>
             <div class="container">
               <ul class="bullets">
-                <li>Doctor of Philosophy (Computer Science)</li>
-                <li>Doctor of Philosophy (Information Technology)</li>
-                <li>Doctor of Philosophy (Mathematical Sciences)</li>
+                <li><a href="/programmes/pcs">Doctor of Philosophy (Computer Science)</a></li>
+                <li><a href="/programmes/pit">Doctor of Philosophy (Information Technology)</a></li>
+                <li><a href="/programmes/pms">Doctor of Philosophy (Mathematical Sciences)</a></li>
               </ul>
             </div>
           </div>
@@ -91,9 +80,9 @@
             <h2 class="blue program-type">Master Degree</h2>
             <div class="container">
               <ul class="bullets">
-                <li>Master of Computer Science</li>
-                <li>Master of Information Technology</li>
-                <li>Master of Science in Mathematical Sciences</li>
+                <li><a href="/programmes/mcs">Master of Computer Science</a></li>
+                <li><a href="/programmes/mit">Master of Information Technology</a></li>
+                <li><a href="/programmes/mms">Master of Science in Mathematical Sciences</a></li>
               </ul>
             </div>
           </div>
@@ -102,14 +91,14 @@
             <h2 class="blue program-type">Bachelor</h2>
             <div class="container">
               <ul class="bullets">
-                <li>Bachelor of Science (Honours) in Managment Mathematics with Computing</li>
-                <li>Bachelor of Computer Science (Honours) in Data Science</li>
-                <li>Bachelor of Computer Science (Honours) in Interactive Software Technology</li>
-                <li>Bachelor of Information Systems (Honours) in Enterprise Information Systems</li>
-                <li>Bachelor of Information Technology (Honours) in Internet Technology</li>
-                <li>Bachelor of Information Technology (Honours) in Information Security</li>
-                <li>Bachelor of Information Technology (Honours) in Software Systems Development</li>
-                <li>Bachelor of Software Engineering (Honours)</li>
+                <li><a href="/programmes/rmm">Bachelor of Science (Honours) in Managment Mathematics with Computing</a></li>
+                <li><a href="/programmes/rds">Bachelor of Computer Science (Honours) in Data Science</a></li>
+                <li><a href="/programmes/rst">Bachelor of Computer Science (Honours) in Interactive Software Technology</a></li>
+                <li><a href="/programmes/rei">Bachelor of Information Systems (Honours) in Enterprise Information Systems</a></li>
+                <li><a href="/programmes/rit">Bachelor of Information Technology (Honours) in Internet Technology</a></li>
+                <li><a href="/programmes/ris">Bachelor of Information Technology (Honours) in Information Security</a></li>
+                <li><a href="/programmes/rsd">Bachelor of Information Technology (Honours) in Software Systems Development</a></li>
+                <li><a href="/programmes/rsw">Bachelor of Software Engineering (Honours)</a></li>
               </ul>
             </div>
           </div>
@@ -118,10 +107,10 @@
             <h2 class="blue program-type">Diploma</h2>
             <div class="container">
               <ul class="bullets">
-                <li>Diploma in Computer Science</li>
-                <li>Diploma in Information Systems</li>
-                <li>Diploma in Information Technology</li>
-                <li>Diploma in Software Engineering</li>
+                <li><a href="/programmes/dcs">Diploma in Computer Science</a></li>
+                <li><a href="/programmes/dis">Diploma in Information Systems</a></li>
+                <li><a href="/programmes/dft">Diploma in Information Technology</a></li>
+                <li><a href="/programmes/dse">Diploma in Software Engineering</a></li>
               </ul>
             </div>
           </div>
@@ -129,89 +118,3 @@
         </div>
     </body>
 </html>
-
-<script>
-const searchInput = document.getElementById('search-input');
-const searchResults = document.getElementById('search-results');
-
-// Simulated list of available programs
-// TODO: Retrieve the list of programmes from database
-/* function fetchProgrammeList() {
-      $.ajax({
-          url: '/get-programme-list',  // The server-side route to fetch staff data
-          type: 'GET',
-          dataType: 'json',
-          success: function (data) {
-              // Assuming data is in the format: { 'staff_list': [...] }
-              const staffList = data.staff_list;
-
-              // Display staff data on the webpage
-              const staffListDiv = $('#staff-list');
-              staffListDiv.empty();
-              staffList.forEach(function (staff) {
-                // image cannot display properly
-                  const staffInfo = `
-                  <div class="card-4 panel animate-fading">
-                    <table>
-                      <tr>
-                        <td class="card-section-1">
-                          <div class="staff-avatar center">
-                            <img src="/static/${staff.avatar}" style="width:100%;"/>
-                          </div>
-                        </td>
-                        <td class="card-section-2">
-                          <b class="staff-name">${staff.staff_name}</b><br/>
-                          Designation: ${staff.designation}<br/>Department: ${staff.department}<br/>
-                          Position: ${staff.position}<br/>Email: ${staff.email}
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                  `;
-                  staffListDiv.append(staffInfo);
-              });
-          }
-      });
-  } */
-
-const programs = [
-    'Program A',
-    'Program B',
-    'Program C',
-    // Add more program names
-];
-
-searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase();
-    const matchingPrograms = programs.filter(program => program.toLowerCase().includes(query));
-
-    // Display autocomplete suggestions
-    displayResults(matchingPrograms);
-});
-
-function displayResults(results) {
-    searchResults.innerHTML = '';
-
-    if (results.length === 1) {
-        // Automatically redirect if there's only one result
-        redirectToProgramPage(results[0]);
-    } else {
-        // Display autocomplete suggestions
-        results.forEach(result => {
-            const resultItem = document.createElement('div');
-            resultItem.classList.add('result-item');
-            resultItem.textContent = result;
-            searchResults.appendChild(resultItem);
-
-            resultItem.addEventListener('click', () => {
-                redirectToProgramPage(result);
-            });
-        });
-    }
-}
-
-function redirectToProgramPage(programName) {
-    // You can implement the redirection logic here
-    // Example: window.location.href = '/path/to/program/' + programName;
-}
-</script>
