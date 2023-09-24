@@ -1,5 +1,6 @@
 import sys
 import time
+import uuid
 
 import boto3
 import config
@@ -12,6 +13,7 @@ app = Flask(__name__, static_folder="../static", template_folder="../templates")
 db_conn_pool = DbConnectionPool.get_instance()
 sns = boto3.resource("sns", consts.AWS_REGION)
 sys_abuse_topic = sns.Topic(consts.SYS_ABUSE_TOPIC_ARN)
+lex = boto3.client("lexv2-runtime", consts.AWS_REGION)
 CORS(app)
 
 # Stream printed logs from EC2 to CloudWatch
@@ -155,6 +157,70 @@ def list_staffs():
 def staff(id):
     academician = next((a for a in academicians if a["id"] == id), None)
     return render_template("academician_details.html", academician=academician)
+
+
+# TODO: [N5] The website should be able to provide comparisons on the selected programme structure.
+@app.route("/compare_programmes", methods=["POST"])
+def compare_programmes():
+    return {}
+
+
+# [N6] There should be a robot to answer frequently asked questions (FAQ)
+@app.route("/faq_ans", methods=["GET"])
+def get_faq_answer():
+    # Input
+    q = request.args.get("q", ".")
+
+    # Get current time
+    now = int(time.time())
+
+    db_conn = db_conn_pool.get_connection(pre_ping=True)
+    cursor = db_conn.cursor()
+
+    try:
+        # Try to get the chatbot session ID
+        cursor.execute("SELECT id, created_at FROM chatbot_session WHERE ip_addr = %s", (request.remote_addr,))
+        db_conn.commit()
+        chatbot_session = cursor.fetchone()
+        chatbot_session_id = str(uuid.uuid4())
+
+        # Have established a chatbot session ?
+        if chatbot_session:
+            # Chatbot session almost expired ?
+            if now - chatbot_session[1] > 290:
+                # Renew the chatbot session
+                cursor.execute(
+                    "UPDATE chatbot_session SET id = %s, created_at = %s WHERE ip_addr = %s",
+                    (chatbot_session_id, now, request.remote_addr),
+                )
+                db_conn.commit()
+
+            else:
+                chatbot_session_id = chatbot_session[0]
+
+        else:
+            # Establish a new chatbot session
+            cursor.execute(
+                "INSERT INTO chatbot_session VALUES (%s, %s, %s)",
+                (request.remote_addr, chatbot_session_id, now),
+            )
+            db_conn.commit()
+
+        # Talk with the chatbot
+        chatbot_resp = lex.recognize_text(
+            botId=consts.CHATBOT_ID,
+            botAliasId=consts.CHATBOT_ALIAS_ID,
+            localeId="en_US",
+            sessionId=chatbot_session_id,
+            text=q,
+        )
+
+        # Output
+        return {"result": chatbot_resp["messages"][0]["content"]}
+
+    finally:
+        cursor.close()
+        db_conn.close()
 
 
 @app.errorhandler(404)
