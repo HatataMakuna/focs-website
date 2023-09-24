@@ -10,6 +10,13 @@
     <link rel="icon" type="image/png" href="/static/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
 
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}">
     <style>
       * {
         box-sizing: border-box;
@@ -158,13 +165,15 @@
       .xbox {
         width: 100%;
         height: 350px;
-        background: url('https://i.ibb.co/tBJGPD9/xbox.png') no-repeat center center/cover;
+        background: url('/static/awardEvent.jpg') no-repeat center center/cover;
+        background-size: 100% 425px;
+        background-position: center top;
         margin-bottom: 20px;
       }
 
       .xbox .content {
         width: 40%;
-        padding: 50px 0 0 30px;
+        padding: 120px 0 0 70px;
       }
 
       .xbox p,
@@ -189,7 +198,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        margin: 30px 0 30px;
+        margin: 5px 0 30px;
       }
 
       .follow * {
@@ -207,9 +216,9 @@
       .links-inner {
         max-width: 1100px;
         margin: 0 auto;
-        padding: 0 20px;
+        padding: 0 50px;
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         grid-gap: 10px;
         align-items: flex-start;
         justify-content: center;
@@ -224,7 +233,7 @@
         background: #f2f2f2;
         color: #616161;
         font-size: 12px;
-        padding: 20px 0;
+        padding: 10px 0;
       }
 
       .footer-inner {
@@ -237,7 +246,7 @@
       }
 
       .footer div {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         display: flex;
         align-items: center;
       }
@@ -252,7 +261,7 @@
       }
 
       .footer li {
-        margin-right: 30px;
+        margin-left: 300px;
         margin-bottom: 20px;
       }
 
@@ -485,179 +494,215 @@
       </nav>
 
       <!-- Showcase -->
-      <header class="showcase">
-        <!-- Slideshow container -->
-        <div class="slideshow-container fade">
-          <!-- Full images with numbers and message Info -->
-          <div class="Containers">
-            <div class="MessageInfo">1 / 7</div>
-
-            <div
-              style="
-                width: 100%;
-                height: 320px;
-                background-image: url('/static/focs_0.png');
-                background-repeat: no-repeat;
-                background-size: contain;
-                background-position: center;
-              "
-            ></div>
+      <header class="mb-4">
+        <div id="carouselExampleIndicators" class="carousel slide bg-dark">
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="3"
+              aria-label="Slide 4"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="4"
+              aria-label="Slide 5"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="5"
+              aria-label="Slide 6"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="6"
+              aria-label="Slide 7"
+            ></button>
           </div>
-
-          <div class="Containers">
-            <div class="MessageInfo">2 / 7</div>
-
-            <div
-              style="
-                width: 100%;
-                height: 320px;
-                background-image: url('/static/focs_1.jpg');
-                background-repeat: no-repeat;
-                background-size: contain;
-                background-position: center;
-              "
-            ></div>
+          <div class="carousel-inner">
+            <div class="carousel-item active position-relative" style="height: 320px">
+              <div
+                class="w-100 position-absolute"
+                style="
+                  background-image: url('/static/focs_0.png');
+                  background-position: center;
+                  height: 320px;
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                "
+              ></div>
+              <div
+                class="position-absolute top-50 start-50 translate-middle text-white text-center px-3 py-3"
+                style="width: 640px; background-color: rgba(0, 0, 0, 0.25)"
+              >
+                <h3>Welcome to Faculty of Computing and Information Technology (FOCS)</h3>
+                <span>Select MORE INFO to watch Faculty Video</span>
+              </div>
+            </div>
+            <div class="carousel-item position-relative" style="height: 320px">
+              <div
+                class="w-100 position-absolute"
+                style="
+                  background-image: url('/static/focs_1.jpg');
+                  background-position: center;
+                  height: 320px;
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                "
+              ></div>
+              <div class="position-absolute"></div>
+            </div>
+            <div class="carousel-item position-relative" style="height: 320px">
+              <div
+                class="w-100 position-absolute"
+                style="
+                  background-image: url('/static/focs_2.jpg');
+                  background-position: center;
+                  height: 320px;
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                "
+              ></div>
+              <div class="position-absolute"></div>
+            </div>
+            <div class="carousel-item position-relative" style="height: 320px">
+              <div
+                class="w-100 position-absolute"
+                style="
+                  background-image: url('/static/focs_3.jpg');
+                  background-position: center;
+                  height: 320px;
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                "
+              ></div>
+              <div class="position-absolute"></div>
+            </div>
+            <div class="carousel-item position-relative" style="height: 320px">
+              <div
+                class="w-100 position-absolute"
+                style="
+                  background-image: url('/static/focs_4.jpg');
+                  background-position: center;
+                  height: 320px;
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                "
+              ></div>
+              <div class="position-absolute"></div>
+            </div>
+            <div class="carousel-item position-relative" style="height: 320px">
+              <div
+                class="w-100 position-absolute"
+                style="
+                  background-image: url('/static/focs_5.jpg');
+                  background-position: center;
+                  height: 320px;
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                "
+              ></div>
+              <div class="position-absolute"></div>
+            </div>
+            <div class="carousel-item position-relative" style="height: 320px">
+              <div
+                class="w-100 position-absolute"
+                style="
+                  background-image: url('/static/focs_6.png');
+                  background-position: center;
+                  height: 320px;
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                "
+              ></div>
+              <div class="position-absolute"></div>
+            </div>
           </div>
-
-          <div class="Containers">
-            <div class="MessageInfo">3 / 7</div>
-
-            <div
-              style="
-                width: 100%;
-                height: 320px;
-                background-image: url('/static/focs_2.jpg');
-                background-repeat: no-repeat;
-                background-size: contain;
-                background-position: center;
-              "
-            ></div>
-          </div>
-
-          <div class="Containers">
-            <div class="MessageInfo">4 / 7</div>
-
-            <div
-              style="
-                width: 100%;
-                height: 320px;
-                background-image: url('/static/focs_3.jpg');
-                background-repeat: no-repeat;
-                background-size: contain;
-                background-position: center;
-              "
-            ></div>
-          </div>
-
-          <div class="Containers">
-            <div class="MessageInfo">5 / 7</div>
-
-            <div
-              style="
-                width: 100%;
-                height: 320px;
-                background-image: url('/static/focs_4.jpg');
-                background-repeat: no-repeat;
-                background-size: contain;
-                background-position: center;
-              "
-            ></div>
-          </div>
-
-          <div class="Containers">
-            <div class="MessageInfo">6 / 7</div>
-
-            <div
-              style="
-                width: 100%;
-                height: 320px;
-                background-image: url('/static/focs_5.jpg');
-                background-repeat: no-repeat;
-                background-size: contain;
-                background-position: center;
-              "
-            ></div>
-          </div>
-
-          <div class="Containers">
-            <div class="MessageInfo">7 / 7</div>
-
-            <div
-              style="
-                width: 100%;
-                height: 320px;
-                background-image: url('/static/focs_6.png');
-                background-repeat: no-repeat;
-                background-size: contain;
-                background-position: center;
-              "
-            ></div>
-          </div>
-
-          <!-- Back and forward buttons -->
-          <a class="Back" onclick="plusSlides(-1)">&#10094;</a>
-          <a class="forward" onclick="plusSlides(1)">&#10095;</a>
-        </div>
-
-        <br />
-
-        <!-- The circles/dots -->
-        <div style="text-align: center">
-          <span class="dots" onclick="currentSlide(1)"></span>
-          <span class="dots" onclick="currentSlide(2)"></span>
-          <span class="dots" onclick="currentSlide(3)"></span>
-          <span class="dots" onclick="currentSlide(4)"></span>
-          <span class="dots" onclick="currentSlide(5)"></span>
-          <span class="dots" onclick="currentSlide(6)"></span>
-          <span class="dots" onclick="currentSlide(7)"></span>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
       </header>
 
       <!-- Home cards 1 -->
       <section class="home-cards">
         <div>
-          <img src="https://i.ibb.co/LZPVKq9/card1.png" alt="" />
-          <h3>New Surface Pro 7</h3>
-          <p>See how Katie Sowers, Asst. Coach for the 49ers, uses Surface Pro 7 to put her plans into play.</p>
-          <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
+          <img src="/static/dip_comp.jpg" alt="" height="150px" />
+          <h3>Diploma in Computer Science</h3>
+          <p>Classes started from Monday(01-July-2024)</p>
+          <br />
+          <a href="#"> Enroll <i class="fas fa-chevron-right"></i> </a>
         </div>
         <div>
-          <img src="https://i.ibb.co/KjGFHVJ/card2.png" alt="" />
-          <h3>New Surface Laptop 3</h3>
-          <p>
-            Express yourself powerfully with a thin, light, and elegant design, faster performance, and up to 11.5 hours
-            battery life.
-          </p>
-          <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
+          <img src="/static/infoTech.jpg" alt="" height="150px" />
+          <h3>Diploma in Information Technologies</h3>
+          <p>Classes started from Monday(01-July-2024)</p>
+          <a href="#">Enroll <i class="fas fa-chevron-right"></i></a>
         </div>
         <div>
-          <img src="https://i.ibb.co/2cnshH6/card3.png" alt="" />
-          <h3>Save $150 + free controller</h3>
-          <p>Buy an Xbox One X console and double your fun with a free select extra controller. Starting at $349.</p>
-          <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
+          <img src="/static/softEngineer.jpg" alt="" height="150px" />
+          <h3>Bachelor in Software Engineering</h3>
+          <p>Classes started from Monday(15-Jun-2024)</p>
+          <a href="#">Enroll <i class="fas fa-chevron-right"></i></a>
         </div>
         <div>
-          <img src="https://i.ibb.co/G57P0Pb/card4.png" alt="" />
-          <h3>The new Microsoft Edge</h3>
-          <p>Expect more. World class performance, with more privacy, more productivity, and more value.</p>
-          <a href="#">Learn More <i class="fas fa-chevron-right"></i></a>
+          <img src="/static/dataSci.jpg" alt="" height="150px" />
+          <h3>Bachelor in Data Science</h3>
+          <p>Classes started from Monday(15-Jun-2024)</p>
+          <br />
+          <a href="#">Enroll <i class="fas fa-chevron-right"></i></a>
         </div>
       </section>
 
       <!-- Xbox -->
       <section class="xbox">
         <div class="content">
-          <h2>Xbox Game Pass Ultimate</h2>
-          <p>
-            Xbox Game Pass Ultimate Xbox Live Gold and over 100 high-quality console and PC games. Play together with
-            friends and discover your next favorite game.
-          </p>
-          <a href="#" class="btn"> Join Now <i class="fas fa-chevron-right"></i> </a>
+          <h2>Award & Event</h2>
+          <p>Award and Event of Tunku Abdul Rahman University of Management and Technology.</p>
+          <a href="#" class="btn"> View <i class="fas fa-chevron-right"></i> </a>
         </div>
       </section>
 
       <!-- Home cards 2 -->
-      <section class="home-cards">
+      <!-- <section class="home-cards">
         <div>
           <img src="https://i.ibb.co/zVqhWn2/card5.png" alt="" />
           <h3>Microsoft Teams</h3>
@@ -682,10 +727,10 @@
           <p>Learn how Kubernetes works and get started with cloud native app development today.</p>
           <a href="#">Get Started <i class="fas fa-chevron-right"></i></a>
         </div>
-      </section>
+      </section> -->
 
       <!-- Carbon -->
-      <section class="carbon dark">
+      <!-- <section class="carbon dark">
         <div class="content">
           <h2>Commiting To Carbon Negative</h2>
           <p>
@@ -694,72 +739,42 @@
           </p>
           <a href="#" class="btn"> Learn More <i class="fas fa-chevron-right"></i> </a>
         </div>
-      </section>
-
-      <!-- Follow -->
-      <section class="follow">
-        <p>Follow Microsoft</p>
-        <a href="https://facebook.com">
-          <img src="https://i.ibb.co/LrVMXNR/social-fb.png" alt="Facebook" />
-        </a>
-        <a href="https://twitter.com">
-          <img src="https://i.ibb.co/vJvbLwm/social-twitter.png" alt="Twitter" />
-        </a>
-        <a href="https://linkedin.com">
-          <img src="https://i.ibb.co/b30HMhR/social-linkedin.png" alt="Linkedin" />
-        </a>
-      </section>
-    </div>
+      </section> -->
     <!-- Links -->
     <section class="links">
       <div class="links-inner">
         <ul>
-          <li><h3>What's New</h3></li>
-          <li><a href="#">Surface Pro X</a></li>
-          <li><a href="#">Surface Laptop 3</a></li>
-          <li><a href="#">Surface Pro 7</a></li>
-          <li><a href="#">Windows 10 apps</a></li>
-          <li><a href="#">Office apps</a></li>
+          <li><h3>CONTACT US</h3></li>
+          <p>
+            FACULTY OF COMPUTING AND INFORMATION TECHNOLOGY <br />
+            TUNKU ABDUL RAHMAN UNIVERSITY OF MANAGEMENT AND TECHNOLOGY <br />
+            JALAN GENTING KELANG <br />
+            SETAPAK <br />
+            53300 KUALA LUMPUR <br />
+            <br />
+            TELEPHONE: 603-41450123 Ext no. 3233 <br />
+            MOBILE PHONE: 6011-10758554 <br />
+            FAX: 603-41423166 / 018 925 1001 <br />
+            EMAIL : focs@tarc.edu.my
+            <br />
+            <br />
+            OPENING HOURS <br />
+            8.30am - 5.30pm (Monday-Friday)
+          </p>
         </ul>
         <ul>
-          <li><h3>Microsoft Store</h3></li>
-          <li><a href="#">Account Profile</a></li>
-          <li><a href="#">Download Center</a></li>
-          <li><a href="#">Microsoft Store support</a></li>
-          <li><a href="#">Returns</a></li>
-          <li><a href="#">Older tracking</a></li>
-        </ul>
-        <ul>
-          <li><h3>Education</h3></li>
-          <li><a href="#">Microsfot in education</a></li>
-          <li><a href="#">Office for students</a></li>
-          <li><a href="#">Office 365 for schools</a></li>
-          <li><a href="#">Deals for studentss</a></li>
-          <li><a href="#">Microsfot Azure</a></li>
-        </ul>
-        <ul>
-          <li><h3>Enterprise</h3></li>
-          <li><a href="#">Azure</a></li>
-          <li><a href="#">AppSource</a></li>
-          <li><a href="#">Automotive</a></li>
-          <li><a href="#">Government</a></li>
-          <li><a href="#">Healthcare</a></li>
-        </ul>
-        <ul>
-          <li><h3>Developer</h3></li>
-          <li><a href="#">Visual Studio</a></li>
-          <li><a href="#">Windowszs Dev Center</a></li>
-          <li><a href="#">Developer Network</a></li>
-          <li><a href="#">TechNet</a></li>
-          <li><a href="#">Microsoft Developer</a></li>
-        </ul>
-        <ul>
-          <li><h3>Company</h3></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">About Microsoft</a></li>
-          <li><a href="#">Company news</a></li>
-          <li><a href="#">Privacy at Microsoft</a></li>
-          <li><a href="#">Inverstors</a></li>
+          <li><h3>Follow Us</h3></li>
+          <li class="follow">
+            <a href="https://facebook.com">
+              <img src="https://i.ibb.co/LrVMXNR/social-fb.png" alt="Facebook" />
+            </a>
+            <a href="https://twitter.com">
+              <img src="https://i.ibb.co/vJvbLwm/social-twitter.png" alt="Twitter" />
+            </a>
+            <a href="https://linkedin.com">
+              <img src="https://i.ibb.co/b30HMhR/social-linkedin.png" alt="Linkedin" />
+            </a>
+          </li>
         </ul>
       </div>
     </section>
@@ -767,59 +782,22 @@
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-inner">
-        <div><i class="fas fa-globe fa-2x"></i> English (United States)</div>
         <ul>
-          <li><a href="#">Sitemap</a></li>
-          <li><a href="#">Contact Microsoft</a></li>
-          <li><a href="#">Privacy &amp; cookies</a></li>
-          <li><a href="#">Terms of use</a></li>
-          <li><a href="#">Trademarks</a></li>
-          <li><a href="#">Safety &amp; eco</a></li>
-          <li><a href="#">About our ads</a></li>
-          <li><a href="#">&amp;copy; Microsoft 2020</a></li>
+          <li><p>TAR UMT © 2023 All Rights Reserved Disclaimer Privacy Policy and ABAC Policy</p></li>
         </ul>
       </div>
     </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
 
     <script>
       document
         .querySelector('.menu-btn')
         .addEventListener('click', () => document.querySelector('.main-menu').classList.toggle('show'))
-
-      var slidePosition = 1
-      SlideShow(slidePosition)
-
-      // forward/Back controls
-      function plusSlides(n) {
-        SlideShow((slidePosition += n))
-      }
-
-      //  images controls
-      function currentSlide(n) {
-        SlideShow((slidePosition = n))
-      }
-
-      function SlideShow(n) {
-        var i
-        var slides = document.getElementsByClassName('Containers')
-        var circles = document.getElementsByClassName('dots')
-        if (n > slides.length) {
-          slidePosition = 1
-        }
-        if (n < 1) {
-          slidePosition = slides.length
-        }
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = 'none'
-        }
-        for (i = 0; i < circles.length; i++) {
-          circles[i].className = circles[i].className.replace(' enable', '')
-        }
-        slides[slidePosition - 1].style.display = 'block'
-        circles[slidePosition - 1].className += ' enable'
-      }
-
-      setInterval(() => plusSlides(1), 5000)
     </script>
   </body>
 </html>
