@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Master of Information Technology | FOCS</title>
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/plStyle.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}">
+</head>
+<body translate="no">
+  <div class="menu-btn">
+    <i class="fas fa-bars fa-2x"></i>
+  </div>
+  <div class="container">
+    <!-- Navigation bar -->
+    <nav class="main-nav">
+      <img class="logo" src="/static/logo.png" alt="Tunku Abdul Rahman University of Management and Technology" />
+
+      <ul class="main-menu">
+        <li>
+          <a href="#">Home</a>
+        </li>
+
+        <li>
+          <a href="#">About Us</a>
+        </li>
+
+        <li>
+          <a href="#">Facilities</a>
+        </li>
+
+        <li>
+          <a href="#">Research</a>
+        </li>
+
+        <li>
+          <a href="#">External Advisors</a>
+        </li>
+
+        <li>
+          <a href="#">Our Team</a>
+        </li>
+      </ul>
+
+      <ul class="right-menu">
+        <li>
+          <a href="#">
+            <i class="fas fa-search"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <header class="animate-top">
+      <h1>Master of Information Technology (N/482/7/0156) (02/26) (MQA/PA 11406)</h3>
+    </header>
+
+    <ol class="breadcrumb">
+      <li><a href="/programmes">Programmes</a></li>
+      <li>Master of Information Technology</li>
+    </ol>
+
+    <section>
+      <div class="card panel">
+        <!-- Tab Menu -->
+        <div class="bar border-bottom light-grey" style="margin-bottom: 10px;">
+          <a class="bar-item button tablink dark-grey" onclick="openTab(event, 'ProgrammeOverview')">Programme Overview</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'ProgrammeOutline')">Programme Outline</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'CareerProspects')">Career Prospects</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'MinimumEntryRequirements')">Minimum Entry Requirements</a>
+        </div>
+
+        <!-- Start of tab contents -->
+        <div id="ProgrammeOverview" class="container animate-opacity detail" style="display: block;">
+          <i class="fa fa-book"></i><strong> Programme Overview</strong>
+          <p align="justify">Master of Information Technology programme is for those who have the interest to advance their career in research and industry that requires professionals to be equipped with innovative knowledge, research skills, high order thinking skills and needed soft skills in the information technology areas to produce new knowledge or technology that will be the catalyst of the digital economy. Students of this programme have the opportunity to explore and conduct information technology research in the following areas but not limited to information system, threat intelligence, networking, information security which as far as possible to be applied to various real-life industries including Smart Campus applications, Industry 4.0, Agriculture 4.0 and any innovative commercial-value solutions.</p>
+
+          <i class="fa fa-arrow-circle-up"></i><strong> Intake</strong>
+          <p>Rolling Intake (throughout the year)</p>
+
+          <i class="fa fa-arrow-circle-up"></i><strong> Duration</strong>
+          <ul class="bullets">
+            <li>Full time (Malaysian & International students) - 2 years</li>
+            <li>Part time (Malaysian students ONLY) - 3 years</li>
+          </ul>
+
+          <i class="fa fa-arrow-circle-up"></i><strong> Campus</strong>
+          <ul class="bullets">
+            <li>KL Main Campus</li>
+          </ul>
+        </div>
+
+        <div id="ProgrammeOutline" class="container animate-opacity detail" style="display: none;">
+          <strong>Compulsory</strong>
+          <ul class="bullets">
+            <li>Research Methodology</li>
+            <li>Doctoral Research</li>
+            <li>Special Topic</li>
+          </ul>
+        </div>
+
+        <div id="CareerProspects" class="container animate-opacity detail" style="display: none;">
+          <strong>Career Prospects</strong>
+          <ul class="bullets">
+            <li>Researcher</li>
+            <li>Business Development Executive</li>
+            <li>Product Development Executive</li>
+            <li>Market Analyst</li>
+            <li>Product Planner</li>
+            <li>Project Consultant</li>
+            <li>Mobile Apps Developer</li>
+            <li>Programmer</li>
+            <li>Software Developer</li>
+            <li>IT Strategist</li>
+            <li>Network Security Consultant</li>
+            <li>IT Consultant</li>
+            <li>Business Analyst</li>
+            <li>Data Security Consultant</li>
+          </ul>
+        </div>
+
+        <div id="MinimumEntryRequirements" class="container animate-opacity detail" style="display: none;">
+          <strong>Minimum Entry Requirements</strong>
+          <ul class="bullets">
+            <li>A Bachelor's Degree of Computing (MQF, Level 6) or in the area of Science and Technology or related Computing with a minimum CGPA of 3.00; <b>OR</b></li>
+            <li>A Bachelor's Degree of Computing (MQF, Level 6) or in the area of Science and Technology or related Computing, with CGPA below 3.00 but above 2.50, can be accepted subject to rigorous internal assessment process; <b>OR</b></li>
+            <li>A Bachelor's Degree of Computing (MQF, Level 6) or in the area of Science and Technology or related to Computing or in the area of Science and Technology or related to Computing, with CGPA less than 2.50, with a minimum of 5 years working experience in a relevant field may be accepted.</li>
+          </ul>
+          <strong>English Language Requirements</strong>
+          <p>Malaysian Students</p>
+          <ul class="bullets">
+            <li>MUET Band 4.0 or IELTS Band 6.0 or CEFR Mid B2 or TOEFL iBT 60 or equivalent; <b>OR</b></li>
+            <li>Exemption of English Language requirement if medium of instruction during Master studies was in English</li>
+          </ul>
+          <p>International Students</p>
+          <ul class="bullets">
+            <li>IELTS Band 6.0 or CEFR Mid B2, TOEFL iBT 60 or equivalent; <b>OR</b></li>
+            <li>Exemption of English Language requirement if medium of instruction during Master studies was in English</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="width: 100%; padding: 50px 0; text-align: center; background-image: url('https://www.tarc.edu.my/files/focs/background/C8D273C9-6BB6-4977-953F-44EEBFDEB2C5.jpg'); background-size: cover;">
+        <h3 style="color: white;"></h3>
+        <a class="btn" style="margin: 5px;" href="https://www.tarc.edu.my/admissions/a/intake-in-progress/" bis_skin_checked="1">Enroll Now</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  function openTab(evt, name) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("detail");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" dark-grey", "");
+    }
+    document.getElementById(name).style.display = "block";
+    evt.currentTarget.className += " dark-grey";
+  }
+</script>
+

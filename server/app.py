@@ -1,17 +1,17 @@
-import sys
 import time
+import uuid
 
 import boto3
-import config
 import consts
 from db_connection_pool import DbConnectionPool
-from flask import Flask, jsonify, redirect, render_template, request
+from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder="../static", template_folder="../templates")
 db_conn_pool = DbConnectionPool.get_instance()
 sns = boto3.resource("sns", consts.AWS_REGION)
 sys_abuse_topic = sns.Topic(consts.SYS_ABUSE_TOPIC_ARN)
+lex = boto3.client("lexv2-runtime", consts.AWS_REGION)
 CORS(app)
 
 # Stream printed logs from EC2 to CloudWatch
@@ -92,32 +92,132 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/programmes", methods=["GET"])
-def list_programmes():
+# TODO: [N1] The website should be able to show the page regarding the information
+# of an intended computing programme as a search result
+@app.route("/programmes")
+def programmes():
     return render_template("ProgrammeList.html")
 
 
-# TODO: [N1] The website should be able to show the page regarding the information
-# of an intended computing programme as a search result
-#
-# If only ONE programme is returned as search result, redirect the user to the programme page
-@app.route("/redirect-program", methods=["GET"])
-def redirect_programme():
-    program_name = request.args.get("program_name")
-    # Implement your logic to determine the program URL based on the name
-    # Example: program_url = get_program_url(program_name)
-    program_url = f"/path/to/program/{program_name}"
-    return redirect(program_url)
+@app.route("/programmes/pcs")
+def programme_pcs():
+    return render_template("programmes/PCS.html")
+
+
+@app.route("/programmes/pit")
+def programme_pit():
+    return render_template("programmes/PIT.html")
+
+
+@app.route("/programmes/pms")
+def programme_pms():
+    return render_template("programmes/PMS.html")
+
+
+@app.route("/programmes/mcs")
+def programme_mcs():
+    return render_template("programmes/MCS.html")
+
+
+@app.route("/programmes/mit")
+def programme_mit():
+    return render_template("programmes/MIT.html")
+
+
+@app.route("/programmes/mms")
+def programme_mms():
+    return render_template("programmes/MMS.html")
+
+
+@app.route("/programmes/rds")
+def programme_rds():
+    return render_template("programmes/RDS.html")
+
+
+@app.route("/programmes/rei")
+def programme_rei():
+    return render_template("programmes/REI.html")
+
+
+@app.route("/programmes/ris")
+def programme_ris():
+    return render_template("programmes/RIS.html")
+
+
+@app.route("/programmes/rit")
+def programme_rit():
+    return render_template("programmes/RIT.html")
+
+
+@app.route("/programmes/rmm")
+def programme_rmm():
+    return render_template("programmes/RMM.html")
+
+
+@app.route("/programmes/rsd")
+def programme_rsd():
+    return render_template("programmes/RSD.html")
+
+
+@app.route("/programmes/rst")
+def programme_rst():
+    return render_template("programmes/RST.html")
+
+
+@app.route("/programmes/rsw")
+def programme_rsw():
+    return render_template("programmes/RSW.html")
+
+
+@app.route("/programmes/dcs")
+def programme_dcs():
+    return render_template("programmes/DCS.html")
+
+
+@app.route("/programmes/dft")
+def programme_dft():
+    return render_template("programmes/DFT.html")
+
+
+@app.route("/programmes/dis")
+def programme_dis():
+    return render_template("programmes/DIS.html")
+
+
+@app.route("/programmes/dse")
+def programme_dse():
+    return render_template("programmes/DSE.html")
 
 
 # TODO: [N9]
 # Get the list of staffs : DONE
 @app.route("/get-staff-list", methods=["GET"])
 def get_staff_list():
+    # Get the page number, items per page, and search query from the request parameters
+    page_number = int(request.args.get("page", 1))  # default is 1st page
+    items_per_page = int(request.args.get("itemsPerPage", 20))  # default is 20 staffs per page
+    search_query = request.args.get("search", "")
+
+    # Calculate the offset based on the page number and items per page
+    offset = (page_number - 1) * items_per_page
+
     db_conn = db_conn_pool.get_connection(pre_ping=True)
     cursor = db_conn.cursor()
     try:
-        cursor.execute("SELECT * FROM staff")
+        cursor.execute(
+            """
+            SELECT * FROM staff WHERE UPPER(staff_name) LIKE UPPER(%s) OR UPPER(designation) LIKE UPPER(%s)
+            OR UPPER(position) LIKE UPPER(%s) OR UPPER(department) LIKE UPPER(%s) LIMIT %s OFFSET %s
+        """,
+            (
+                f"%{search_query}%",
+                f"%{search_query}%",
+                f"%{search_query}%",
+                f"%{search_query}%",
+                items_per_page,
+                offset,
+            ),
+        )
         staff_data = cursor.fetchall()
 
         # Convert the result to a list of dictionaires
@@ -134,7 +234,10 @@ def get_staff_list():
             }
             staff_list.append(staff_info)
 
-        return jsonify({"staff_list": staff_list})
+        # Get the total count of staff members
+        cursor.execute("SELECT COUNT(*) FROM staff")
+        total_count = cursor.fetchone()[0]
+        return jsonify({"staff_list": staff_list, "total_count": total_count})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -150,11 +253,113 @@ def list_staffs():
     return render_template("StaffList.html")
 
 
+@app.route("/qna", methods=["GET"])
+def list_qna():
+    return render_template("Qna.html")
+
+
 # get the staff details
-@app.route("/staffs/<int:id>")
-def staff(id):
-    academician = next((a for a in academicians if a["id"] == id), None)
-    return render_template("academician_details.html", academician=academician)
+@app.route("/staffs/<id>")
+def staff(id: int):
+    db_conn = db_conn_pool.get_connection(pre_ping=True)
+    cursor = db_conn.cursor()
+    try:
+        cursor.execute(
+            "SELECT s.staff_id, s.staff_name, s.avatar, s.designation, s.department, s.position,"
+            + " s.email, d.publications, d.specialization, d.area_of_interest FROM staff s, staff_details d"
+            + " WHERE s.staff_id = d.staff_id AND s.staff_id = %s",
+            (id,),
+        )
+        staff_data = cursor.fetchone()
+        if staff_data:
+            current_staff_profile = {
+                "staff_id": staff_data[0],
+                "staff_name": staff_data[1],
+                "avatar": "/static/" + staff_data[2],
+                "designation": staff_data[3],
+                "department": staff_data[4],
+                "position": staff_data[5],
+                "email": staff_data[6],
+                "publications": staff_data[7],
+                "specialization": staff_data[8],
+                "area_of_interest": staff_data[9],
+            }
+        else:
+            return jsonify({"message": "Staff not found"}), 404
+        return render_template("StaffDetails.html", staffprofile=current_staff_profile), 200
+    except Exception as e:
+        return jsonify({"message": "Error while retrieving staff details: " + str(e)}), 500
+    finally:
+        cursor.close()
+        db_conn.close()
+
+
+# TODO: [N5] The website should be able to provide comparisons on the selected programme structure.
+@app.route("/compare_programmes", methods=["POST"])
+def compare_programmes():
+    return {}
+
+
+# [N6] There should be a robot to answer frequently asked questions (FAQ)
+@app.route("/faq_ans", methods=["GET"])
+def get_faq_answer():
+    # Input
+    q = request.args.get("q", ".")
+
+    # Ensure query is not empty
+    if q == "":
+        q = "."
+
+    # Get current time
+    now = int(time.time())
+
+    db_conn = db_conn_pool.get_connection(pre_ping=True)
+    cursor = db_conn.cursor()
+
+    try:
+        # Try to get the chatbot session ID
+        cursor.execute("SELECT id, created_at FROM chatbot_session WHERE ip_addr = %s", (request.remote_addr,))
+        db_conn.commit()
+        chatbot_session = cursor.fetchone()
+        chatbot_session_id = str(uuid.uuid4())
+
+        # Have established a chatbot session ?
+        if chatbot_session:
+            # Chatbot session almost expired ?
+            if now - chatbot_session[1] > 290:
+                # Renew the chatbot session
+                cursor.execute(
+                    "UPDATE chatbot_session SET id = %s, created_at = %s WHERE ip_addr = %s",
+                    (chatbot_session_id, now, request.remote_addr),
+                )
+                db_conn.commit()
+
+            else:
+                chatbot_session_id = chatbot_session[0]
+
+        else:
+            # Establish a new chatbot session
+            cursor.execute(
+                "INSERT INTO chatbot_session VALUES (%s, %s, %s)",
+                (request.remote_addr, chatbot_session_id, now),
+            )
+            db_conn.commit()
+
+        # Talk with the chatbot
+        chatbot_resp = lex.recognize_text(
+            botId=consts.CHATBOT_ID,
+            botAliasId=consts.CHATBOT_ALIAS_ID,
+            localeId="en_US",
+            sessionId=chatbot_session_id,
+            text=q,
+        )
+
+        # Output
+        return {"result": chatbot_resp["messages"][0]["content"]}
+
+    finally:
+        cursor.close()
+        db_conn.close()
 
 
 @app.errorhandler(404)
@@ -166,108 +371,30 @@ def catch_all(error):
 def about():
     return render_template("www.tarc.edu.my")
 
+
 @app.route("/softwareEngineer", methods=["GET"])
 def softwareEngineer():
     return render_template("TanKangHong/homepage.html")
+
 
 @app.route("/softwareEngineer/display1", methods=["GET"])
 def display1():
     return render_template("TanKangHong/applyPage.html")
 
+
 @app.route("/softwareEngineer/display2", methods=["GET"])
 def display2():
     return render_template("TanKangHong/apply2.html")
+
 
 @app.route("/softwareEngineer/display3", methods=["GET"])
 def display3():
     return render_template("TanKangHong/apply3.html")
 
+
 @app.route("/softwareEngineer/display4", methods=["GET"])
 def display4():
     return render_template("TanKangHong/apply4.html")
-
-
-@app.route("/addemp", methods=["POST"])
-def AddEmp():
-    emp_id = request.form["emp_id"]
-    first_name = request.form["first_name"]
-    last_name = request.form["last_name"]
-    pri_skill = request.form["pri_skill"]
-    location = request.form["location"]
-    emp_image_file = request.files["emp_image_file"]
-
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
-
-    # Reopen the timed out database connection to avoid PyMySQL interface error
-    db_conn = db_conn_pool.get_connection(pre_ping=True)
-
-    cursor = db_conn.cursor()
-
-    if emp_image_file.filename == "":
-        return "Please select a file"
-
-    try:
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
-        db_conn.commit()
-        emp_name = "" + first_name + " " + last_name
-        # Uplaod image file in S3 #
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-        s3 = boto3.resource("s3")
-
-        try:
-            print("Data inserted in MySQL RDS... uploading image to S3...")
-            s3.Bucket(config.custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
-            bucket_location = boto3.client("s3").get_bucket_location(Bucket=config.custombucket)
-            s3_location = bucket_location["LocationConstraint"]
-
-            if s3_location is None:
-                s3_location = ""
-            else:
-                s3_location = "-" + s3_location
-
-            # object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-            #     s3_location, config.custombucket, emp_image_file_name_in_s3
-            # )
-
-        except Exception as e:
-            return str(e)
-
-    finally:
-        cursor.close()
-
-    print("all modification done...")
-    return render_template("AddEmpOutput.html", name=emp_name)
-
-
-@app.route("/applyPage", methods=["POST"])
-def login_student():
-    if not request.json:
-        return {"code": 4000}
-
-    # Inputs
-    name = request.json.get("name", "")
-    icNo = request.json.get("IcNo", "")
-
-    db_conn = db_conn_pool.get_connection(pre_ping=True)
-    cursor = db_conn.cursor()
-
-    try:
-        # Query the database to verify student credentials
-        cursor.execute("SELECT * FROM student WHERE name = %s AND IcNo = %s", (name, icNo))
-        student_data = cursor.fetchone()
-
-        if student_data:
-            # Student login successful
-            return jsonify({"message": "Student login successful", "Name": student_data[0]}), 200
-        else:
-            # Student login failed
-            return jsonify({"message": "Invalid student ID or password"}), 401
-
-    finally:
-        cursor.close()
-        db_conn.close()
-
-
 
 
 if __name__ == "__main__":

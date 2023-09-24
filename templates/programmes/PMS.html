@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Doctor of Philosophy (Mathematical Sciences) | FOCS</title>
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/plStyle.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}">
+</head>
+<body translate="no">
+  <div class="menu-btn">
+    <i class="fas fa-bars fa-2x"></i>
+  </div>
+  <div class="container">
+    <!-- Navigation bar -->
+    <nav class="main-nav">
+      <img class="logo" src="/static/logo.png" alt="Tunku Abdul Rahman University of Management and Technology" />
+
+      <ul class="main-menu">
+        <li>
+          <a href="#">Home</a>
+        </li>
+
+        <li>
+          <a href="#">About Us</a>
+        </li>
+
+        <li>
+          <a href="#">Facilities</a>
+        </li>
+
+        <li>
+          <a href="#">Research</a>
+        </li>
+
+        <li>
+          <a href="#">External Advisors</a>
+        </li>
+
+        <li>
+          <a href="#">Our Team</a>
+        </li>
+      </ul>
+
+      <ul class="right-menu">
+        <li>
+          <a href="#">
+            <i class="fas fa-search"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <header class="animate-top">
+      <h1>Doctor of Philosophy (Mathematical Sciences) (N/461/8/0029) (04/26) (MQA/PA 10773)</h3>
+    </header>
+
+    <ol class="breadcrumb">
+      <li><a href="/programmes">Programmes</a></li>
+      <li>Doctor of Philosophy (Mathematical Sciences)</li>
+    </ol>
+
+    <section>
+      <div class="card panel">
+        <!-- Tab Menu -->
+        <div class="bar border-bottom light-grey" style="margin-bottom: 10px;">
+          <a class="bar-item button tablink dark-grey" onclick="openTab(event, 'ProgrammeOverview')">Programme Overview</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'ProgrammeOutline')">Programme Outline</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'CareerProspects')">Career Prospects</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'MinimumEntryRequirements')">Minimum Entry Requirements</a>
+        </div>
+
+        <!-- Start of tab contents -->
+        <div id="ProgrammeOverview" class="container animate-opacity detail" style="display: block;">
+          <i class="fa fa-book"></i><strong> Programme Overview</strong>
+          <p align="justify">Department of Mathematical and Data Science at TAR UMT offers the opportunity to study for the degree of Doctor of Philosophy (Mathematical Sciences) in a thriving research environment. This programme served to those who are interested in research and require in-depth knowledge and experience in mathematics or statistics through individual and specialized research projects. The programme allow the students to acquire advanced knowledge in their fields of interest.</p>
+
+          <i class="fa fa-arrow-circle-up"></i><strong> Intake</strong>
+          <p>Rolling Intake (throughout the year)</p>
+
+          <i class="fa fa-arrow-circle-up"></i><strong> Duration</strong>
+          <ul class="bullets">
+            <li>Full time (Malaysian & International students) - 3 years</li>
+            <li>Part time (Malaysian students ONLY) - 4 years</li>
+          </ul>
+
+          <i class="fa fa-arrow-circle-up"></i><strong> Campus</strong>
+          <ul class="bullets">
+            <li>KL Main Campus</li>
+          </ul>
+        </div>
+
+        <div id="ProgrammeOutline" class="container animate-opacity detail" style="display: none;">
+          <strong>Compulsory</strong>
+          <ul class="bullets">
+            <li>Research Methodology</li>
+            <li>Doctoral Research</li>
+            <li>Special Topic</li>
+          </ul>
+        </div>
+
+        <div id="CareerProspects" class="container animate-opacity detail" style="display: none;">
+          <strong>Career Prospects</strong>
+          <ul class="bullets">
+            <li>Business Consultant</li>
+            <li>Research Scientist (Maths)</li>
+            <li>Senior Data Scientist</li>
+            <li>Senior Academicians in Institutions of Higher Learning</li>
+          </ul>
+        </div>
+
+        <div id="MinimumEntryRequirements" class="container animate-opacity detail" style="display: none;">
+          <strong>Minimum Entry Requirements</strong>
+          <ul class="bullets">
+            <li>A Master's Degree (MQF, Level 7) in Mathematics or Statistics or Mathematical Science related as accepted by the Senate; <b>OR</b></li>
+            <li>Other qualifications equivalent to a Master's Degree (MQF, Level 7) in Mathematics or Statistics or Mathematical Science related that are accepted by the Senate of TAR UMT.</li>
+          </ul>
+          <strong>English Language Requirements</strong>
+          <p>Malaysian Students</p>
+          <ul class="bullets">
+            <li>MUET Band 3.5 or IELTS Band 5.0 or CEFR High B1 or TOEFL iBT 40 or equivalent; <b>OR</b></li>
+            <li>Exemption of English Language requirement if medium of instruction during Master studies was in English</li>
+          </ul>
+          <p>International Students</p>
+          <ul class="bullets">
+            <li>IELTS Band 5.0 or CEFR High B1 or TOEFL iBT 40 or equivalent; <b>OR</b></li>
+            <li>Exemption of English Language requirement if medium of instruction during Master studies was in English</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="width: 100%; padding: 50px 0; text-align: center; background-image: url('https://www.tarc.edu.my/files/focs/background/C8D273C9-6BB6-4977-953F-44EEBFDEB2C5.jpg'); background-size: cover;">
+        <h3 style="color: white;"></h3>
+        <a class="btn" style="margin: 5px;" href="https://www.tarc.edu.my/admissions/a/intake-in-progress/" bis_skin_checked="1">Enroll Now</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  function openTab(evt, name) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("detail");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" dark-grey", "");
+    }
+    document.getElementById(name).style.display = "block";
+    evt.currentTarget.className += " dark-grey";
+  }
+</script>
+

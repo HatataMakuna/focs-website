@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Bachelor of Software Engineering (Honours) | FOCS</title>
+  <link rel="icon" type="image/png" href="/static/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/plStyle.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}">
+</head>
+<body translate="no">
+  <div class="menu-btn">
+    <i class="fas fa-bars fa-2x"></i>
+  </div>
+  <div class="container">
+    <!-- Navigation bar -->
+    <nav class="main-nav">
+      <img class="logo" src="/static/logo.png" alt="Tunku Abdul Rahman University of Management and Technology" />
+
+      <ul class="main-menu">
+        <li>
+          <a href="#">Home</a>
+        </li>
+
+        <li>
+          <a href="#">About Us</a>
+        </li>
+
+        <li>
+          <a href="#">Facilities</a>
+        </li>
+
+        <li>
+          <a href="#">Research</a>
+        </li>
+
+        <li>
+          <a href="#">External Advisors</a>
+        </li>
+
+        <li>
+          <a href="#">Our Team</a>
+        </li>
+      </ul>
+
+      <ul class="right-menu">
+        <li>
+          <a href="#">
+            <i class="fas fa-search"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <header class="animate-top">
+      <h1>Bachelor of Software Engineering (Honours)</h3>
+    </header>
+
+    <ol class="breadcrumb">
+      <li><a href="/programmes">Programmes</a></li>
+      <li>Bachelor of Software Engineering (Honours)</li>
+    </ol>
+
+    <section>
+      <!-- Images -->
+      <div class="content section">
+        <img src="/static/pImages/RSW_1.jpg" style="width:50%">
+        <img src="/static/pImages/RSW_2.jpg" style="width:50%">
+      </div>
+
+      <div class="card panel">
+        <!-- Tab Menu -->
+        <div class="bar border-bottom light-grey" style="margin-bottom: 10px;">
+          <a class="bar-item button tablink dark-grey" onclick="openTab(event, 'ProgrammeOverview')">Programme Overview</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'MinimumEntryRequirements')">Minimum Entry Requirements</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'ProgrammeOutline')">Programme Outline</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'CareerProspects')">Career Prospects</a>
+          <a class="bar-item button tablink" onclick="openTab(event, 'FeesFinancialAids')">Fees & Financial Aids</a>
+        </div>
+
+        <!-- Start of tab contents -->
+        <div id="ProgrammeOverview" class="container animate-opacity detail" style="display: block;">
+          <i class="fa fa-book"></i><strong> Programme Overview</strong>
+          <p align="justify">Graduates of this programme will be able to develop, manage and maintain high-quality software in a systematic, controlled and efficient manner. In addition to fundamentals of computing, core courses such as Data Structures and Algorithms, Research Method, Artificial Intelligence, Human Computer Interaction, and Distributed Systems and Parallel Computing will be offered to students.</p>
+
+          <p align="justify">Students will develop their specialisation by going through the following courses; Systems Analysis and Design, Software Engineering, Software Requirements Engineering, Software Design and Architecture, Formal Methods for Software Engineering, Software Quality Assurance and Testing, Software Evolution and Maintenance, and Software Project Management.</p>
+
+          <p align="justify">Elective courses like Introduction to Computer Security, Advanced Database Management, Mobile Application Development, Web Application Development, Blockchain Application Development, Agile Software Development, Data Science, and Cloud Computing also will be offered to students undergoing this programme.</p>
+
+          <p align="justify">Students will have an opportunity to work with the industry through their 6 months industrial training and carry out real-life projects on software engineering. All such training will add value to their qualification and increase their employment opportunities.</p>
+
+          <i class="fa fa-calendar-check-o"></i><strong> Intake</strong>
+          <ul class="bullets">
+            <li>Year 1 Intake: January (KL); June (KL, PG); November (KL)</li>
+            <li>Year 2 Intake: June (KL, PG)</li>
+          </ul>
+
+          <i class="fa fa-clock-o"></i><strong> Duration</strong>
+          <p>3 years</p>
+
+          <i class="fa fa-building"></i><strong> Campus</strong>
+          <ul class="bullets">
+            <li>KL Main Campus</li>
+            <li>Penang Branch Campus</li>
+          </ul>
+
+          <i class="fa fa-arrow-circle-up"></i><strong> Academic Progression:</strong>
+          <div class="image-container">
+            <img src="/static/pImages/academic_progression.jpg" alt="Academic Progression"/>
+          </div>
+        </div>
+
+        <div id="MinimumEntryRequirements" class="container animate-opacity detail" style="display: none;">
+          <i class="fa fa-list"></i><strong> Minimum Entry Requirements</strong>
+          <div class="image-container">
+            <a href="/static/pImages/degree_requirements.png" target="_blank">
+              <img src="/static/pImages/degree_requirements.png" caption="false">
+            </a>
+          </div>
+        </div>
+
+        <div id="ProgrammeOutline" class="container animate-opacity detail" style="display: none;">
+          <i class="fa fa-book"></i><strong> Programme Outline</strong>
+          <ul class="bullets" style="margin: 10px;">
+            <li>Problem Solving and Programming</li>
+            <li>Database Management</li>
+            <li>Introduction to Computer Systems</li>
+            <li>Object-Oriented Programming</li>
+            <li>Research Methods</li>
+            <li>Data Structures and Algorithms</li>
+            <li>Software Engineering</li>
+            <li>Social and Professional Issues</li>
+            <li>Software Quality Assurance and Testing</li>
+            <li>Software Requirements Engineering</li>
+            <li>Software Design and Architecture</li>
+            <li>Software Project Management</li>
+            <li>Formal Methods for Software Engineering</li>
+            <li>Software Evolution and Maintenance</li>
+            <li>Systems Analysis and Design</li>
+            <li>Introduction to Computer Networks</li>
+            <li>Web Design and Development</li>
+            <li>Human Computer Interaction</li>
+            <li>Probability and Statistics</li>
+            <li>Discrete Mathematics</li>
+            <li>Advanced Discrete Mathematics</li>
+            <li>Music Appreciation</li>
+            <li>Project I</li>
+            <li>Project II</li>
+            <li>Industrial Training (6 months)</li>
+          </ul>
+          <strong>Electives (Choose 6):</strong>
+          <ul class="bullets" style="margin: 10px;">
+            <li>Advanced Database Management</li>
+            <li>Artificial Intelligence</li>
+            <li>Web Application Development</li>
+            <li>Blockchain Application Development</li>
+            <li>Introduction to Computer Security</li>
+            <li>Distributed Systems and Parallel Computing</li>
+            <li>Mobile Application Development</li>
+            <li>Graphic Programming</li>
+            <li>Integrative Programming</li>
+            <li>Image Processing</li>
+            <li>Data Science</li>
+            <li>Cloud Computing</li>
+            <li>Agile Software Development</li>
+          </ul>
+          <strong>Language, Mata Pelajaran Pengajian Umum (MPU) and Co-curricular Courses:</strong>
+          <ul class="bullets" style="margin: 10px;">
+            <li>English for Tertiary Studies</li>
+            <li>Falsafah dan Isu Semasa</li>
+            <li>Academic English</li>
+            <li>Penghayatan Etika dan Peradaban</li>
+            <li>English for Career Preparation</li>
+            <li>Entrepreneurship</li>
+            <li>Bahasa Kebangsaan A</li>
+            <li>Contemporary Malaysian Issues</li>
+            <li>Co-curricular</li>
+          </ul>
+        </div>
+
+        <div id="CareerProspects" class="container animate-opacity detail" style="display: none;">
+          <i class="fa fa-briefcase"></i><strong> Career Prospects</strong>
+          <ul class="bullets" style="margin:10px;">
+            <li>Software Engineers</li>
+            <li>Software Testers</li>
+            <li>Software Quality Assurance Engineers</li>
+            <li>Software Developers</li>
+            <li>Software Architects</li>
+            <li>Systems Analysts</li>
+            <li>Web Developers</li>
+            <li>Mobile Application Developers</li>
+            <li>IT Consultants</li>
+            <li>IT and Project Managers</li>
+            <li>Programmers</li>
+          </ul>
+        </div>
+
+        <div id="FeesFinancialAids" class="container animate-opacity detail" style="display: none;">
+          <strong>Fees & Financial Aids</strong>
+          <ul class="bullets">
+            <li>Estimated Total Fees: RM 34,600 (Malaysian Student), RM60,400 (International Student)</li>
+            <li>The estimated total fees may vary by 10%</li>
+            <li>For more information on Fees, <a href="https://www.tarc.edu.my/bursary/content.jsp?cat_id=5AA0377F-4E7F-494A-8EB4-CEF5CE4DD7AE" target="_blank"><b>click here</b></a>.</li>
+          </ul>
+
+          <p><b>Merit Scholarship</b></p>
+          <p>To find out more, <a class="hovering" href="https://www.tarc.edu.my/admissions/contentsub.jsp?cat_id=58F1E9DB-53BF-4657-8DD6-80056FEAF89F&fmenuid=" target="_blank"><b>click here</b></a>.</p>
+
+          <p><b>Other Scholarship</b></p>
+          <p>To find out more, <a class="hovering" href="https://www.tarc.edu.my/dsa/financial-aid/scholarships-grants/" target="_blank"><b>click here</b></a>.</p>
+
+          <p><b>Financial Aid</b></p>
+          <ul class="bullets">
+            <li>For PTPTN, <a href="https://www.tarc.edu.my/dsa/financial-aid/ptptn/" target="_blank"><b>click here</b></a></li>
+            <li>For Study Loan, <a href="https://www.tarc.edu.my/dsa/financial-aid/study-loans/" target="_blank"><b>click here</b></a></li>
+            <li>For more information on Financial Aid, <a href="https://www.tarc.edu.my/dsa/financial-aid/financial-aid/" target="_blank"><b>click here</b></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="width: 100%; padding: 50px 0; text-align: center; background-image: url('https://www.tarc.edu.my/files/focs/background/C8D273C9-6BB6-4977-953F-44EEBFDEB2C5.jpg'); background-size: cover;">
+        <h3 style="color: white;"></h3>
+        <a class="btn" style="margin: 5px;" href="https://www.tarc.edu.my/admissions/a/intake-in-progress/" bis_skin_checked="1">Enroll Now</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  function openTab(evt, name) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("detail");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" dark-grey", "");
+    }
+    document.getElementById(name).style.display = "block";
+    evt.currentTarget.className += " dark-grey";
+  }
+
+  var slideIndex = 1;
+  showDivs(slideIndex);
+
+  function plusDivs(n) {
+    showDivs(slideIndex += n);
+  }
+
+  function showDivs(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    x[slideIndex-1].style.display = "block";
+  }
+</script>
+
