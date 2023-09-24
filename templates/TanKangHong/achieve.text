@@ -1,0 +1,34 @@
+pip install pytesseract pillow
+pip show pillow   //check library
+pip show pytesseract
+
+pip uninstall pillow pytesseract   // if still cannot start the ai
+
+pip install pdf2image
+
+pip install pytesseract pillow pdf2image
+
+
+pip install tabula-py
+
+pip install Flask PyMuPDF
+
+pip install opencv-python
+
+pip install PyPDF2
+
+pip install PdfReader
+
+pip install pdfminer.six
+
+
+pip install pytesseract pdf2image opencv-python python-docx
+
+pip install pypdf
+
+pip install --upgrade pymupdf
+
+pip install pdfplumber
+
+
+pip install python-Levenshtein-wheels

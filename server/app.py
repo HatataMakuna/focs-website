@@ -286,6 +286,26 @@ def catch_all(error):
 def about():
     return render_template("www.tarc.edu.my")
 
+@app.route("/softwareEngineer", methods=["GET"])
+def softwareEngineer():
+    return render_template("TanKangHong/homepage.html")
+
+@app.route("/softwareEngineer/display1", methods=["GET"])
+def display1():
+    return render_template("TanKangHong/applyPage.html")
+
+@app.route("/softwareEngineer/display2", methods=["GET"])
+def display2():
+    return render_template("TanKangHong/apply2.html")
+
+@app.route("/softwareEngineer/display3", methods=["GET"])
+def display3():
+    return render_template("TanKangHong/apply3.html")
+
+@app.route("/softwareEngineer/display4", methods=["GET"])
+def display4():
+    return render_template("TanKangHong/apply4.html")
+
 
 @app.route("/addemp", methods=["POST"])
 def AddEmp():
@@ -337,6 +357,37 @@ def AddEmp():
 
     print("all modification done...")
     return render_template("AddEmpOutput.html", name=emp_name)
+
+
+@app.route("/applyPage", methods=["POST"])
+def login_student():
+    if not request.json:
+        return {"code": 4000}
+
+    # Inputs
+    name = request.json.get("name", "")
+    icNo = request.json.get("IcNo", "")
+
+    db_conn = db_conn_pool.get_connection(pre_ping=True)
+    cursor = db_conn.cursor()
+
+    try:
+        # Query the database to verify student credentials
+        cursor.execute("SELECT * FROM student WHERE name = %s AND IcNo = %s", (name, icNo))
+        student_data = cursor.fetchone()
+
+        if student_data:
+            # Student login successful
+            return jsonify({"message": "Student login successful", "Name": student_data[0]}), 200
+        else:
+            # Student login failed
+            return jsonify({"message": "Invalid student ID or password"}), 401
+
+    finally:
+        cursor.close()
+        db_conn.close()
+
+
 
 
 if __name__ == "__main__":
