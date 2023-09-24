@@ -409,7 +409,7 @@
     </footer>
 
     <!-- TODO: Copy this to other pages -->
-    <div class="position-fixed" style="bottom: 16px; right: 16px">
+    <div id="hello-msg-container" class="position-fixed" style="bottom: 16px; right: 16px">
       <div id="hello-msg" style="transition: opacity 0.1s; opacity: 0">
         <!-- Hello message -->
         <div class="position-absolute end-0 bg-dark rounded text-white z-1 shadow" style="width: 256px; bottom: 80px">
@@ -547,6 +547,13 @@
           <span class="float-start" style="margin-top: 12px">${(await resp.json()).result}</span>
         `
         document.getElementById('chat-msgs').appendChild(botMsg)
+      })
+
+      document.body.addEventListener('click', event => {
+        // Clicking outside the chat room will close the chat room
+        if (!document.getElementById('hello-msg-container').contains(event.target)) {
+          document.getElementById('chat-room').style.opacity = 0
+        }
       })
       // TODO: Until here
     </script>
