@@ -1,0 +1,268 @@
+<!--
+  Input
+  {
+    "programmes": [
+      "Diploma in Computer Science",
+      "Diploma in Information Systems",
+      "Diploma in Information Technology"
+    ]
+  }
+
+  Output
+  {
+    "payload": {
+      "results": [
+        {
+          "programme": "Diploma in Computer Science",
+          "campuses": ["JH", "KL", "PG"],
+          "to_programmes": [
+            "Bachelor of Computer Science (Honours) in Data Science",
+            "Bachelor of Computer Science (Honours) in Interactive Software Technology",
+            "Bachelor of Science (Honours) in Management Mathematics with Computing",
+            "Bachelor of Software Engineering (Honours)",
+          ],
+          "entry_reqs": [
+            {
+              "subject": "Additional Mathematics",
+              "grades": [
+                {
+                  "type": "SPM",
+                  "grade": "Credit"
+                },
+                {
+                  "type": "O Level",
+                  "grade": "C"
+                }
+              ],
+            },
+            {
+              "subject": "Mathematics",
+              "grades": [
+                {
+                  "type": "UEC",
+                  "grade": "B"
+                }
+              ],
+            }
+          ],
+          "programme_outline": {
+            "subjects": [
+              "Introduction to Information Technology",
+              "Programming Concepts and Design I",
+              "Programming Concepts and Design II",
+              "Operating Systems",
+              "Web Design and Development",
+              "Systems Analysis and Design",
+              "Object-Oriented Programming Techniques",
+              "Computer Systems Architecture",
+              "Fundamentals of Computer Networks",
+              "Database Development and Applications",
+              "Pre-Calculus",
+              "Introductory Calculus",
+              "Statistics I",
+              "Statistics II",
+              "Discrete Mathematics",
+              "Algebra",
+              "Industrial Training"
+            ],
+            "electives": [
+              [
+                "Accounting Methods I",
+                "Introduction to Data Science",
+                "Computer Game Studies",
+                "Software Engineering"
+              ],
+              [
+                "Accounting Methods II",
+                "Introduction to Data Mining",
+                "Computer Game Development",
+                "Software Requirement and Design"
+              ],
+              [
+                "Fundamentals of Artificial Intelligence",
+                "Mobile Application Development",
+                "GUI and Web Application Programming"
+              ]
+            ]
+          },
+          "career_prospects": [
+            "Junior Analyst Programmers",
+            "Junior Systems Analysts",
+            "Junior Software Engineers",
+            "Junior Systems Engineers",
+            "Junior Research Officers",
+            "Junior Quantitative Analysts",
+            "Junior Software Developers"
+          ],
+          "estimated_total_fee": {
+            "local": 17600,
+            "international": 33300,
+          },
+        },
+        {
+          "programme": "Diploma in Information Systems",
+          "campuses": ["KL", "PG", "PK"],
+          "to_programmes": [
+            "Bachelor of Information Systems (Honours) in Enterprise Information Systems"
+          ],
+          "entry_reqs": [
+            {
+              "subject": "Mathematics",
+              "grades": [
+                {
+                  "type": "SPM",
+                  "grade": "Credit"
+                },
+                {
+                  "type": "O Level",
+                  "grade": "C"
+                },
+                {
+                  "type": "UEC",
+                  "grade": "B"
+                }
+              ],
+            }
+          ],
+          "programme_outline": {
+            "subjects": [
+              "Introduction to Information Technology",
+              "Programming Concepts and Design I",
+              "Programming Concepts and Design II",
+              "Principles of Information Systems",
+              "Web Design and Development",
+              "Web Systems and Technologies",
+              "Systems Analysis and Design",
+              "Database Development and Applications",
+              "Managing Information Systems",
+              "Computer Systems Architecture",
+              "Electronic Commerce",
+              "Enterprise Resource Planning",
+              "Operating Systems",
+              "Fundamentals of Computer Networks",
+              "Introductory Statistics",
+              "Discrete Mathematics",
+              "Principles of Accounting"
+              "Industrial Training",
+            ],
+            "electives": [
+              [
+                "Introduction to Logistics Operations",
+                "Mobile Commerce and Marketing"
+              ],
+              [
+                "Cost Accounting",
+                "Introduction to Data Science"
+              ],
+              [
+                "Cloud Computing for Business",
+                "Accounting Software Packages"
+              ]
+            ]
+          },
+          "career_prospects": [
+            "Junior Programmers",
+            "Junior Systems Analysts",
+            "Junior SAP Support Consultants",
+            "Junior IT Support Executives",
+            "Junior IT Executives",
+          ],
+          "estimated_total_fee": {
+            "local": 17800,
+            "international": 33600,
+          },
+        },
+        {
+          "programme": "Diploma in Information Technology",
+          "campuses": ["JH", "KL", "PG", "PH", "PK", "SB"],
+          "to_programmes": [
+            "Bachelor of Information Technology (Honours) in Information Security",
+            "Bachelor of Information Technology (Honours) in Internet Technology"
+            "Bachelor of Information Technology (Honours) in Software Systems Development"
+          ],
+          "entry_reqs": [
+            {
+              "subject": "Mathematics",
+              "grades": [
+                {
+                  "type": "SPM",
+                  "grade": "Credit"
+                },
+                {
+                  "type": "O Level",
+                  "grade": "C"
+                },
+                {
+                  "type": "UEC",
+                  "grade": "B"
+                }
+              ],
+            }
+          ],
+          "programme_outline": {
+            "subjects": [
+              "Introduction to Information Technology",
+              "Programming Concepts and Design I",
+              "Programming Concepts and Design II",
+              "Principles of Information Systems",
+              "Web Design and Development",
+              "Systems Analysis and Design",
+              "Object-Oriented Programming Techniques",
+              "Operating Systems",
+              "Computer Systems Architecture",
+              "Fundamentals of Computer Networks",
+              "Database Development and Applications",
+              "Web Systems and Technologies",
+              "GUI and Web Application Programming",
+              "Introduction to Cybersecurity",
+              "Calculus and Algebra",
+              "Probability and Statistics",
+              "Discrete Mathematics",
+              "Industrial Training (10 weeks)"
+            ],
+            "electives": [
+              [
+                "Introduction to Business",
+                "Mobile Commerce and Marketing"
+              ],
+              [
+                "Introduction to Marketing",
+                "Introduction to Data Science"
+              ],
+              [
+                "Business Organisation and Management",
+                "Cloud Computing for Business"
+              ]
+            ]
+          },
+          "career_prospects": [
+            "Junior Programmers",
+            "Junior Systems Analysts",
+            "Junior Network Support Officers",
+            "Junior IT Support Executives",
+            "Junior IT Executives",
+            "Web Developer",
+          ],
+          "estimated_total_fee": {
+            "local": 17800,
+            "international": 33600,
+          },
+        },
+      ]
+    }
+  }
+-->
+
+<!-- [N6] There should be a robot to answer frequently asked questions (FAQ) -->
+<!--
+  Intents
+  - [DONE] Greetings
+  - [DONE] What is FOCS stands for
+  - [DONE] Where is FOCS
+  - [DONE] I want to know who is the leader of FOCS
+  - [DONE] How long your office in operation
+  - [DONE] Can I have your contact information of FOCS
+  - [TODO:] I want to know which programme is the most suitable to me
+  - [TODO:] What is the total fees of my selected programme
+  - [DONE] Thanks
+-->

@@ -1,5 +1,6 @@
 import sys
 import time
+import uuid
 
 import boto3
 import consts
@@ -11,6 +12,7 @@ app = Flask(__name__, static_folder="../static", template_folder="../templates")
 db_conn_pool = DbConnectionPool.get_instance()
 sns = boto3.resource("sns", consts.AWS_REGION)
 sys_abuse_topic = sns.Topic(consts.SYS_ABUSE_TOPIC_ARN)
+lex = boto3.client("lexv2-runtime", consts.AWS_REGION)
 CORS(app)
 
 # Stream printed logs from EC2 to CloudWatch
@@ -245,6 +247,13 @@ def list_staffs():
     return render_template("StaffList.html")
 
 
+@log
+@app.route("/qna", methods=["GET"])
+def list_qna():
+    return render_template("Qna.html")
+
+
+@log
 # get the staff details
 @app.route("/staffs/<id>")
 def staff(id: int):
@@ -281,6 +290,74 @@ def staff(id: int):
         db_conn.close()
 
 
+# TODO: [N5] The website should be able to provide comparisons on the selected programme structure.
+@app.route("/compare_programmes", methods=["POST"])
+def compare_programmes():
+    return {}
+
+
+# [N6] There should be a robot to answer frequently asked questions (FAQ)
+@app.route("/faq_ans", methods=["GET"])
+def get_faq_answer():
+    # Input
+    q = request.args.get("q", ".")
+
+    # Ensure query is not empty
+    if q == "":
+        q = "."
+
+    # Get current time
+    now = int(time.time())
+
+    db_conn = db_conn_pool.get_connection(pre_ping=True)
+    cursor = db_conn.cursor()
+
+    try:
+        # Try to get the chatbot session ID
+        cursor.execute("SELECT id, created_at FROM chatbot_session WHERE ip_addr = %s", (request.remote_addr,))
+        db_conn.commit()
+        chatbot_session = cursor.fetchone()
+        chatbot_session_id = str(uuid.uuid4())
+
+        # Have established a chatbot session ?
+        if chatbot_session:
+            # Chatbot session almost expired ?
+            if now - chatbot_session[1] > 290:
+                # Renew the chatbot session
+                cursor.execute(
+                    "UPDATE chatbot_session SET id = %s, created_at = %s WHERE ip_addr = %s",
+                    (chatbot_session_id, now, request.remote_addr),
+                )
+                db_conn.commit()
+
+            else:
+                chatbot_session_id = chatbot_session[0]
+
+        else:
+            # Establish a new chatbot session
+            cursor.execute(
+                "INSERT INTO chatbot_session VALUES (%s, %s, %s)",
+                (request.remote_addr, chatbot_session_id, now),
+            )
+            db_conn.commit()
+
+        # Talk with the chatbot
+        chatbot_resp = lex.recognize_text(
+            botId=consts.CHATBOT_ID,
+            botAliasId=consts.CHATBOT_ALIAS_ID,
+            localeId="en_US",
+            sessionId=chatbot_session_id,
+            text=q,
+        )
+
+        # Output
+        return {"result": chatbot_resp["messages"][0]["content"]}
+
+    finally:
+        cursor.close()
+        db_conn.close()
+
+
 @app.errorhandler(404)
 def catch_all(error):
     return render_template("404notfound.html")
@@ -289,6 +366,26 @@ def catch_all(error):
 @app.route("/about", methods=["GET"])
 def about():
     return render_template("www.tarc.edu.my")
+
+@app.route("/softwareEngineer", methods=["GET"])
+def softwareEngineer():
+    return render_template("TanKangHong/homepage.html")
+
+@app.route("/softwareEngineer/display1", methods=["GET"])
+def display1():
+    return render_template("TanKangHong/applyPage.html")
+
+@app.route("/softwareEngineer/display2", methods=["GET"])
+def display2():
+    return render_template("TanKangHong/apply2.html")
+
+@app.route("/softwareEngineer/display3", methods=["GET"])
+def display3():
+    return render_template("TanKangHong/apply3.html")
+
+@app.route("/softwareEngineer/display4", methods=["GET"])
+def display4():
+    return render_template("TanKangHong/apply4.html")
 
 
 if __name__ == "__main__":
