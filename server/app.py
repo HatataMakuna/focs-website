@@ -58,6 +58,12 @@ def list_staffs():
 
 
 @log
+@app.route("/qna", methods=["GET"])
+def list_qna():
+    return render_template("Qna.html")
+
+
+@log
 @app.errorhandler(404)
 def catch_all(error):
     return render_template("404notfound.html")
