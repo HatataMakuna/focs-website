@@ -1,0 +1,203 @@
+<!--
+    TODO: [N10]
+    - use fake data for staff page
+    - retrieve from database to have a page for each staff
+        * should contain: Name of Staff, Designation, Department, Publications (if any), Contact Information, Research area
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Question Helpdesk</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+J +JgB5J5R+K3N+1r5uF8ViLqVd2pi/9m1z8EG95F5Sms5j" crossorigin="anonymous"> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <style>
+    table,
+    th,
+    td {
+      border: 2px solid black;
+    }
+    tr:hover {
+      background-color: #d6eeee;
+    }
+    #qnaList tr td:nth-child(3) {
+      text-align: center;
+    }
+    .status-done {
+      color: green;
+      font-weight: bold;
+    }
+    .status-pending {
+      color: #ffcc00;
+      font-weight: bold;
+    }
+  </style>
+  <body>
+    <div class="w3-container mt-5 ml-4 mr-4">
+      <h2>Question Helpdesk</h2>
+      <br />
+      <input class="form-control" id="myInput" type="text" placeholder="&#128269; Search..." />
+      <br />
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th class="w-35">Question</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Reply</th>
+          </tr>
+        </thead>
+        <tbody id="qnaList">
+          <tr>
+            <td>What are the international collaborations of the Faculty of Computing and Information Technology?</td>
+            <td>cora921@gmail.com</td>
+            <td>In progress</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>
+              What are the scholarship opportunities for students of the Faculty of Computing and Information
+              Technology?
+            </td>
+            <td>mary472@gmail.com</td>
+            <td>In progress</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>
+              Since I can't find any information on the FOCS programme website about the course in digital media
+              technology, does TARUMT provide it?
+            </td>
+            <td>jane920@gmail.com</td>
+            <td>In progress</td>
+            <td>-</td>
+          </tr>
+
+          <tr>
+            <td>
+              What are the awards and recognition received by the Faculty of Computing and Information Technology?
+            </td>
+            <td>benjamin132@gmail.com</td>
+            <td>In progress</td>
+            <td>-</td>
+          </tr>
+
+          <tr>
+            <td>What are the alumni success stories of the Faculty of Computing and Information Technology?</td>
+            <td>ava920@gmail.com</td>
+            <td>In progress</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>What are the career opportunities for graduates of the data science programme?</td>
+            <td>henry651@gmail.com</td>
+            <td>Completed</td>
+            <td>
+              Graduates of the data science program have a wide range of career opportunities available to them. Data
+              scientists are in high demand in a variety of industries, including Google, Microsoft, and Amazon. These
+              companies use data science to improve their products and services, develop new products and services, and
+              make better business decisions or others more.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              What are the facilities and resources available to students of the Faculty of Computing and Information
+              Technology?
+            </td>
+            <td>adam0121@gmail.com</td>
+            <td>Completed</td>
+            <td>
+              Students of the Faculty of Computing and Information Technology have access to a wide range of facilities
+              and resources, including computer labs, research labs, software licenses and more.
+            </td>
+          </tr>
+          <tr>
+            <td>What kind of data science tools and technologies are taught in the programme?</td>
+            <td>henry651@gmail.com</td>
+            <td>Completed</td>
+            <td>
+              You may look more detail in the programme in the FOCS website or you may get more information during the
+              open day.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              What kind of game engines and development tools are used in the interactive software technology programme?
+            </td>
+            <td>adam0121@gmail.com</td>
+            <td>Completed</td>
+            <td>
+              The game engines and development tools are typically used in interactive software technology programs are
+              Unity or Unreal Engine which are some of the most popular game engines used in interactive software
+              technology programs.
+            </td>
+          </tr>
+          <tr>
+            <td>What are the fees for the Faculty of Computing and Information Technology</td>
+            <td>john1221@gmail.com</td>
+            <td>Completed</td>
+            <td>
+              Through the FOCS programme website, you may find out the course's cost details and choose the one about
+              which you wish to find out more.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              What kind of internships are available to students of the Faculty of Computing and Information Technology?
+            </td>
+            <td>anna055@gmail.com</td>
+            <td>Completed</td>
+            <td>
+              Students who study in FOCS may have access to a wide range of internship opportunities in a variety of
+              industries such as Software developer, Information security analyst and more.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $('#myInput').on('keyup', function () {
+          var value = $(this).val().toLowerCase()
+          $('#qnaList tr').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          })
+        })
+
+        // Get all the "Question" cells in the table
+        const questionCells = document.querySelectorAll('table tr td:first-child')
+
+        // Add an event listener to each "Question" cell
+        questionCells.forEach(cell => {
+          cell.contentEditable = true
+        })
+      })
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Loop through all the "Status" cells
+        $('#qnaList tr td:nth-child(3)').each(function () {
+          // Get the text content of the cell
+          var statusText = $(this).text().trim()
+
+          // Add the appropriate class based on the status text
+          if (statusText === 'Completed') {
+            $(this).addClass('status-done')
+          } else if (statusText === 'In progress') {
+            $(this).addClass('status-pending')
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

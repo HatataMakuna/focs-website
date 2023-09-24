@@ -1,0 +1,496 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <title>CodePen - A Pen by Dewan Rabbi</title>
+
+  <link rel="stylesheet" media="screen" href="https://cpwebassets.codepen.io/assets/fullpage/fullpage-7d0085e88e3f06095d712efc55f79fc6aedaeed08967649de30e3ea674797898.css" />
+
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+
+
+  <title>CodePen - A Pen by Dewan Rabbi</title>
+
+  <style>
+    html { font-size: 15px; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { height:100%; display: flex; flex-direction: column; }
+    .referer-warning {
+      background: black;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      padding: 0.75em;
+      color: white;
+      text-align: center;
+      font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, system-ui, Sans-Serif;
+      line-height: 1.2;
+      font-size: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    .referer-warning span { font-family: initial; }
+    .referer-warning h1 { font-size: 1.2rem; margin: 0; }
+    .referer-warning a { color: #56bcf9; }
+  </style>
+</head>
+
+<body class="">
+
+
+  <div id="result-iframe-wrap" role="main">
+    <iframe
+      id="result"
+      srcdoc="<!DOCTYPE html>
+<html lang=&quot;en&quot; >
+
+<head>
+  <meta charset=&quot;UTF-8&quot;>
+
+
+    <link rel=&quot;apple-touch-icon&quot; type=&quot;image/png&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png&quot; />
+
+    <meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;CodePen&quot;>
+
+    <link rel=&quot;shortcut icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico&quot; />
+
+    <link rel=&quot;mask-icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg&quot; color=&quot;#111&quot; />
+
+
+
+
+
+
+  <title>CodePen - A Pen by Dewan Rabbi</title>
+
+    <link rel=&quot;canonical&quot; href=&quot;https://codepen.io/dewan-rabbi/pen/qBrqKgL&quot;>
+
+
+
+
+<style>
+/* Needed -Css*/
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
+}
+
+.container {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.clearfix::after {
+    content: &quot;&quot;;
+    clear: both;
+    display: block;
+}
+
+img {
+    max-width: 100%;
+}
+
+/*Header Area Csc */
+
+.header-section{
+    background: #fff;
+}
+
+.header-section .header-left{
+    float: left;
+    width: 20%;
+}
+
+.header-section .header-right {
+    float: right;
+    width: 80%;
+}
+
+.header-left {
+    background: #efedee;
+    text-align: center;
+    padding: 23.70px;
+}
+
+.header-right .header-right-top {
+    background: url(&quot;https://i.ibb.co/jhqRnN9/banner.jpg&quot;);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, .6);
+}
+
+.header-right .header-right-top h2 {
+    color: rgba(255, 255, 255, .6);
+}
+
+.header-right .header-right-mid{
+    background: #037712;
+}
+
+.header-right .header-right-mid h2 {
+    color: #fff;
+    font-size: 24px;
+    max-width: 600px;
+    padding: 3px 10px;
+}
+
+.header-right .header-right-bottom{
+    background: #87c876;
+}
+
+.header-right .header-right-bottom h4 {
+    color: #fff;
+    text-align: right;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 2px 10px;
+}
+
+/*Header Bottom Area Css*/
+
+.header-bottom{
+    background: #fff;
+    padding: 60px 0;
+}
+
+.header-bottom .header-bottom-content{
+    text-align: center;
+}
+
+.header-bottom .header-bottom-content h1 {
+    border-bottom: 2px solid rgba(0, 0, 0, .2);
+    font-size: 26px;
+}
+
+/*Information Area Css*/
+
+.information-section .information_content table tr td{
+    background: #eeeeee;
+    padding: 3px;
+    margin: 0 2px;
+}
+
+.information_area .information_content table tr:nth-child(5) td {
+    padding: 10px 3px;
+}
+
+/* Mark Area Area Css*/
+
+.mark-section{
+    padding: 30px 0;
+}
+
+.mark-section .mark-section-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.mark-section .mark-section-title  h1 {
+    font-size: 23px;
+}
+
+.mark-section .mark_sheet table{
+    width: 100%;
+}
+
+.mark-section .mark_sheet table tr:nth-child(even) {
+    background: #f0edee;
+}
+
+.mark-section .mark_sheet table tr:nth-child(odd) {
+    background: #dfe0e2;
+}
+
+.mark-section.mark_sheet table tr th {
+    text-align: left;
+    background: #aeb7bd;
+    padding: 5px;
+}
+
+.mark-section .mark_sheet table tr td {
+    padding: 5px;
+}
+
+.mark_button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.apply_now {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.mark_button a {
+    display: inline-block;
+    text-decoration: none;
+    color: #0000ff;
+    font-weight: 800;
+}
+
+.apply_now a {
+  <!-- display: inline-block; -->
+  text-decoration: none;
+  color: #0000ff;
+  font-weight: 800;
+}
+
+/* Footer Area Area Css*/
+
+.footer_area {
+    background: #f2f2f2;
+    padding: 30px;
+    border-top: 5px solid #8eba80;
+}
+
+.footer_area .footer_left_area {
+    float: left;
+    width: 50%;
+    text-align: left;
+}
+
+.footer_area .footer_left_area p {
+    color: #aeb7bd;
+    margin-top: 20px;
+}
+
+.footer_area .footer_right_area {
+    float: right;
+    width: 50%;
+    text-align: right;
+}
+
+.footer_area .footer_right_area p {
+    display: inline-block;
+    color: #aeb7bd;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+</head>
+
+<body translate=&quot;no&quot;>
+  <!DOCTYPE html>
+<html lang=&quot;en&quot;>
+    <head>
+        <meta charset=&quot;UTF-8&quot;>
+        <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+        <title>Board Exam Result</title>
+        <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css&quot; integrity=&quot;sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==&quot; crossorigin=&quot;anonymous&quot; />
+        <link href=&quot;https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&amp;display=swap&quot; rel=&quot;stylesheet&quot;>
+        <link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;>
+    </head>
+
+    <body>
+        <!-- Header Area -->
+
+        <div class=&quot;header-section&quot;>
+            <div class=&quot;inner-header container clearfix&quot;>
+                <div class=&quot;header-left&quot;>
+                    <a href=&quot;#&quot;>
+                        <img src=&quot;https://i.ibb.co/mGyfKjG/logo.png&quot; alt=&quot;&quot;>
+                    </a>
+                </div>
+                <div class=&quot;header-right&quot;>
+                    <div class=&quot;header-right-top&quot;>
+                        <h2>Sijil Pelajaran Malaysia</h2>
+                    </div>
+                    <div class=&quot;header-right-mid&quot;>
+                        <h2>Sekolah Menengah Kebangsaan Danau Kota (SMKDK)</h2>
+                    </div>
+                    <div class=&quot;header-right-bottom&quot;>
+                        <h4>Official Website of Education Borad</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Bottom Area -->
+
+        <div class=&quot;header-bottom&quot;>
+            <div class=&quot;inner_header_bottom container&quot;>
+                <div class=&quot;header-bottom-content&quot;>
+                    <h1>SPM Result Publication 2021</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Area -->
+
+        <div class=&quot;information-section area&quot;>
+            <div class=&quot;inner_information_area container&quot;>
+                <div class=&quot;information_content&quot;>
+                    <table style=&quot;width:100%;&quot;>
+                        <tr>
+                            <td>Ic No</td>
+                            <td>111111-11-1111</td>
+                            <td>Name</td>
+                            <td>Tan Kang Hong</td>
+                        </tr>
+                        <tr>
+                            <td>State</td>
+                            <td>Kuala Lumpur</td>
+                            <td>Group</td>
+                            <td>Science</td>
+                        </tr>
+
+                        <tr>
+                            <td>Type</td>
+                            <td>SPM</td>
+                            <td>Date Of Birth</td>
+                            <td>06/05/2001</td>
+                        </tr>
+                        <tr>
+                            <td>Result</td>
+                            <td><b>7A+ 6A</b></td>
+                            <td>Institute</td>
+                            <td>TAR UMT</td>
+                        </tr>
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mark Area -->
+
+        <div class=&quot;mark-section&quot;>
+            <div class=&quot;inner-mark-section container&quot;>
+                <div class=&quot;mark-section-title &quot;>
+                    <h1>Subjest-Wise Grade/Mark Sheet</h1>
+                </div>
+                <div class=&quot;mark_sheet&quot;>
+                    <table>
+                        <tr>
+                            <th>Code</th>
+                            <th>Subject</th>
+                            <th>Grade</th>
+                        </tr>
+                        <tr>
+                            <td>101</td>
+                            <td>BAHASA MALAYSIA</td>
+                            <td>A+</td>
+                        </tr>
+                        <tr>
+                            <td>107</td>
+                            <td>BAHASA INGGERIS</td>
+                            <td>A+</td>
+                        </tr>
+                        <tr>
+                            <td>109</td>
+                            <td>MATEMATIK</td>
+                            <td>A+</td>
+                        </tr>
+                        <tr>
+                          <td>110</td>
+                          <td>MATEMATIK TABAHAN</td>
+                          <td>A+</td>
+                      </tr>
+                        <tr>
+                            <td>145</td>
+                            <td>SOCIAL SCIENCE</td>
+                            <td>A+</td>
+                        </tr>
+                        <tr>
+                            <td>111</td>
+                            <td>ISLAM</td>
+                            <td>A+</td>
+                        </tr>
+                        <tr>
+                            <td>137</td>
+                            <td>ACCOUNTINGS</td>
+                            <td>A+</td>
+                        </tr>
+                        <tr>
+                            <td>137</td>
+                            <td>BUISNESS</td>
+                            <td>A+</td>
+                        </tr>
+                        <tr>
+                            <td>138</td>
+                            <td>FINNANCE</td>
+                            <td>A+</td>
+                        </tr>
+                        <tr>
+                            <td>126</td>
+                            <td>ARTS</td>
+                            <td>A+</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class=&quot;mark_button&quot;>
+                    <a href=&quot;#&quot;>Search Again</a>
+                </div>
+                <div class=&quot;apply_now&quot;>
+                  <a href=&quot;/softwareEngineer/display3#&quot;>Apply the Course Now</a>
+              </div>
+            </div>
+        </div>
+
+        <!-- Footer Area -->
+
+        <div class=&quot;footer_area&quot;>
+            <div class=&quot;inner_footer_area container clear_fix&quot;>
+                <div class=&quot;footer_left_area&quot;>
+                    <p>&amp;copy; All Right Reserved By Tan Kang Hong</p>
+                </div>
+                <div class=&quot;footer_right_area&quot;>
+                    <p>Powered by</p>
+                    <img src=&quot;https://i.ibb.co/Y8Z9Dhj/footer.png&quot; alt=&quot;&quot;>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+</body>
+
+</html>
+"
+      sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" allowTransparency="true"
+      allowpaymentrequest="true" allowfullscreen="true" class="result-iframe">
+      </iframe>
+  </div>
+
+</body>
+
+</html>

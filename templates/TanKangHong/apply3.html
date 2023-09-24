@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <title>CodePen - html forms</title>
+
+  <link rel="stylesheet" media="screen" href="https://cpwebassets.codepen.io/assets/fullpage/fullpage-7d0085e88e3f06095d712efc55f79fc6aedaeed08967649de30e3ea674797898.css" />
+
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+
+
+  <title>CodePen - html forms</title>
+
+  <style>
+    html { font-size: 15px; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { height:100%; display: flex; flex-direction: column; }
+    .referer-warning {
+      background: black;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      padding: 0.75em;
+      color: white;
+      text-align: center;
+      font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, system-ui, Sans-Serif;
+      line-height: 1.2;
+      font-size: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    .referer-warning span { font-family: initial; }
+    .referer-warning h1 { font-size: 1.2rem; margin: 0; }
+    .referer-warning a { color: #56bcf9; }
+  </style>
+</head>
+
+<body class="">
+
+  <div id="result-iframe-wrap" role="main">
+    <iframe
+      id="result"
+      srcdoc="<!DOCTYPE html>
+<html lang=&quot;en&quot; >
+
+<head>
+  <meta charset=&quot;UTF-8&quot;>
+
+
+    <link rel=&quot;apple-touch-icon&quot; type=&quot;image/png&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png&quot; />
+
+    <meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;CodePen&quot;>
+
+    <link rel=&quot;shortcut icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico&quot; />
+
+    <link rel=&quot;mask-icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg&quot; color=&quot;#111&quot; />
+
+
+
+
+
+
+  <title>CodePen - html forms</title>
+
+    <link rel=&quot;canonical&quot; href=&quot;https://codepen.io/gymratpacks/pen/VKzBEp&quot;>
+
+
+
+
+<style>
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  color: #384047;
+}
+
+form {
+  max-width: 300px;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background: #f4f7f8;
+  border-radius: 8px;
+}
+
+h1 {
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+
+input[type=&quot;text&quot;],
+input[type=&quot;password&quot;],
+input[type=&quot;date&quot;],
+input[type=&quot;datetime&quot;],
+input[type=&quot;email&quot;],
+input[type=&quot;number&quot;],
+input[type=&quot;search&quot;],
+input[type=&quot;tel&quot;],
+input[type=&quot;time&quot;],
+input[type=&quot;url&quot;],
+textarea,
+select {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  font-size: 16px;
+  height: auto;
+  margin: 0;
+  outline: 0;
+  padding: 15px;
+  width: 100%;
+  background-color: #e8eeef;
+  color: #8a97a0;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  margin-bottom: 30px;
+}
+
+input[type=&quot;radio&quot;],
+input[type=&quot;checkbox&quot;] {
+  margin: 0 4px 8px 0;
+}
+
+select {
+  padding: 6px;
+  height: 32px;
+  border-radius: 2px;
+}
+
+button {
+  padding: 19px 39px 18px 39px;
+  color: #FFF;
+  background-color: #4bc970;
+  font-size: 18px;
+  text-align: center;
+  font-style: normal;
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid #3ac162;
+  border-width: 1px 1px 3px;
+  box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+  margin-bottom: 10px;
+}
+
+fieldset {
+  margin-bottom: 30px;
+  border: none;
+}
+
+legend {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+label.light {
+  font-weight: 300;
+  display: inline;
+}
+
+.number {
+  background-color: #5fcf80;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  font-size: 0.8em;
+  margin-right: 4px;
+  line-height: 30px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+  border-radius: 100%;
+}
+
+@media screen and (min-width: 480px) {
+
+  form {
+    max-width: 480px;
+  }
+
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+</head>
+
+<body translate=&quot;no&quot;>
+  <html>
+    <head>
+        <meta charset=&quot;utf-8&quot;>
+        <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+        <title>Congratulations, your score has been successfully reviewed.</title>
+        <link rel=&quot;stylesheet&quot; href=&quot;https://codepen.io/gymratpacks/pen/VKzBEp#0&quot;>
+        <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+        <link rel=&quot;stylesheet&quot; href=&quot;css/main.css&quot;>
+    </head>
+    <body>
+      <div class=&quot;row&quot;>
+    <div class=&quot;col-md-12&quot;>
+      <form action=&quot;index.html&quot; method=&quot;post&quot;>
+        <h1> Congratulations, your score has been successfully reviewed. </h1>
+
+        <fieldset>
+
+          <legend><span class=&quot;number&quot;>1</span>  Basic Info</legend>
+
+          <label for=&quot;name&quot;>Name:</label>
+          <input type=&quot;text&quot; id=&quot;name&quot; name=&quot;user_name&quot;>
+
+          <label for=&quot;email&quot;>Email:</label>
+          <input type=&quot;email&quot; id=&quot;mail&quot; name=&quot;user_email&quot;>
+          <label>Age:</label>
+          <input type=&quot;radio&quot; id=&quot;under_18&quot; value=&quot;under_13&quot; name=&quot;user_age&quot;><label for=&quot;under_13&quot; class=&quot;light&quot;>Under 18</label><br>
+          <input type=&quot;radio&quot; id=&quot;over_18&quot; value=&quot;over_13&quot; name=&quot;user_age&quot;><label for=&quot;over_13&quot; class=&quot;light&quot;>Over 18</label>
+
+        </fieldset>
+        <fieldset>
+
+          <legend><span class=&quot;number&quot;>2</span> Course Taken</legend>
+
+         <label for=&quot;bio&quot;>Course Name</label>
+          <textarea id=&quot;bio&quot; name=&quot;user_bio&quot;></textarea>
+
+
+
+         <label for=&quot;job&quot;>Skills:</label>
+          <select id=&quot;job&quot; name=&quot;user_job&quot;>
+            <optgroup label=&quot;Web&quot;>
+              <option value=&quot;html&quot;>HTML</option>
+              <option value=&quot;python&quot;>Python</option>
+              <option value=&quot;c++&quot;>C++</option>
+              <option value=&quot;cLanguage&quot;>C Language</option>
+              <option value=&quot;blockChain&quot;>Block Chain</option>
+              <option value=&quot;java&quot;>Java</option>
+            </optgroup>
+            <optgroup label=&quot;Program&quot;>
+              <option value=&quot;java&quot;>Java</option>
+              <option value=&quot;c#&quot;>C#</option>
+              <option value=&quot;software&quot;>Software development</option>
+            </optgroup>
+            <optgroup label=&quot;Knowledge&quot;>
+              <option value=&quot;business_owner&quot;>Business Owner</option>
+              <option value=&quot;freelancer&quot;>Freelancer</option>
+            </optgroup>
+          </select>
+
+          <label>Interests:</label>
+          <input type=&quot;checkbox&quot; id=&quot;development&quot; value=&quot;interest_development&quot; name=&quot;user_interest&quot;><label class=&quot;light&quot; for=&quot;development&quot;>Development</label><br>
+          <input type=&quot;checkbox&quot; id=&quot;design&quot; value=&quot;interest_design&quot; name=&quot;user_interest&quot;><label class=&quot;light&quot; for=&quot;design&quot;>Design</label><br>
+          <input type=&quot;checkbox&quot; id=&quot;business&quot; value=&quot;interest_business&quot; name=&quot;user_interest&quot;><label class=&quot;light&quot; for=&quot;business&quot;>Business</label>
+
+         </fieldset>
+
+        <button type=&quot;submit&quot;><a href=&quot;/softwareEngineer/display4&quot;>Apply Now</button>
+
+       </form>
+        </div>
+      </div>
+
+    </body>
+</html>
+
+
+
+</body>
+
+</html>
+"
+      sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" allowTransparency="true"
+      allowpaymentrequest="true" allowfullscreen="true" class="result-iframe">
+      </iframe>
+  </div>
+
+</body>
+
+</html>

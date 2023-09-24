@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <title>CodePen - Login Form with floating placeholder and light button</title>
+
+  <link rel="stylesheet" media="screen" href="https://cpwebassets.codepen.io/assets/fullpage/fullpage-7d0085e88e3f06095d712efc55f79fc6aedaeed08967649de30e3ea674797898.css" />
+
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+
+
+  <title>CodePen - Login Form with floating placeholder and light button</title>
+
+  <style>
+    html { font-size: 15px; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { height:100%; display: flex; flex-direction: column; }
+    .referer-warning {
+      background: black;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      padding: 0.75em;
+      color: white;
+      text-align: center;
+      font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, system-ui, Sans-Serif;
+      line-height: 1.2;
+      font-size: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    .referer-warning span { font-family: initial; }
+    .referer-warning h1 { font-size: 1.2rem; margin: 0; }
+    .referer-warning a { color: #56bcf9; }
+  </style>
+</head>
+
+<body class="">
+
+  <div id="result-iframe-wrap" role="main">
+    <iframe
+      id="result"
+      srcdoc="<!DOCTYPE html>
+<html lang=&quot;en&quot; >
+
+<head>
+  <meta charset=&quot;UTF-8&quot;>
+
+
+    <link rel=&quot;apple-touch-icon&quot; type=&quot;image/png&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png&quot; />
+
+    <meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;CodePen&quot;>
+
+    <link rel=&quot;shortcut icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico&quot; />
+
+    <link rel=&quot;mask-icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg&quot; color=&quot;#111&quot; />
+
+
+
+
+
+
+  <title>CodePen - Login Form with floating placeholder and light button</title>
+
+    <link rel=&quot;canonical&quot; href=&quot;https://codepen.io/soufiane-khalfaoui-hassani/pen/LYpPWda&quot;>
+
+
+
+
+<style>
+html {
+  height: 100%;
+}
+body {
+  margin:0;
+  padding:0;
+  font-family: sans-serif;
+  background: linear-gradient(#141e30, #243b55);
+}
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.login-box .user-box label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+.login-box form a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 4px
+}
+
+.login-box a:hover {
+  background: #03e9f4;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+}
+
+.login-box a span {
+  position: absolute;
+  display: block;
+}
+
+.login-box a span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,100% {
+    left: 100%;
+  }
+}
+
+.login-box a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,100% {
+    top: 100%;
+  }
+}
+
+.login-box a span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,100% {
+    right: 100%;
+  }
+}
+
+.login-box a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #03e9f4);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,100% {
+    bottom: 100%;
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+</head>
+
+<body translate=&quot;no&quot;>
+  <div class=&quot;login-box&quot;>
+  <h2>Verify SPM Result</h2>
+  <form>
+    <div class=&quot;user-box&quot;>
+      <input type=&quot;name&quot; name=&quot;Tan Kang Hong&quot; required=&quot;Tan Kang Hong&quot;>
+      <label>Name</label>
+    </div>
+    <div class=&quot;user-box&quot;>
+      <input type=&quot;icNo&quot; name=&quot;111111-11-1111&quot; required=&quot;111111-11-1111&quot;>
+      <label>Ic No</label>
+    </div>
+    <a href=&quot;/softwareEngineer/display2&quot;>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      Check Result
+    </a>
+  </form>
+</div>
+
+</body>
+
+</html>
+"
+      sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" allowTransparency="true"
+      allowpaymentrequest="true" allowfullscreen="true" class="result-iframe">
+      </iframe>
+  </div>
+
+</body>
+
+<script setup lang="ts">
+  import { ref, computed } from 'vue'
+  import { useStore } from 'stores/user-store'
+  import { api } from 'boot/axios'
+  import { useRouter } from 'vue-router'
+  import { AxiosError } from 'axios'
+  import { useLocalStorageStore } from 'src/stores/localstorage-store'
+
+  useMeta({ title: 'Student Login | MyITPHub' })
+
+  const store = useStore()
+const name = ref('')
+const icNo = ref('')
+
+  async function login(){
+    store.lohinError = false
+    store.errorMessage = ''
+
+    await store.login({
+      name: name.value,
+      icNo: icNo.value,
+    })
+    console.log('Is Authenticated:', lsStore.isAuthenticated)
+  if (!store.loginError) {
+    router.push('/')
+  }
+  }
+  </script>
+</html>

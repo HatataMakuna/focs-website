@@ -66,42 +66,51 @@
       </nav>
 
         <header class="animate-top">
-          <h1 style="text-align:center; font-size:3em;">Staff List</h3>
+          <h1 style="text-align:center; font-size:3em;">Staff List</h1>
         </header>
 
         <!-- TODO: Search feature -->
         <section>
           <div class="search-bar">
-            <input type="text" placeholder="Search staff...">
-            <button type="submit">
+            <input type="text" id="search-input" placeholder="Search staffs...">
+            <button type="submit" id="search-button">
               <i class="fa fa-search"></i>
             </button>
           </div>
         </section>
 
         <!-- TODO: Staff List (use paging if possible) -->
-        <section><div id="staff-list"></div></section>
+        <section>
+          <div id="staff-list"></div>
+          <div id="pagination"></div>
+        </section>
     </div>
   </body>
 </html>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+  // Define the number of staff members per page
+  const itemsPerPage = 20;
+
   // Function to retrieve and display staff list
-  function fetchStaffList() {
+  function fetchStaffList(pageNumber, searchQuery) {
+      const url = `/get-staff-list?page=${pageNumber}&itemsPerPage=${itemsPerPage}&search=${searchQuery}`;
       $.ajax({
-          url: '/get-staff-list',  // The server-side route to fetch staff data
+          url: url,  // The server-side route to fetch staff data
           type: 'GET',
           dataType: 'json',
           success: function (data) {
-              // Assuming data is in the format: { 'staff_list': [...] }
               const staffList = data.staff_list;
+              const totalCount = data.total_count;
+
+              // Calculate the total number of pages needed
+              const totalPages = Math.ceil(totalCount / itemsPerPage);
 
               // Display staff data on the webpage
               const staffListDiv = $('#staff-list');
               staffListDiv.empty();
               staffList.forEach(function (staff) {
-                // image cannot display properly
                   const staffInfo = `
                   <div class="card-4 panel animate-fading">
                     <table>
@@ -112,7 +121,7 @@
                           </div>
                         </td>
                         <td class="card-section-2">
-                          <b class="staff-name">${staff.staff_name}</b><br/>
+                          <a class="staff-name" href="/staffs/${staff.staff_id}">${staff.staff_name}</a><br/>
                           Designation: ${staff.designation}<br/>Department: ${staff.department}<br/>
                           Position: ${staff.position}<br/>Email: ${staff.email}
                         </td>
@@ -122,10 +131,43 @@
                   `;
                   staffListDiv.append(staffInfo);
               });
+
+              // Generate pagination links
+              const paginationDiv = $('#pagination');
+              paginationDiv.empty();
+
+              for (let i = 1; i <= totalPages; i++) {
+                const pageLink = `<a href="#" class="page-link" data-page="${i}">${i}</a>`;
+                paginationDiv.append(pageLink);
+              }
           }
       });
   }
 
+  function handleSearch() {
+    const searchQuery = $('#search-input').val();
+    fetchStaffList(1, searchQuery); // Start from the first page when searching
+  }
+
+  // Add an event listener for the "keydown" event on the search input
+  $('#search-input').on('keydown', function (e) {
+    if (e.keyCode === 13) {
+      // If "Enter" key is pressed, trigger the search button click event
+      $('#search-button').click();
+    }
+  });
+
+  // Handle search button onclick
+  $('#search-button').on('click', handleSearch);
+
+  // Handle pagination link details
+  $('#pagination').on('click', '.page-link', function (e) {
+    e.preventDefault();
+    const pageNumber = $(this).data('page');
+    fetchStaffList(pageNumber);
+  });
+
   // Call the fetchStaffList function to retrieve and display staff data
-  fetchStaffList();
+  // Initial fetch for the first page
+  fetchStaffList(1, '');
 </script>
