@@ -70,6 +70,19 @@
             <h1>Programme List</h3>
           </header>
 
+          <section>
+            <div class="search-bar">
+              <input type="text" id="search-input" placeholder="Search staffs..." />
+              <button type="submit" id="search-button" onclick="handleSearch()">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </section>
+
+          <section>
+            <div id="search-results" class="card-2 panel"></div>
+          </section>
+
           <!-- Programme List -->
         <section>
           <div class="card-2 panel">
@@ -283,3 +296,58 @@
         </script>
     </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  function searchProgrammes(searchQuery) {
+      // Make an AJAX request to the server
+      $.ajax({
+          url: `/search-programmes?search=${searchQuery}`,
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+              const searchResultsDiv = $("#search-results");
+              if (data.programme_list.length === 0) {
+                  searchResultsDiv.html(`<p align="center">No programmes found.</p>`);
+              } else {
+                  searchResultsDiv.append(`<h2 style="text-align:center;">Search Results</h2>`);
+
+                  // Create an unordered list for the search results
+                  const resultList = $("<ul class='bullets'></ul>");
+
+                  data.programme_list.forEach((programme) => {
+                      // Create list items with links to the program pages
+                      const listItem = `<li><a href="/programmes/${programme.id}">${programme.name}</a></li>`;
+                      resultList.append(listItem);
+                  });
+
+                  searchResultsDiv.append(resultList);
+              }
+          },
+          error: function (error) {
+              console.error("Error during search:", error);
+          }
+      });
+  }
+
+  function handleSearch() {
+      const searchQuery = $('#search-input').val()
+      const searchResultsDiv = $("#search-results");
+      searchResultsDiv.empty(); // Clear previous results
+
+      // call the search programmes function only if the search query is not empty
+      if (searchQuery !== '') {
+          searchProgrammes(searchQuery);
+      }
+  }
+
+  $('#search-button').on('click', handleSearch);
+
+  // Add an event listener for the "keydown" event on the search input
+  $('#search-input').on('keydown', function (e) {
+    if (e.keyCode === 13) {
+      // If "Enter" key is pressed, trigger the search button click event
+      $('#search-button').click()
+    }
+  })
+</script>

@@ -16,8 +16,8 @@ lex = boto3.client("lexv2-runtime", consts.AWS_REGION)
 CORS(app)
 
 # Stream printed logs from EC2 to CloudWatch
-sys.stdout = open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w")
-sys.stderr = sys.stdout
+# sys.stdout = open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w")
+# sys.stderr = sys.stdout
 
 
 # [N8] The website should be able to track the IP (Internet Protocol) address of the visitor device.
@@ -98,6 +98,37 @@ def index():
 @app.route("/programmes")
 def programmes():
     return render_template("ProgrammeList.html")
+
+
+@app.route("/search-programmes", methods=['GET'])
+def search_programmes():
+    search_query = request.args.get("search", '')
+
+    db_conn = db_conn_pool.get_connection(pre_ping=True)
+    cursor = db_conn.cursor()
+    try:
+        cursor.execute(
+            "SELECT * FROM programmes WHERE UPPER(id) LIKE UPPER(%s) OR UPPER(name) LIKE UPPER(%s)",
+            (f"%{search_query}%", f"%{search_query}%")
+        )
+        programme_data = cursor.fetchall()
+
+        programme_list = []
+        for programme in programme_data:
+            programme_info = {
+                "id": programme[0],
+                "name": programme[1],
+            }
+            programme_list.append(programme_info)
+
+        return jsonify({"programme_list": programme_list}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+    finally:
+        cursor.close()
+        db_conn.close()
 
 
 @app.route("/programmes/pcs")
