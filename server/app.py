@@ -1,4 +1,5 @@
 import time
+import sys
 import uuid
 
 import boto3
@@ -15,8 +16,8 @@ lex = boto3.client("lexv2-runtime", consts.AWS_REGION)
 CORS(app)
 
 # Stream printed logs from EC2 to CloudWatch
-# sys.stdout = open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w")
-# sys.stderr = sys.stdout
+sys.stdout = open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w")
+sys.stderr = sys.stdout
 
 
 # [N8] The website should be able to track the IP (Internet Protocol) address of the visitor device.
