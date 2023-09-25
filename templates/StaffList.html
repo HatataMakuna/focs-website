@@ -187,44 +187,52 @@
       type: 'GET',
       dataType: 'json',
       success: function (data) {
-        const staffList = data.staff_list
-        const totalCount = data.total_count
-
-        // Calculate the total number of pages needed
-        const totalPages = Math.ceil(totalCount / itemsPerPage)
-
-        // Display staff data on the webpage
         const staffListDiv = $('#staff-list')
-        staffListDiv.empty()
-        staffList.forEach(function (staff) {
-          const staffInfo = `
-                  <div class="card-4 panel animate-fading">
-                    <table>
-                      <tr>
-                        <td class="card-section-1">
-                          <div class="staff-avatar center">
-                            <img src="/static/${staff.avatar}" style="width:100%;"/>
-                          </div>
-                        </td>
-                        <td class="card-section-2">
-                          <a class="staff-name" href="/staffs/${staff.staff_id}">${staff.staff_name}</a><br/>
-                          Designation: ${staff.designation}<br/>Department: ${staff.department}<br/>
-                          Position: ${staff.position}<br/>Email: ${staff.email}
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                  `
-          staffListDiv.append(staffInfo)
-        })
+        if (data.staff_list.length === 0) {
+          staffListDiv.html(`
+            <div class="card-4 panel animate-fading">
+              <b style="font-size: 15px;">No staffs found.</b>
+            </div>
+          `);
+        } else {
+          const staffList = data.staff_list
+          const totalCount = data.total_count
 
-        // Generate pagination links
-        const paginationDiv = $('#pagination')
-        paginationDiv.empty()
+          // Calculate the total number of pages needed
+          const totalPages = Math.ceil(totalCount / itemsPerPage)
 
-        for (let i = 1; i <= totalPages; i++) {
-          const pageLink = `<a href="#" class="page-link" data-page="${i}">${i}</a>`
-          paginationDiv.append(pageLink)
+          // Display staff data on the webpage
+          staffListDiv.empty()
+          staffList.forEach(function (staff) {
+            const staffInfo = `
+                    <div class="card-4 panel animate-fading">
+                      <table>
+                        <tr>
+                          <td class="card-section-1">
+                            <div class="staff-avatar center">
+                              <img src="/static/${staff.avatar}" style="width:100%;"/>
+                            </div>
+                          </td>
+                          <td class="card-section-2">
+                            <a class="staff-name" href="/staffs/${staff.staff_id}">${staff.staff_name}</a><br/>
+                            Designation: ${staff.designation}<br/>Department: ${staff.department}<br/>
+                            Position: ${staff.position}<br/>Email: ${staff.email}
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    `
+            staffListDiv.append(staffInfo)
+          })
+
+          // Generate pagination links
+          const paginationDiv = $('#pagination')
+          paginationDiv.empty()
+
+          for (let i = 1; i <= totalPages; i++) {
+            const pageLink = `<a href="#" class="page-link" data-page="${i}">${i}</a>`
+            paginationDiv.append(pageLink)
+          }
         }
       },
     })
