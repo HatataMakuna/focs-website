@@ -240,7 +240,7 @@
   </div>
 
   <div id="hello-msg-container" class="position-fixed" style="bottom: 16px; right: 16px">
-    <div id="hello-msg" style="transition: opacity 0.1s; opacity: 0">
+    <div id="hello-msg" style="transition: opacity 0.1s; opacity: 0; display: none">
       <!-- Hello message -->
       <div class="position-absolute end-0 bg-dark rounded text-white z-1 shadow" style="width: 256px; bottom: 80px">
         <i class="bi bi-robot fs-2 mx-2 align-middle"></i>
@@ -262,7 +262,7 @@
     </div>
 
     <!-- Chat room -->
-    <div id="chat-room" style="transition: opacity 0.5s; opacity: 0">
+    <div id="chat-room" style="transition: opacity 0.5s; opacity: 0; display: none">
       <div
         class="position-absolute end-0 bg-dark rounded text-white z-1 shadow"
         style="width: 512px; height: 512px; bottom: 80px"
@@ -359,14 +359,21 @@
   let index = 0
   setTimeout(() => {
     const timer = setInterval(() => {
-      document.getElementById('hello-msg').style.opacity = helloMsgOpacities[index]
+      const helloMsg = document.getElementById('hello-msg')
+      helloMsg.style.display = 'block'
+      helloMsg.style.opacity = helloMsgOpacities[index]
       ++index
       if (index == helloMsgOpacities.length) clearInterval(timer)
     }, 100)
   }, 1000)
 
   function hideHelloMessage() {
-    document.getElementById('hello-msg').style.opacity = 0
+    const helloMsg = document.getElementById('hello-msg')
+    helloMsg.style.opacity = 0
+
+    setTimeout(() => {
+      helloMsg.style.display = 'none'
+    }, 100)
   }
 
   function toggleChatRoom() {
@@ -374,6 +381,14 @@
 
     const chatRoom = document.getElementById('chat-room')
     chatRoom.style.opacity = 1 - chatRoom.style.opacity
+
+    if (chatRoom.style.opacity == 0) {
+      setTimeout(() => {
+        chatRoom.style.display = 'none'
+      }, 500)
+    } else {
+      chatRoom.style.display = 'block'
+    }
   }
 
   document.getElementById('q-form').addEventListener('submit', async event => {
@@ -411,8 +426,12 @@
   document.body.addEventListener('click', event => {
     // Clicking outside the chat room will close the chat room
     if (!document.getElementById('hello-msg-container').contains(event.target)) {
-      document.getElementById('chat-room').style.opacity = 0
+      const chatRoom = document.getElementById('chat-room')
+      chatRoom.style.opacity = 0
+
+      setTimeout(() => {
+        chatRoom.style.display = 'none'
+      }, 500)
     }
   })
 </script>
-
