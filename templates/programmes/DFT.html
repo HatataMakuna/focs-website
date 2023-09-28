@@ -5,6 +5,13 @@
   <title>Diploma in Information Technology | FOCS</title>
   <link rel="icon" type="image/png" href="/static/favicon.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/plStyle.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/general.css') }}">
 </head>
@@ -211,9 +218,88 @@
       </div>
     </section>
   </div>
+
+  <div id="hello-msg-container" class="position-fixed" style="bottom: 16px; right: 16px">
+    <div id="hello-msg" style="transition: opacity 0.1s; opacity: 0; display: none">
+      <!-- Hello message -->
+      <div class="position-absolute end-0 bg-dark rounded text-white z-1 shadow" style="width: 256px; bottom: 80px">
+        <i class="bi bi-robot fs-2 mx-2 align-middle"></i>
+        <span>Hello, how can I help you ?</span>
+
+        <i
+          class="position-absolute bi bi-x text-danger fs-5 end-0 top-0 fw-bold"
+          onclick="hideHelloMessage()"
+          style="cursor: pointer"
+        >
+        </i>
+      </div>
+
+      <!-- Arrow -->
+      <div
+        class="position-absolute bg-dark z-0"
+        style="width: 16px; height: 16px; bottom: 72px; right: 24px; transform: rotate(45deg)"
+      ></div>
+    </div>
+
+    <!-- Chat room -->
+    <div id="chat-room" style="transition: opacity 0.5s; opacity: 0; display: none">
+      <div
+        class="position-absolute end-0 bg-dark rounded text-white z-1 shadow"
+        style="width: 512px; height: 512px; bottom: 80px"
+      >
+        <!-- Chat messages -->
+        <ol id="chat-msgs" class="px-1 mb-0 overflow-auto" style="list-style-type: none; height: 442px">
+          <li class="overflow-auto">
+            <i class="bi bi-robot fs-2 mx-2 float-start"></i>
+            <span class="float-start" style="margin-top: 12px">Hello, how can I help you ?</span>
+          </li>
+        </ol>
+
+        <form id="q-form">
+          <!-- Text box to send text to chatbot -->
+          <input
+            id="q"
+            class="form-control position-absolute"
+            name="q"
+            placeholder="I want to ask something..."
+            style="left: 16px; bottom: 16px; width: 408px"
+          />
+
+          <!-- Send button -->
+          <button
+            class="position-absolute btn btn-info rounded bg-info text-dark pt-2"
+            style="bottom: 16px; right: 16px; height: 38px"
+            type="submit"
+          >
+            <i class="bi bi-send fs-6"></i>
+          </button>
+        </form>
+      </div>
+
+      <div
+        class="position-absolute bg-dark z-0"
+        style="width: 16px; height: 16px; bottom: 72px; right: 24px; transform: rotate(45deg)"
+      ></div>
+    </div>
+
+    <!-- Chat button -->
+    <button
+      type="button"
+      class="position-absolute btn btn-dark rounded-circle ps-3 bottom-0 end-0 shadow"
+      style="width: 64px"
+      onclick="toggleChatRoom()"
+    >
+      <i class="fs-2 bi bi-chat-dots"></i>
+    </button>
+  </div>
 </body>
 </html>
 
+<script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   function openTab(evt, name) {
@@ -247,5 +333,85 @@
     }
     x[slideIndex-1].style.display = "block";
   }
-</script>
 
+  // Blinking to catch the user attention that there is a help chatbot
+  const helloMsgOpacities = [1, 0, 1]
+  let index = 0
+  setTimeout(() => {
+    const timer = setInterval(() => {
+      const helloMsg = document.getElementById('hello-msg')
+      helloMsg.style.display = 'block'
+      helloMsg.style.opacity = helloMsgOpacities[index]
+      ++index
+      if (index == helloMsgOpacities.length) clearInterval(timer)
+    }, 100)
+  }, 1000)
+
+  function hideHelloMessage() {
+    const helloMsg = document.getElementById('hello-msg')
+    helloMsg.style.opacity = 0
+
+    setTimeout(() => {
+      helloMsg.style.display = 'none'
+    }, 100)
+  }
+
+  function toggleChatRoom() {
+    hideHelloMessage()
+
+    const chatRoom = document.getElementById('chat-room')
+    chatRoom.style.opacity = 1 - chatRoom.style.opacity
+
+    if (chatRoom.style.opacity == 0) {
+      setTimeout(() => {
+        chatRoom.style.display = 'none'
+      }, 500)
+    } else {
+      chatRoom.style.display = 'block'
+    }
+  }
+
+  document.getElementById('q-form').addEventListener('submit', async event => {
+    // Dont refresh the page
+    event.preventDefault()
+
+    // Input
+    const q = document.getElementById('q').value
+
+    // Display user query
+    const userMsg = document.createElement('li')
+    userMsg.className = 'overflow-auto'
+    userMsg.innerHTML = `
+      <i class="bi bi-person-circle fs-2 mx-2 float-end"></i>
+      <span class="float-end" style="margin-top: 12px">${q}</span>
+    `
+    document.getElementById('chat-msgs').appendChild(userMsg)
+
+    // Clear user input
+    document.getElementById('q').value = ''
+
+    // Tell something to the chatbot
+    const resp = await fetch('/faq_ans?' + new URLSearchParams({ q }))
+
+    // Display chatbot response
+    const botMsg = document.createElement('li')
+    botMsg.className = 'overflow-auto'
+    botMsg.innerHTML = `
+      <i class="bi bi-robot fs-2 mx-2 float-start"></i>
+      <span class="float-start" style="margin-top: 12px">${(await resp.json()).result}</span>
+    `
+    document.getElementById('chat-msgs').appendChild(botMsg)
+  })
+
+  document.body.addEventListener('click', event => {
+    // Clicking outside the chat room will close the chat room
+    if (!document.getElementById('hello-msg-container').contains(event.target)) {
+      const chatRoom = document.getElementById('chat-room')
+      chatRoom.style.opacity = 0
+
+      setTimeout(() => {
+        chatRoom.style.display = 'none'
+      }, 500)
+    }
+  })
+</script>
