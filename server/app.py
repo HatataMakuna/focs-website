@@ -1,5 +1,5 @@
-import time
 import sys
+import time
 import uuid
 
 import boto3
@@ -16,8 +16,8 @@ lex = boto3.client("lexv2-runtime", consts.AWS_REGION)
 CORS(app)
 
 # Stream printed logs from EC2 to CloudWatch
-sys.stdout = open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w")
-sys.stderr = sys.stdout
+# sys.stdout = open("/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log", "w")
+# sys.stderr = sys.stdout
 
 
 # [N8] The website should be able to track the IP (Internet Protocol) address of the visitor device.
@@ -100,16 +100,16 @@ def programmes():
     return render_template("ProgrammeList.html")
 
 
-@app.route("/search-programmes", methods=['GET'])
+@app.route("/search-programmes", methods=["GET"])
 def search_programmes():
-    search_query = request.args.get("search", '')
+    search_query = request.args.get("search", "")
 
     db_conn = db_conn_pool.get_connection(pre_ping=True)
     cursor = db_conn.cursor()
     try:
         cursor.execute(
             "SELECT * FROM programmes WHERE UPPER(id) LIKE UPPER(%s) OR UPPER(name) LIKE UPPER(%s)",
-            (f"%{search_query}%", f"%{search_query}%")
+            (f"%{search_query}%", f"%{search_query}%"),
         )
         programme_data = cursor.fetchall()
 
