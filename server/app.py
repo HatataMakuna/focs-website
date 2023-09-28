@@ -205,32 +205,32 @@ def get_staff_list():
     db_conn = db_conn_pool.get_connection(pre_ping=True)
     cursor = db_conn.cursor()
     try:
-        cursor.execute(
-            """
-        cursor.execute(
-            """
-            SELECT * FROM staff WHERE UPPER(staff_name) LIKE UPPER(%s) OR UPPER(designation) LIKE UPPER(%s)
-            OR UPPER(position) LIKE UPPER(%s) OR UPPER(department) LIKE UPPER(%s) LIMIT %s OFFSET %s
-        """,
-            (
-                f"%{search_query}%",
-                f"%{search_query}%",
-                f"%{search_query}%",
-                f"%{search_query}%",
-                items_per_page,
-                offset,
-            ),
-        )
-        """,
-            (
-                f"%{search_query}%",
-                f"%{search_query}%",
-                f"%{search_query}%",
-                f"%{search_query}%",
-                items_per_page,
-                offset,
-            ),
-        )
+        # cursor.execute(
+        #     """
+        # cursor.execute(
+        #     """
+        #     SELECT * FROM staff WHERE UPPER(staff_name) LIKE UPPER(%s) OR UPPER(designation) LIKE UPPER(%s)
+        #     OR UPPER(position) LIKE UPPER(%s) OR UPPER(department) LIKE UPPER(%s) LIMIT %s OFFSET %s
+        # """,
+        #     (
+        #         f"%{search_query}%",
+        #         f"%{search_query}%",
+        #         f"%{search_query}%",
+        #         f"%{search_query}%",
+        #         items_per_page,
+        #         offset,
+        #     ),
+        # )
+        # """,
+        #     (
+        #         f"%{search_query}%",
+        #         f"%{search_query}%",
+        #         f"%{search_query}%",
+        #         f"%{search_query}%",
+        #         items_per_page,
+        #         offset,
+        #     ),
+        # )
         staff_data = cursor.fetchall()
 
         # Convert the result to a list of dictionaires
