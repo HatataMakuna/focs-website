@@ -1,5 +1,5 @@
 Flask==2.3.2
-Flask-Cors==4.0.0
+Flask-Cors==6.0.0
 pymysql==1.1.0
 pymysql-pool==0.4.6
 boto3==1.28.18
